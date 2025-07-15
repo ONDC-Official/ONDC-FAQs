@@ -325,7 +325,8 @@ class UIController {
         <div class="faq-question">${highlightedQuestion}</div>
         <div class="faq-answer-preview">${faq.answerPreview}</div>
         <div class="faq-meta">
-          <div class="faq-tags">${tags}</div>
+          <span class="faq-category">${faq.category}</span>
+          ${tags ? `<div class="faq-tags">${tags}</div>` : ''}
         </div>
       </div>
     `;
@@ -458,6 +459,7 @@ class UIController {
       <div class="mt-3">
         <small class="text-muted">
           Category: ${faq.category} | 
+          ${faq.tags.length > 0 ? `Tags: ${faq.tags.join(', ')} | ` : ''}
           Last updated: ${new Date(faq.lastUpdated).toLocaleDateString()}
         </small>
       </div>

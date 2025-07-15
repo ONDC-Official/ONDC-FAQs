@@ -27,7 +27,8 @@ class FAQManager {
 
   processFAQs(rawFAQs) {
     return rawFAQs.map((faq, index) => {
-      const category = this.extractCategory(faq.tags);
+      // Use categories field for category extraction
+      const category = this.extractCategory(faq.categories);
       
       const processedAnswer = this.processAnswer(faq.answer);
       
@@ -36,17 +37,18 @@ class FAQManager {
         question: faq.question.trim(),
         answer: processedAnswer,
         answerPreview: this.createPreview(processedAnswer),
+        categories: Array.isArray(faq.categories) ? faq.categories : [],
         tags: Array.isArray(faq.tags) ? faq.tags : [],
         category: category,
-        searchText: `${faq.question} ${processedAnswer} ${(faq.tags || []).join(' ')}`.toLowerCase(),
+        searchText: `${faq.question} ${processedAnswer} ${(faq.categories || []).join(' ')} ${(faq.tags || []).join(' ')}`.toLowerCase(),
         lastUpdated: faq.lastUpdated || new Date().toISOString(),
         relatedQuestions: []
       };
     });
   }
 
-  extractCategory(tags) {
-    if (!tags || !Array.isArray(tags)) return 'General';
+  extractCategory(categories) {
+    if (!categories || !Array.isArray(categories)) return 'General';
     
     const categoryMappings = {
       'Getting Started': ['getting started', 'introduction', 'basics', 'ondc'],
@@ -54,22 +56,22 @@ class FAQManager {
       'Integration': ['integration', 'api flow', 'implementation'],
       'Errors & Troubleshooting': ['error', 'troubleshooting', 'issue', 'problem'],
       'Logistics': ['logistics', 'delivery', 'shipping'],
-      'Payments & Settlement': ['payment', 'settlement', 'rsf', 'reconciliation'],
+      'Reconciliation and Settlement Framework (RSF)': ['payment', 'settlement', 'rsf', 'reconciliation'],
       'Registry & Network': ['registry', 'network', 'participant'],
       'IGM & Support': ['igm', 'support', 'grievance'],
-      'Retail & Commerce': ['retail', 'commerce', 'product', 'catalog'],
+      'Retail': ['retail', 'commerce', 'product', 'catalog'],
       'Mobility & Travel': ['mobility', 'travel', 'ride', 'booking']
     };
     
     for (const [category, patterns] of Object.entries(categoryMappings)) {
-      if (tags.some(tag => patterns.some(pattern => 
-        tag.toLowerCase().includes(pattern)
+      if (categories.some(cat => patterns.some(pattern => 
+        cat.toLowerCase().includes(pattern)
       ))) {
         return category;
       }
     }
     
-    return tags[0] || 'General';
+    return categories[0] || 'General';
   }
 
   processAnswer(answer) {
@@ -134,6 +136,11 @@ class FAQManager {
   calculateSimilarity(faq1, faq2) {
     let score = 0;
     
+    // Check shared categories
+    const sharedCategories = faq1.categories.filter(cat => faq2.categories.includes(cat));
+    score += sharedCategories.length * 3;
+    
+    // Check shared tags
     const sharedTags = faq1.tags.filter(tag => faq2.tags.includes(tag));
     score += sharedTags.length * 2;
     
@@ -196,6 +203,9 @@ class FAQManager {
       faqs.forEach(faq => {
         markdown += `### ${faq.question}\n\n`;
         markdown += `${faq.answer}\n\n`;
+        if (faq.categories.length > 0) {
+          markdown += `**Categories:** ${faq.categories.join(', ')}\n\n`;
+        }
         if (faq.tags.length > 0) {
           markdown += `**Tags:** ${faq.tags.join(', ')}\n\n`;
         }

@@ -12,10 +12,10 @@ class SearchEngine {
   initialize(faqs) {
     // Initialize MiniSearch for fast full-text search
     this.miniSearch = new MiniSearch({
-      fields: ['question', 'answer', 'tags', 'category'],
-      storeFields: ['id', 'question', 'answerPreview', 'tags', 'category'],
+      fields: ['question', 'answer', 'categories', 'tags', 'category'],
+      storeFields: ['id', 'question', 'answerPreview', 'categories', 'tags', 'category'],
       searchOptions: {
-        boost: { question: 3, tags: 2, category: 1.5, answer: 1 },
+        boost: { question: 3, categories: 2, tags: 2, category: 1.5, answer: 1 },
         fuzzy: 0.2,
         prefix: true,
         combineWith: 'OR'
@@ -29,9 +29,10 @@ class SearchEngine {
     this.fuseSearch = new Fuse(faqs, {
       keys: [
         { name: 'question', weight: 0.4 },
-        { name: 'answer', weight: 0.3 },
-        { name: 'tags', weight: 0.2 },
-        { name: 'category', weight: 0.1 }
+        { name: 'answer', weight: 0.25 },
+        { name: 'categories', weight: 0.15 },
+        { name: 'tags', weight: 0.15 },
+        { name: 'category', weight: 0.05 }
       ],
       threshold: 0.4,
       includeScore: true,
@@ -115,9 +116,10 @@ class SearchEngine {
     const fuseTempSearch = new Fuse(searchableFAQs, {
       keys: [
         { name: 'question', weight: 0.4 },
-        { name: 'answer', weight: 0.3 },
-        { name: 'tags', weight: 0.2 },
-        { name: 'category', weight: 0.1 }
+        { name: 'answer', weight: 0.25 },
+        { name: 'categories', weight: 0.15 },
+        { name: 'tags', weight: 0.15 },
+        { name: 'category', weight: 0.05 }
       ],
       threshold: 0.4,
       includeScore: true,

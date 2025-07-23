@@ -1,0 +1,472 @@
+- question: What is RSF in ONDC?
+  answer: 'The Reconciliation and Settlement Framework (RSF) in ONDC defines the process
+    by which Network Participants (NPs) settle funds for on-network transactions.
+    It ensures secure, transparent, and efficient fund flow through: Digital signatures
+    for non-repudiation Integration with banks via Settlement Agencies (e.g., NBBL)
+    Batch-based settlement advice generation and routing Final settlement within T+1
+    days via APIs (/settle, /on_settle) RSF supports compliance with RBI guidelines
+    and builds trust across the ONDC network.'
+  categories:
+  - Optional reconciliation updates by fund receivers
+  tags:
+  - ondc
+  - reconciliation
+  - settlement
+  - network
+  - digital
+  lastUpdated: '2024-07-10T10:00:00Z'
+  categories:
+  - Contract and Payment Flow
+  tags:
+  - track
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the transaction flow in RSF ?
+  answer: 'The image outlines the detailed transaction flow for Reconciliation and
+    Settlement in a three-party setup: Collector, Settlement Agency, and Receiver.
+    Here''s a brief explanation:
+
+    1. Settlement Phase:
+
+    Collector & Receiver: Collector and Receiver both send the /settle call to the
+    settlement  agency. Settlement Agency: Receives settlement instructions from both
+    Collector and Receiver. Compare them to check for matching orders and amounts.
+    If matched: proceeds to settlement. If mismatched: Share /on_settle with the status
+    NOT_SETTLED with Collector & Receiver. 2. Mismatch Reconciliation Among NPs: This
+    part deals with resolving mismatches between participants. Mismatch Process: Reconciliation
+    /recon sent to counterparty. If mismatch is found: Counterparty reviews and responds
+    with on_recon diff_amount flag. ​​'
+  categories:
+  - Reconciliation and Settlement Framework (RSF)
+  tags:
+  - transaction
+  - reconciliation
+  - settlement
+  - status
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Is the settlement process expected to be carried out on a daily basis,
+    or does it depend on the mutual decision of the buyer and seller (as both need
+    to send /settle to S.A)?
+  answer: Settlement takes as agreed between the buyer app (collector) and seller
+    app (receiver) viz. agreed through the settlement_window and settlement_basis
+    attribute. The settlement cycle shall run once every day in the initial phase.
+    Buyer Applications (Collector) are strongly suggested to send a daily /settle
+    call, even if there are null settlements for the day to ensure deductions don’t
+    happen based on the settlement call of the Seller Application (Receiver). In cases,
+    Seller Applications (Receiver) sends a settle call for which there is no Call
+    from the Buyer Application (Collector), money will get debited from the Collector.
+  categories:
+  - Reconciliation and Settlement Framework (RSF)
+  tags:
+  - settlement
+  - buyer
+  - seller
+  - app
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Is there an offline settlement process in RSF 2.0?
+  answer: No, the settlement of funds takes place through the settlement agency
+  categories:
+  - Reconciliation and Settlement Framework (RSF)
+  tags:
+  - settlement
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Is there any utility available for testing the RSF 2.0 flow?
+  answer: Yes, details available in the ONDC Official GitHub page
+  categories:
+  - Reconciliation and Settlement Framework (RSF)
+  tags:
+  - ondc
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Is the provider amount optional?
+  answer: Sharing provider amount is optional. In case seller app 'Opts in' for direct
+    provider settlement, only then the provider amount is shared by the seller app.
+  categories:
+  - Reconciliation and Settlement Framework (RSF)
+  tags:
+  - seller
+  - app
+  - settlement
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the collector amount ?
+  answer: collector amount is essentially the amount kept by the collector of payment
+    of the order. In retail context where retail buyer app is the collector, collector
+    amount would refer to the buyer app’s finder fees commission
+  categories:
+  - Reconciliation and Settlement Framework (RSF)
+  tags:
+  - payment
+  - order
+  - retail
+  - buyer
+  - app
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is self.amount?
+  answer: Depending on who is calling the API - For buyer app's recon - self would
+    be BFF - For seller app's recon - In case of SOR settlement, self would be seller
+    app's margin. In the case of an entire settlement to SNP, self would be an inter
+    NP amount.
+  categories:
+  - Self is the amount to be moved to the current account of the entity calling the
+    API
+  tags:
+  - api
+  - buyer
+  - app
+  - seller
+  - settlement
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What are the settlement instructions for the buyer and seller apps in
+    a transaction where both apps have applicable commissions?
+  answer: 'For a retail order of 1050 Rupees collected by the retail buyer app, where
+    the buyer app’s applicable commission is 50 Rupees, the retail seller app’s applicable
+    commission is 200 Rupees, the respective settle payloads would be: Buyer app’s
+    settlement instruction (collector''s /settle) inter participant - 1000 collector
+    - 50 self - 50 Seller app’s settlement instruction (receiver''s /settle) inter
+    participant - 1000 collector - 50 self - 200 provider - 800'
+  categories:
+  - Self is the amount to be moved to the current account of the entity calling the
+    API
+  tags:
+  - settlement
+  - buyer
+  - seller
+  - transaction
+  - retail
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: How will we know the tds and tcs value?
+  answer: TCS/ TDS is dependent on the transaction context, whether it is applicable
+    and if so how much. Check the tax guidelines shared. Settle instructions only
+    provide the money to be moved from collector to receiver. Calculations and reconciliation
+    among NPs are to be taken up in recon/ on_recon
+  categories:
+  - Self is the amount to be moved to the current account of the entity calling the
+    API
+  tags:
+  - transaction
+  - reconciliation
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Where can we use the TO_BE_INITIATED status in settlement?
+  answer: recon / on_recon APIs are to be leveraged for reconciling orders among NPs
+    irrespective of whether an order’s settlement amount has been settled or not.
+    In case, the recon API is called for an order before the settlement has taken
+    place, the status for the same would be TO_BE_INITIATED.
+  categories:
+  - Self is the amount to be moved to the current account of the entity calling the
+    API
+  tags:
+  - status
+  - settlement
+  - order
+  - api
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: For the "settle" call do we need to pass the list of orders for which
+    the settlement window has expired or the orders whose settlement is yet to expire?
+  answer: The orders for which the settlement is due is what is needed to be shared
+    in the /settle call.
+  categories:
+  - Self is the amount to be moved to the current account of the entity calling the
+    API
+  tags:
+  - settlement
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Now, if the case is for settling withholding amounts after the return
+    window is expired, if the order item is non returnable, will there be any case
+    of withholding amount settlement involved?
+  answer: There may be cases where a refund etc. may be required through the IGM route.
+  categories:
+  - Self is the amount to be moved to the current account of the entity calling the
+    API
+  tags:
+  - return
+  - order
+  - settlement
+  - refund
+  - igm
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Can you point us to the documentation for payloads of ACK and NACK?
+  answer: Available in Swagger UI - It is the same for all APIs across ONDC network
+  categories:
+  - Self is the amount to be moved to the current account of the entity calling the
+    API
+  tags:
+  - documentation
+  - ondc
+  - network
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: How many APIs do I need to develop to become RSF 2.0 compliant?
+  answer: 'There are 6 APIs for development: /Settle, /On_Settle, /Report, /on_Report,
+    /Recon, /On_Recon.'
+  categories:
+  - Self is the amount to be moved to the current account of the entity calling the
+    API
+  tags: []
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the use of /Settle, /On_Settle APIs?
+  answer: '/Settle: The Network Participants (Collector and Receiver) send settlement
+    instructions to the Settlement Agency, specifying the order ID and the corresponding
+    order amount. /On_Settle: The Settlement Agency responds to the bap_uri/on_settle
+    with a status of either SETTLED or NOT_SETTLED, indicating whether the settlement
+    was successful.'
+  categories:
+  - Self is the amount to be moved to the current account of the entity calling the
+    API
+  tags:
+  - network
+  - settlement
+  - order
+  - bap
+  - status
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the use of /Report, /On_Report APIs?
+  answer: Report APIs can be used by the Collector or Receiver to know about the status
+    of a settlement call from the Settlement Agency. The situation can arise due to
+    edge case scenarios where the participant does not receive a /On_Settle call from
+    the SA and therefore wants to know of the Settle Status. The caller of the API
+    can mention the reference Transaction id and Reference Message id in the /Report
+    call and Settlement Agency will share details on /On_Report API
+  categories:
+  - Self is the amount to be moved to the current account of the entity calling the
+    API
+  tags:
+  - status
+  - settlement
+  - participant
+  - api
+  - transaction
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the use of /Recon, /On_Recon APIs?
+  answer: "The reconciliation process among the NPs are facilitated through the recon\
+    \ and on_recon APIs. In case settlement instructions are shared to the settlement\
+    \ agency and it fails for certain orders due an order mismatch or an order amount\
+    \ mismatch, NPs shall leverage the recon and on_recon API to communicate the mismatches.\
+    \ /recon:- In case an NP receives an order amount mismatch error code from the\
+    \ settlement agency, the receiver initiates the /recon request to the collector\
+    \ providing the breakup details for the respective order ID(s). \n/on_recon:-\
+    \ The collector then reconciles and responds with the on_recon including the difference\
+    \ amount after getting the recon call. In case an NP receives an order id mismatch\
+    \ error code (i.e. order ID not shared by the counterparty), the NP is expected\
+    \ to call the /recon API of the respective counterparty with the specific order\
+    \ ID(s) and its breakup details. The counterparty then reconciles and responds\
+    \ with details specific to the order id requested. In both cases, if the response\
+    \ is correctly reconciled for the requisite orders, the settlement is initiated\
+    \ in the next settlement cycle. Otherwise, NPs are expected to raise an IGM for\
+    \ resolving the differences."
+  categories:
+  - Self is the amount to be moved to the current account of the entity calling the
+    API
+  tags:
+  - reconciliation
+  - settlement
+  - order
+  - api
+  - error
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What are the Steps needed for my application to be RSF 2.0 Compliant?
+  answer: 'RSF 2.0 compliance involves 4 major steps – 1. NOCA bank account opening
+    (Refer to Ques 26. for NOCA opening applicability) 2. Registration process including
+    agreement signing with NBBL 3. API Development (6 in Number) – Settle, On_Settle,
+    Report, On_Report, Recon, On_Recon 4. Testing: Settle, On_Settle, Report, On_Report
+    with NBBL’s Pre-prod environment. Recon, On_Recon with ONDC’s Mock Server or another
+    NP'
+  categories:
+  - Self is the amount to be moved to the current account of the entity calling the
+    API
+  tags:
+  - compliance
+  - registration
+  - api
+  - ondc
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the “MISC” settlement call? When should I be using the same?
+  answer: 'MISC settlement (under Settle Call) is used for settling pre-funded money
+    from an NP’s NOCA (non operative current account) to their operative account.
+    Misc Settlement call can also be used by an MSN Seller Network participant to
+    transfer money from its NOCA account to its Seller’s Operative Current Account
+    as per their terms of trade. All inter NP order level settlements need to mandatorily
+    use Settle Type: “Inter-NP”'
+  categories:
+  - Self is the amount to be moved to the current account of the entity calling the
+    API
+  tags:
+  - settlement
+  - seller
+  - network
+  - participant
+  - order
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Can RECON API be initiated by both Collector and Receiver ?
+  answer: Yes, it can be initiated by both. Suggestion is for the receiver to initiate
+    the flow
+  categories:
+  - Self is the amount to be moved to the current account of the entity calling the
+    API
+  tags:
+  - api
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: We have observed the following parameters in on_confirm. Could you please
+    provide more information on these parameters?
+  answer: '"@ondc/org/settlement_basis":"delivery", "@ondc/org/settlement_window":"P1D",
+    "@ondc/org/withholding_amount":"10.00
+
+    A settlement basis is the event based on which the settlement is to be initiated
+    at the time of settlement window. So, delivery as the settlement basis and 3 as
+    the settlement window would mean the settlement instruction has to be sent on
+    the 3rd day from the delivery date.'
+  categories:
+  - Self is the amount to be moved to the current account of the entity calling the
+    API
+  tags:
+  - confirm
+  - ondc
+  - settlement
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: I am seeking clarification on the settlement process in scenarios where.
+  answer: The seller-side order is partially canceled. The buyer-side order is fully
+    canceled. As a seller app, we need to understand how settlement and reconciliation
+    are handled in these cases. Could you please provide guidance on this process?
+    Typically, settlement of the order for now takes place after a terminal state
+    in the retail domains, for example return window plus 7 days. Whether the order
+    is seller side or buyer side cancelled is immaterial given fund movement will
+    take place post a terminal state. For a completely cancelled order, if there are
+    no cancellation charges, no settlement needs to be done For a partially cancelled
+    order, the fund needs to be settled based on the remaining portion of the order
+    quote.
+  categories:
+  - Self is the amount to be moved to the current account of the entity calling the
+    API
+  tags:
+  - settlement
+  - order
+  - seller
+  - app
+  - reconciliation
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Is the transaction id the same in the report call?
+  answer: Yes, the transaction id is the same in the report call for testing with
+    a mock server. For real cases, this is up to the implementation of the NP. Refer
+    notes provided in the instructions document for leveraging the mock server for
+    testing purposes.
+  categories:
+  - Self is the amount to be moved to the current account of the entity calling the
+    API
+  tags:
+  - transaction
+  - implementation
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Is the transaction id the same in the recon call?
+  answer: Same as above
+  categories:
+  - Self is the amount to be moved to the current account of the entity calling the
+    API
+  tags:
+  - transaction
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: 'Please explain the /recon calculations?
+
+    A:'
+  answer: orders.amount = Total order amount settlements.amount = Amount to be settled
+    from buyer app to seller app (collector to receiver) settlements.commision = Buyer
+    app’s commission settlements.withholding_amount = Not applicable currently settlements.tds
+    = Calculated on order.amount or settlements.amount (check with legal/finance teams)
+    settlements.tcs = Calculated on order.amount or settlements.amount (check with
+    legal/finance)
+  categories:
+  - Self is the amount to be moved to the current account of the entity calling the
+    API
+  tags:
+  - order
+  - buyer
+  - app
+  - seller
+  - commission
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: How does /on_recon help in fixing amounts in /settle?
+  answer: 'orders.amount = Total order amount settlements.amount = Not always BFF
+    (Depends on collector and receiver pair) settlements.commision = Always buyer
+    app’s commission If /on_recon has recon_accord: true, NPs will trigger /settle.
+    However: When the seller collects payment, /settle includes: Inter-participant
+    amount = Amount settled from collector to receiver Collector amount = What collector
+    keeps for themselves Self amount = Amount moved to API caller’s operative account
+    Provider amount = Amount transferred to an end provider’s account Refer to Section
+    3.4 in the use case documentation for detailed examples.'
+  categories:
+  - Self is the amount to be moved to the current account of the entity calling the
+    API
+  tags:
+  - order
+  - buyer
+  - app
+  - commission
+  - seller
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: 'What does message.orders.amount refer to in the /recon payload, and why
+    is message.orders.settlements an array? Also, should we include all previous unsuccessful
+    settlement attempts for the order?
+
+    A: The message.orders.amount.value field represents the full cost of an order,
+    while settlements ensure the correct transfer of funds after accounting for deductions.'
+  answer: If an order involves multiple payments, multiple settlement records can
+    be sent, each linked to a corresponding payment_id.
+  categories:
+  - Settlement Agency Onboarding
+  tags:
+  - settlement
+  - order
+  - payment
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Are there unsolicited calls for reports or status updates?
+  answer: No there are no unsolicited calls from the settlement agency
+  categories:
+  - Settlement Agency Onboarding
+  tags:
+  - status
+  - settlement
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: 'We have completed the RSF 2.0 processes and our logs have been approved
+    by ONDC. Could you kindly let us know what the next steps are in the process?
+
+    A: Onboarding with Settlement Agency – NBBL has two steps – (can be performed
+    simultaneously)'
+  answer: 'For agreement, it shall have two copies – a) Primary Copy on INR 1500 Stamp
+    Paper ( to be retained by NBBL ) and b) counter copy to be retained by the NP
+    on INR 500 Stamp Paper. It should be signed in wet ink.  Once the agreement is
+    ready at your end kindly let know, we will share the coordinates to send the agreement.
+
+
+    Please ensure the following are the documents to be shared as a part of onboarding.
+
+    List of Document - Agreement – NP <> SA  (Attached) GST (soft copy) PAN (soft
+    copy) NP Account Details (Soft Copy of Offer letter issued by Bank) Operative
+    (or Current) Account Details (Cancelled Cheque containing legal name of entity)
+    For #6, folks from NBBL, the settlement agency, - @ / @ will share the details
+    and this shall be a part of technical onboarding.'
+  categories:
+  - Reconciliation and Settlement Framework (RSF)
+  tags:
+  - ondc
+  - onboarding
+  - settlement
+  - gst
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: 'How do I include additional payment components not listed in the standard
+    example?
+
+    '
+  answer: 'You can include any additional payment elements in the quote.breakup field
+    of the payload.
+
+    '
+  categories:
+  - Reconciliation and Settlement Framework (RSF)
+  tags:
+  - payment
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What are the implications of delayed payments?
+  answer: 'Delayed payments may incur additional interest. Details are provided in
+    the settlement terms shared by the lender.
+
+    '
+  categories:
+  - Reconciliation and Settlement Framework (RSF)
+  tags:
+  - settlement
+  lastUpdated: '2024-07-10T10:00:00Z'

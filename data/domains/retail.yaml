@@ -1,0 +1,475 @@
+- question: The signature verification failed
+  answer: "Reason: The issue occurs due to a mismatch between the payload and the\
+    \ signing string, often caused by formatting or beautification, even if the payload\
+    \ content is the same. Resolution: The JSON should be stringified before signing,\
+    \ and the request body must be the exact lookup payload that was signed. Check\
+    \ that the lookup payload and the signing string are exactly the same — without\
+    \ beautification, extra spaces, or formatting changes. Minified JSON is preferred.\
+    \ Implementation Guide: Process Walkthroughs The ONDC onboarding process begins\
+    \ with key generation, where participants create a signing key pair using the\
+    \ Ed25519 algorithm and an encryption key pair using the X25519 algorithm (in\
+    \ ASN.1 DER format). Utilities for this are available in multiple languages such\
+    \ as Java, Python, Node.js, PHP, and Go. Once the keys are generated, participants\
+    \ move to endpoint setup, which includes generating a unique request_id, signing\
+    \ it, and hosting the ondc-site-verification.html file at the appropriate URL\
+    \ for domain verification. Additionally, the /on_subscribe endpoint must be implemented\
+    \ and hosted to handle challenge decryption using a shared key derived from the\
+    \ encryption keys. After these technical prerequisites are met, participants prepare\
+    \ a /subscribe request that includes essential entity details such as subscriber\
+    \ ID, callback URLs, public keys, and a unique key ID. The appropriate operation\
+    \ type (e.g., Buyer App, Seller App, or both) is selected based on the participant’s\
+    \ role. The final subscription request is then submitted to the ONDC Registry\
+    \ endpoint corresponding to the relevant environment (Staging, Pre-Prod, or Production)\
+    \ to complete the onboarding process. Once you receive an ACK response from the\
+    \ Registry, your entity is successfully subscribed to the ONDC network. Once a\
+    \ Network Participant (NP) successfully subscribes to the ONDC Registry, it can\
+    \ perform a self-lookup to validate its presence in the network. This is done\
+    \ by calling the /lookup API using its own subscriber_id. This journey is crucial\
+    \ for NPs to verify whether their registration details (including subscriber type,\
+    \ domain, city, signing/public keys, and endpoint URLs) are correctly recorded\
+    \ in the registry. This also serves as a quick way to test connectivity with the\
+    \ registry and confirm successful onboarding. The same lookup flow is used by\
+    \ other participants (like gateways and seller apps) to retrieve public keys and\
+    \ endpoint information for interaction and signature verification. To maintain\
+    \ trust and ensure message integrity in the ONDC network, every request initiated\
+    \ by an NP must include an Authorization header. This header is a cryptographic\
+    \ signature created using the NP’s private signing key. The NP starts by generating\
+    \ a digest of the request body using the BLAKE-512 hash function. Then, it appends\
+    \ timestamp fields (created and expires) and constructs a signing string. This\
+    \ string is signed with Ed25519 using the NP’s private key, and the resulting\
+    \ signature is encoded in base64 and attached to the Authorization header. This\
+    \ header is validated by the receiving NP (or Gateway), which retrieves the sender’s\
+    \ public key using the /lookup API and verifies the signature before accepting\
+    \ the request. This guarantees that the payload is authentic and untampered. In\
+    \ a standard ONDC transactional flow such as /search, the Buyer App (BAP) initiates\
+    \ a request to the Gateway. The Gateway first validates the Authorization header\
+    \ by fetching the BAP’s public key using the /lookup API and performing signature\
+    \ verification. It then validates the schema (specifically the context block)\
+    \ and, if successful, signs the payload with its own private key, adding the X-Gateway-Authorization\
+    \ header. The Gateway reads the domain and city from the context and broadcasts\
+    \ the request to all eligible Seller Apps (BPPs) discovered via registry lookup.\
+    \ After that, the flow becomes entirely peer-to-peer. Each Seller App validates\
+    \ both headers, fetches public keys from the registry, and if the checks pass,\
+    \ it processes the /search request. It then responds with a /on_search callback\
+    \ sent directly to the Buyer App by appending /on_search to the subscriber_url\
+    \ obtained via registry lookup. No further gateway involvement is needed after\
+    \ the initial broadcast, making all subsequent communication directly between\
+    \ network participants. Transactional Flow for IGM (Issue and Grievance Management)\
+    \ Issue and Grievance Management (IGM) is a key component within the ONDC (Open\
+    \ Network for Digital Commerce) ecosystem. It provides a structured and standardized\
+    \ way for participants to raise, manage, and resolve disputes or issues that may\
+    \ arise during or after an order is fulfilled. This could include problems such\
+    \ as wrong items delivered, damaged products, delays, or payment discrepancies.\
+    \ There are two versions of IGM that define how issues are handled: IGM 1.0.0\
+    \ In IGM 1.0.0, the buyer is the only party allowed to raise an issue. The issue\
+    \ is addressed by the seller (or the seller app), who is responsible for providing\
+    \ a resolution. Issues can be raised at two levels: Item-level: Specific to a\
+    \ particular item in the order (e.g., one item was damaged or missing). Fulfillment-level:\
+    \ Related to the delivery or the overall order experience (e.g., delayed shipment,\
+    \ incomplete order). The resolution process involves the seller responding with\
+    \ possible actions like replacement, refund, or clarification. IGM 2.0.0 In IGM\
+    \ 2.0.0, the process is bi-directional – meaning both the buyer and the seller\
+    \ can raise issues. This version introduces greater flexibility and a more balanced\
+    \ dispute resolution framework. Both parties (buyer and seller) have the ability\
+    \ to: Raise an issue against each other. Respond to and resolve the issue. This\
+    \ version supports a wider range of scenarios, including: Sellers raising issues\
+    \ for fraudulent buyer claims. Buyers continue to raise issues related to order\
+    \ problems. Issue resolution can still be based on the item or fulfillment level,\
+    \ but now both parties can initiate and participate in the process actively. The\
+    \ Journey of Financial Information Service (FIS) API The Financial Information\
+    \ Service (FIS) API transforms the process of securing a personal loan into a\
+    \ structured, transparent, and efficient journey. Through the open network, borrowers\
+    \ and lenders connect seamlessly, guided by a series of well-defined steps facilitated\
+    \ by the Borrower Platform (BAP) and Lender Platforms (BPPs). This narrative outlines\
+    \ the journey, from the initial search for a loan to its final confirmation and\
+    \ ongoing status updates, emphasizing clarity, trust, and technological precision.\
+    \ Initiating the Search for Financial Opportunities: The journey begins when a\
+    \ borrower, seeking a personal loan, engages the Borrower Platform (BAP). The\
+    \ BAP initiates a search request, sending a query through the network’s gateway\
+    \ to the registry. The registry identifies available Lender Platforms (BPPs) capable\
+    \ of offering personal loan services. The gateway forwards the search request\
+    \ to these BPPs, which respond with an on_search callback, publishing their loan\
+    \ catalogs. These catalogs contain a variety of loan products, complete with details\
+    \ such as loan types, interest rates, repayment terms, and eligibility criteria,\
+    \ accessible via the Swagger Link. This transparent exchange opens a world of\
+    \ possibilities, allowing the borrower to explore tailored financial solutions.\
+    \ Exploring a Catalog of Loan Offers: Upon receiving the on_search response, the\
+    \ BAP presents the borrower with a comprehensive catalog of loan offers from multiple\
+    \ BPPs. Each offer is detailed, showcasing key information like interest rates,\
+    \ loan tenures, and specific terms. This stage empowers the borrower to compare\
+    \ options side by side, evaluating which loan aligns best with their financial\
+    \ goals. The open network ensures that all relevant details are accessible, fostering\
+    \ informed decision-making and eliminating the opacity often associated with traditional\
+    \ loan searches. Selecting the Ideal Loan Product: With a clear view of available\
+    \ options, the borrower selects a specific loan offer that meets their needs.\
+    \ The BAP sends a select request to the chosen BPP, indicating the preferred loan\
+    \ product. This action marks a pivotal moment in the journey, as the borrower\
+    \ commits to pursuing a specific financial path, confident in their choice based\
+    \ on the transparent information provided. Receiving Detailed Loan Information:\
+    \ The lender responds with an on_select callback, acknowledging the borrower’s\
+    \ selection and providing detailed information about the chosen loan product.\
+    \ This response may include a dynamic form, prompting the borrower to specify\
+    \ details such as the desired loan amount or repayment term. The BAP displays\
+    \ this form to the borrower, ensuring a user-friendly experience as they input\
+    \ the requested information, which is then relayed back to the BPP. This step\
+    \ ensures the loan is tailored to the borrower’s unique requirements. Specifying\
+    \ Loan Details: If a dynamic form is provided, the borrower completes it, entering\
+    \ critical details such as the loan amount and preferred term. The BAP facilitates\
+    \ this process, securely collecting and transmitting the information to the BPP.\
+    \ This form (Loan Details) submission refines the loan offer, aligning it closely\
+    \ with the borrower’s financial objectives and setting the stage for a formal\
+    \ application. Formalizing the Loan Application: With the loan details submitted,\
+    \ the BAP sends an init request to the BPP, formally initiating the loan application\
+    \ process. This request includes the selected loan product, requested amount,\
+    \ term, and any additional details gathered through the form. This step transitions\
+    \ the journey from exploration to a structured engagement, signaling the borrower’s\
+    \ intent to move forward with the chosen lender. Refining the Application with\
+    \ Additional Information: The BPP responds with an on_init callback, acknowledging\
+    \ the initialization and potentially providing additional dynamic forms to collect\
+    \ further details. These forms may request Know Your Customer (KYC) information,\
+    \ bank account details for loan disbursement, or e-mandate setup for repayments.\
+    \ The BAP presents these form (KYC, Bank Details, e-Mandate) requirements to the\
+    \ borrower, who completes and submits them. The lender also provides an initial\
+    \ loan status update and may include additional terms, ensuring both parties are\
+    \ aligned as the application progresses. Submitting Comprehensive Details: After\
+    \ completing the additional forms, the BAP sends another init request, incorporating\
+    \ the submission_id from the form submissions. This ensures all required information—KYC\
+    \ documents, bank details, or e-mandate authorizations—is securely transmitted\
+    \ to the BPP. The open network’s robust infrastructure guarantees that sensitive\
+    \ data is handled with care, maintaining security and compliance throughout the\
+    \ process. Processing and Updating the Application: The BPP processes the submitted\
+    \ information and responds with an on_init callback, updating the loan application\
+    \ status. This response confirms that the additional details have been received\
+    \ and integrated, moving the application closer to completion. The borrower remains\
+    \ informed through the BAP, which provides real-time updates on the application’s\
+    \ progress, ensuring transparency and engagement. Reviewing the Loan Agreement:\
+    \ As the application nears finalization, the BPP sends a form (Loan Agreement)\
+    \ to the BAP, presenting the formal loan agreement for the borrower’s review.\
+    \ This document outlines all terms, including interest rates, repayment schedules,\
+    \ and responsibilities. The BAP displays the agreement, allowing the borrower\
+    \ to review it carefully and provide an e-signature to indicate acceptance. This\
+    \ step is critical, as it formalizes the borrower’s commitment to the loan terms.\
+    \ Confirming the Loan Application: Once the borrower signs the loan agreement,\
+    \ the BAP sends a confirm request to the BPP, finalizing the loan application.\
+    \ This action solidifies the partnership between the borrower and the lender,\
+    \ marking the successful completion of the application process. The open network\
+    \ ensures that this confirmation is securely communicated, maintaining a clear\
+    \ record of the agreement. Receiving Final Confirmation: The BPP responds with\
+    \ an on_confirm callback, providing final confirmation details to the borrower.\
+    \ This response confirms that the loan order is complete, and the loan is ready\
+    \ for sanctioning or disbursement. The borrower receives clear communication through\
+    \ the BAP, ensuring they understand the next steps, whether it’s awaiting funds\
+    \ or activating repayment schedules. Monitoring Loan Status: Even after confirmation,\
+    \ the journey continues with ongoing support. The BAP can send periodic status\
+    \ requests to the BPP to check the loan’s progress—whether it has been sanctioned,\
+    \ disbursed, or is in repayment. The BPP responds with updates, which the BAP\
+    \ relays to the borrower, ensuring they remain informed at every stage. The open\
+    \ network’s commitment to transparency ensures that the borrower is never left\
+    \ in the dark, fostering trust and clarity throughout the loan lifecycle. Conclusion:\
+    \ The journey through personal loan acquisition via the FIS API is a testament\
+    \ to the power of open networks in revolutionizing financial services. By connecting\
+    \ borrowers with lenders through a structured, transparent, and secure process,\
+    \ the FIS API empowers individuals to make informed decisions, access tailored\
+    \ solutions, and engage with confidence. From the initial search to ongoing status\
+    \ updates, each step is designed to streamline the experience, build trust, and\
+    \ deliver value. This journey is not just about securing a loan—it’s about empowering\
+    \ borrowers to achieve their financial aspirations with clarity and control, supported\
+    \ by a robust and innovative digital ecosystem. Logistic v1.2.5:- \nVersion Compatibility\
+    \ for ONDC Protocol 1.2.5 introduces new baseline and enhanced features, detailed\
+    \ in separate documentation:\n\n\n\nLSPs and LBNPs can selectively enable features\
+    \ based on their business needs and must publish the features they support to\
+    \ allow for mutual discovery. For APIs using these features, the context.version\
+    \ must be set to \"1.2.5\". 1.2.5 builds upon 1.2.0: It's considered an incremental\
+    \ update that layers new features over the base version 1.2.0. Compatibility Between\
+    \ 1.2.0 and 1.2.5 General Backward Compatibility: Most APIs in version 1.2.5 are\
+    \ backward compatible with version 1.2.0, allowing nodes (NPs) using version 1.2.0\
+    \ to communicate seamlessly with those using 1.2.5.\n\nException – RTO Flow: The\
+    \ updated RTO (Return to Origin) flow is not backward compatible with version\
+    \ 1.2.0. Because of this, 1.2.5 and 1.2.0 are considered side-by-side compatible\
+    \ rather than fully backward compatible.\n\nInteraction Scenarios:- An LBNP using\
+    \ 1.2.0 may receive responses in either 1.2.0 or 1.2.5 from LSPs. An LBNP using\
+    \ 1.2.5 may also receive responses in either 1.2.0 or 1.2.5.When responding with\
+    \ version 1.2.5, the LSP must include the list of features it supports. An LBNP\
+    \ using 1.2.5 can activate business workflows dynamically based on discovered\
+    \ feature support from the LSP. Additional Notes:-Systems may implement a version\
+    \ check for compatibility with \"1.2.*\" to support both 1.2.0 and 1.2.5 flexibly.\
+    \ Transactional Flow for RSF (Reconciliation and Settlement Framework) Reconciliation\
+    \ and Settlement Framework:- The Reconciliation and Settlement Framework (RSF)\
+    \ governs how money flows between buyers, sellers, and other network participants\
+    \ (NPs) on the ONDC network.  RSF 2.0 introduces a claim-based payout system where\
+    \ both Buyer Apps (acting as Collectors) and Seller Apps (acting as Receivers)\
+    \ submit their settlement details independently to the Settlement Agency (SA).\
+    \ Here's a breakdown of the transaction flow: Standard Flow (Buyer App as Collector,\
+    \ Seller App as Receiver, distinct legal entities): Order Placement and Payment:\
+    \ A buyer places an order through a Buyer App and makes a payment.  The Buyer\
+    \ App becomes the Collector of funds. /settle Call (Both Buyer and Seller Apps):\
+    \ The Seller App (Receiver) sends a /settle call to the SA, claiming the amount\
+    \ due to them (including their commission and any amount owed to the Seller on\
+    \ Record). The Buyer App (Collector) also sends a /settle call to the SA, specifying\
+    \ the order details and the amount to be settled. Order Matching and Reconciliation:\
+    \ The SA matches the orders submitted by both the Buyer App and Seller App based\
+    \ on order details. Balance Check: The SA checks if the Buyer App's account for\
+    \ ONDC settlement has sufficient funds. Fund Transfer: If the balance is sufficient,\
+    \ the SA instructs the banks to transfer funds: From the Buyer App's (Collector's)\
+    \ account for ONDC settlement to the Seller App's (Receiver's) account for ONDC\
+    \ settlement. From the Seller App's account for ONDC settlement to the Seller\
+    \ on Record's bank account (if last-mile settlement is opted in by the Seller\
+    \ App). From the Buyer App's (Collector's) account for ONDC settlement to the\
+    \ Buyer App's (Collector's) operating account for the Buyer Finder Fee (BFF).\
+    \ From the Seller App's (Receiver's) account for ONDC settlement to the Seller\
+    \ App's (Receiver's) operating account for their commission. /on_settle (Settlement\
+    \ Confirmation): The SA notifies both the Buyer App and Seller App about the successful\
+    \ settlement, providing settlement reference numbers with status “SETTLED” or\
+    \ “NOT-SETTLED”. Onboarding process with SA\nThe onboarding process with a Settlement\
+    \ Account (SA) involves several steps for Network Participants (NPs) on the ONDC\
+    \ network.NPs can reach out to the Settlement Agency (SA) via the contact email\
+    \   provided on the ONDC website  . NPs are required to open an account for ONDC\
+    \ settlement with banks onboarded on NPCI-NBBL NOCS. NPs are expected to follow\
+    \ the following steps as per their respective role on the ONDC network. As a Buyer\
+    \ App or Marketplace Seller App (MSN): On ONDC’s & SA’s  website, refer to the\
+    \ published list of banks onboarded with SA Open an account for ONDC settlement\
+    \ either with your existing bank, if it's on the published list, or with another\
+    \ bank from the list Confirm that you have an account for ONDC settlement with\
+    \ an SA on-boarded bank on ONDC’s NP portal Declare  on ONDC’s NP portal that\
+    \ you have completed integration with SA Post go-live on the network, start making\
+    \ claims to SA for receivables As an Inventory Seller App (ISN): Choose either\
+    \ of the following options: Option 1: Follow steps 1 to 7 as mentioned above;\
+    \ similar to Buyer App or Marketplace Seller App (MSN) Option 2: Alternatively,\
+    \ follow the following steps- (A) If you will never be the Collector (take money\
+    \ from the buyer directly) or will never take on-network logistics\n- don’t open\
+    \ a new account for ONDC settlement with an SA on-boarded bank; and continue with\
+    \ your existing bank account\n\n(B) If you will be the Collector (take money from\
+    \ the buyer directly) or will take on-network logistics sometime in the future\n\
+    - open a new account for ONDC settlement with an SA on-boarded bank; and continue\
+    \ with your existing bank account Declare on ONDC’s NP portal that you have completed\
+    \ API integration with SA Post go-live on the network, initiate receivables claims\
+    \ by sharing /settle call(s) with SA Transactional Flow for Retail v1.2.0 1. Search\
+    \ and Discovery /search (Buyer NP → Gateway → Seller NPs):\n Initiates a search\
+    \ query from the buyer, which is propagated through the gateway to relevant Seller\
+    \ NPs /on_search (Seller NPs → Gateway → Buyer NP):\n Seller NPs respond with\
+    \ available products or services matching the search criteria.\n\n Key Enhancements\
+    \ in v1.2.0: Support for product variants, add-ons, and customization options.\
+    \ Incremental catalog refresh capability, allowing Buyer NPs to fetch only updated\
+    \ catalog entries since the last refresh. 2. Product Selection and Quotation /select\
+    \ (Buyer NP → Seller NP):\n Buyer selects a specific product or service, initiating\
+    \ a request for detailed quotation /on_select (Seller NP → Buyer NP):\n Seller\
+    \ NP provides detailed quotation, including pricing, availability, and other relevant\
+    \ terms. Considerations: Handling of out-of-stock scenarios with appropriate error\
+    \ messages. Inclusion of detailed fulfillment information, such as delivery timelines\
+    \ and logistics options. 3. Order Initialization /init (Buyer NP → Seller NP):\n\
+    \ Buyer NP initiates the order placement process, providing necessary order details.\
+    \ /on_init (Seller NP → Buyer NP):\n Seller NP responds with order initialization\
+    \ confirmation, including order ID and terms.\n\n Key Elements: Inclusion of provider\
+    \ tax numbers for verification purposes. 4. Order Confirmation /confirm (Buyer\
+    \ NP → Seller NP):\n Buyer NP confirms the order, finalizing the purchase intent.\
+    \ /on_confirm (Seller NP → Buyer NP):\n Seller NP acknowledges the order confirmation,\
+    \ providing final order details.\n\n Important Aspects: Digital signing of the\
+    \ transaction-level contract between Buyer NP and Seller NP. Inclusion of settlement\
+    \ terms and payment instructions. 5. Order Fulfillment and Tracking /status (Buyer\
+    \ NP → Seller NP):\n Buyer NP requests the current status of the order. /on_status\
+    \ (Seller NP → Buyer NP):\n Seller NP provides the latest status updates, including\
+    \ shipment and delivery information.\n\n Enhancements: Provision of tracking URLs\
+    \ and estimated delivery times. Handling of logistics through integrated logistics\
+    \ partners, if applicable. 6. Order Cancellation and Returns /cancel (Buyer NP\
+    \ → Seller NP):\n Buyer NP initiates order cancellation. /on_cancel (Seller NP\
+    \ → Buyer NP):\n Seller NP acknowledges the cancellation request. /update (Buyer\
+    \ NP → Seller NP):\n Used for initiating returns or modifications to the order.\
+    \ /on_update (Seller NP → Buyer NP):\n Seller NP responds to the update request,\
+    \ confirming actions taken. Key Considerations: Accurate timestamping of cancellation\
+    \ and return requests. Inclusion of reasons for cancellation or return in the\
+    \ response. 7. Payment and Settlement /payment (Buyer NP → Seller NP):\n Buyer\
+    \ NP processes the payment for the order. /on_payment (Seller NP → Buyer NP):\n\
+    \ Seller NP acknowledges receipt of payment. Settlement Process: Involvement of\
+    \ Reconciliation Service Providers (RSPs) and Settlement Agencies to facilitate\
+    \ fund transfers between Network Participants. 8. Post-Transaction Activities\
+    \ Issue and Grievance Management:\n ONDC provides a framework for resolving disputes\
+    \ and handling grievances through Online Dispute Resolution (ODR) mechanisms.\
+    \ Feedback and Ratings:\n Buyers can provide feedback and ratings for products\
+    \ and services, contributing to the overall trust and reliability of the network.\
+    \ /search"
+  categories:
+  - Retail API related queries
+  tags:
+  - signature
+  - verification
+  - implementation
+  - ondc
+  - onboarding
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What are action and on_action calls?
+  answer: action calls are made by Buyer apps to seller apps. on_action calls are
+    made by Seller app to buyer apps for action calls they received. There are few
+    unsolicited on_action calls made by Seller app when there is change in order status
+    like on_status,on_update. Search,select,init are few action calls. On_search,on_select,on_init
+    are few on_action calls.
+  categories:
+  - Retail API related queries
+  tags:
+  - buyer
+  - seller
+  - app
+  - order
+  - status
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What does “search by item” mean?
+  answer: It means sending a search request to find catalogs from sellers that offer
+    the specific item and can fulfill the order at the given drop location — based
+    on GPS coordinates or area code.
+  categories:
+  - Retail API related queries
+  tags:
+  - search
+  - order
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is an incremental catalog refresh?
+  answer: An incremental catalog refresh is a lightweight update mechanism that allows
+    buyer Network Participants (NPs) to refresh their cached catalogs by receiving
+    only the changes since the last full catalog update. This includes modifications
+    such as item updates, store closures, or store deactivations, making the process
+    more efficient than sending the entire catalog each time.
+  categories:
+  - Retail API related queries
+  tags:
+  - catalog
+  - update
+  - buyer
+  - network
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What does ‘TTL’ mean in ONDC?
+  answer: TTL (Time To Live) defines how long a message remains valid within the network.
+    It ensures that requests are timely and relevant by setting an expiration duration.
+    TTL is typically expressed in ISO8601 duration format — for example, PT30S represents
+    30 seconds.
+  categories:
+  - Retail API related queries
+  tags:
+  - ondc
+  - network
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: How to book a demo in the staging environment?
+  answer: One can book a demo through the NP Portal homepage (portal.ondc.org). Homepage>>
+    Requests related to integration journey>>Book Demo slot Following document contains
+    the guidelines for the demo -
+  categories:
+  - Retail API related queries
+  tags:
+  - ondc
+  - integration
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: The quantity,price or count should be numeric or string?
+  answer: 'Make sure that not all amounts are in string. There are two major places
+    the amount is in numeric (with strictly 2 decimal places only) especially in on_action
+    calls: Breakup array @ondc/org/item_quantity object has a count key which should
+    be numeric in all on_action calls Items array has quantity object which has count
+    key which should also be numeric in on_action calls after /init calls'
+  categories:
+  - Retail
+  tags:
+  - quantity
+  - retail
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the transaction trail of ONDC API calls?
+  answer: Request is sent from sender to recipient; Recipient acknowledges the request
+    by sending an "ACK" (or "NACK" if they cannot validate the request); Recipient
+    sends response through the callback for the corresponding request API e.g. /on_search
+    callback for /search request; Recipient of callback (could be the original sender)
+    acknowledges the response by sending an "ACK" (or "NACK" if they cannot validate
+    the request); The calls from are made in order (for pre- order stage) - /search,
+    /select/, /init, /confirm
+  categories:
+  - Retail
+  tags:
+  - transaction
+  - ondc
+  - api
+  - search
+  - order
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the ‘/search’ call intended for?
+  answer: "‘/search’ API is used to communicate the intent for a full or incremental\
+    \ catalog refresh. It triggers the seller NP to send a refreshed catalog. \nA\
+    \ full catalog refresh instructs the seller NP to send the entire catalog of items\
+    \ again.\nAn incremental catalog refresh instructs the seller NP to send only\
+    \ the changes in the catalog(such as item changes, store opening, store closing\
+    \ etc.)"
+  categories:
+  - Retail
+  tags:
+  - search
+  - api
+  - catalog
+  - seller
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Explain the keys days, schedule, holiday, duration, and range in the schedule
+    object?
+  answer: 'Days: This field represents the days of the week when the store is open
+    Timings of Schedule: This object provides detailed information about the store''s
+    operating hours, including holidays and recurring schedules. Holiday: This field
+    contains a list of future dates representing holidays when the store will be closed.
+    The dates should be in the format "YYYY-MM-DD". An empty array should be passed
+    if there are no holidays.
+
+    Duration: This field represents the order preparation time in ISO 8601 duration
+    format. It signifies the maximum time needed for the seller to prepare the order
+    for shipping or pickup. For example, "PT30M" indicates an order preparation time
+    of 30 minutes. Range: This object defines a continuous time range during which
+    the store is open. start: This field specifies the start time of the operational
+    hours in HHMM format. For example, "1100" represents 11:00 AM. end: This field
+    specifies the end time of the operational hours in HHMM format. For example, "2100"
+    represents 9:00 PM.'
+  categories:
+  - Retail
+  tags:
+  - order
+  - seller
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the start and end location in fulfillment?
+  answer: 'Start: it is start location from where the order will get picked up End:  it
+    is the end location where the order will get dropped.'
+  categories:
+  - Retail
+  tags:
+  - fulfillment
+  - order
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is Request incremental catalog refresh (pull)
+  answer: 'Request Incremental Catalog Refresh (Pull) is a process where a system
+    requests only the updated or changed parts of a catalog since the last update,
+    instead of retrieving the entire catalog. The Buyer NP requests a one-time incremental
+    refresh: start_time is before Context.timestamp, end_time is also before Context.timestamp,
+    and end_time is after start_time (meaning the Buyer NP pulls incremental updates
+    between start_time and end_time in a single solicited response).'
+  categories:
+  - Retail
+  tags:
+  - catalog
+  - update
+  - buyer
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Is there any partial cancellation supported from the buyer app?
+  answer: Buyer side partial cancellation is not supported for now in the retail api
+    contract
+  categories:
+  - Retail
+  tags:
+  - buyer
+  - app
+  - retail
+  - api
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: 'I want to be an ISN but don''t want to build a seller app. Also Dont
+    want to onboard any MSN Can I be on ONDC platform?
+
+    '
+  answer: 'Either of these options have to be selected. There is no other option to
+    onboard ONDC.
+
+    '
+  categories:
+  - Retail
+  tags:
+  - seller
+  - app
+  - ondc
+  - platform
+  lastUpdated: '2024-07-10T10:00:00Z'

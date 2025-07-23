@@ -1,0 +1,323 @@
+- question: '- What is Liquidated? How it is different from reverse qc.'
+  answer: -There are two types of return:- 1. Where the item is returned to the seller.
+    2. Seller does not want product back and will refund returns Examples:- The buyer
+    wants to return the shirt due to its size. Buyer initiates return. The seller
+    wants the product to be shipped back. This is reverse qc The buyer wants to return
+    Pizza due to its taste. Buyer initiates return. The seller doesn't want the product
+    to be shipped back. Still the seller will refund. This is liquidated.
+  categories:
+  - Mobility & Travel FAQs
+  tags:
+  - return
+  - seller
+  - refund
+  - buyer
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: 'How many domains are there inside mobility?
+
+    A: We have five domains in mobility:
+
+    TRV10 - Ride hailing'
+  answer: TRV11 - Unreserved ticketing (Metro & Bus) TRV12 - Reserved ticketing (Intercity
+    buses and flights) TRV13 - Accommodation booking TRV14 - Unreserved Entry Passes
+    (Experiences)
+  categories:
+  - Mobility & Travel FAQs
+  tags:
+  - mobility
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: How many flows are present in TRV10?
+  answer: There are 16 flows present in TRV10 BPP Collecting - Payment Confirmation
+    On-Demand - Assign driver on on-confirm On-Demand - Assign driver post on-confirm
+    On-Demand - Purple Tags (Assign driver on on-confirm) On-Demand - Assign driver
+    post on-confirm(Self-Pickup) On-Demand - Ride cancellation by driver On-Demand
+    - Ride cancellation by rider Driver not found on on_confirm Driver not found post
+    on_confirm On-Demand - Ride with multiple stops On-Demand - Update Stop On-Demand
+    - Pre Order Bid On-Demand - Post Order Tip On-Demand - Rental Schedule - Rental
+    Schedule - Trip On-Demand - Rental (when end stop GPS coordinate is present)
+  categories:
+  - Mobility & Travel FAQs
+  tags:
+  - bpp
+  - payment
+  - confirm
+  - update
+  - order
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: 'How many flows are present in TRV11?
+
+    A: There are 16 flows present inside TRV11'
+  answer: IntraCity - Delayed Cancellation Flow (Rejected) IntraCity - Delayed Cancellation
+    Flow (Successful) IntraCity - GPS Based Flow IntraCity - Purchase Journey Flow
+    (Code Based) IntraCity - Search Pagination Flow (Code Based) IntraCity - Unlimited
+    Passes Flow (Code Based) IntraCity - User Cancellation Flow IntraCity - Vehicle
+    Based Confirmation Flow IntraCity - Technical Cancellation Flow Metro - Cancel
+    Flow Metro - GPS Based Flow Metro - Station Code Based Flow Metro - Delayed Cancellation
+    Flow (Rejected) Metro - Delayed Cancellation Flow (Accepted) Metro - Technical
+    Cancellation Flow Metro - End Stop Update Flow
+  categories:
+  - Mobility & Travel FAQs
+  tags:
+  - search
+  - cancel
+  - update
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the Log verification process?
+  answer: 'Let’s consider an example of TRV11: To verify your logs, you can use the
+    POST method exposed at  within the . Available flows are: METRO_STATION_CODE METRO_GPS
+    METRO_USER_CANCEL METRO_TECHNICAL_CANCEL INTRACITY_STATION_CODE INTRACITY_GPS
+    INTRACITY_USER_CANCEL INTRACITY_TECHNICAL_CANCEL The payload structure for validation
+    is as follows: { "domain": "ONDC: TRV11", "version": "2.0.0", "flow": "STATION_CODE",
+    "payload": { "search_1": {}, "on_search_1": {}, "search_2": {}, "on_search_2":
+    {}, "select": {}, "on_select": {}, "init": {}, "on_init": {}, "confirm": {}, "on_confirm":
+    {}, "status": {}, "on_status": {} } }'
+  categories:
+  - Mobility & Travel FAQs
+  tags:
+  - verification
+  - cancel
+  - ondc
+  - search
+  - select
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is TRANSIT_STOP and INTERMEDIATE_STOP in TRV11?
+  answer: The TRANSIT_STOP station is a change stop for moving to another line in
+    the metro context. An INTERMEDIATE_STOP station is a normal stop/ station on the
+    metro route.
+  categories:
+  - Mobility & Travel FAQs
+  tags: []
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is SJT and RJT  in TRV 11?
+  answer: SJT is a single journey ticket from station A to station B RJT is a round
+    journey ticket which includes onward and return trip also from point A to point
+    B.
+  categories:
+  - Mobility & Travel FAQs
+  tags:
+  - return
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What are BUYER_FINDER_FEES?
+  answer: Buyer Finder Fees are charges associated with finding and connecting buyers
+    to sellers in a transaction. These fees are either in percentage format of the
+    total transaction value or a fixed value.
+  categories:
+  - Mobility & Travel FAQs
+  tags:
+  - buyer
+  - transaction
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Why are there two searches and on-search in metro TRV11?
+  answer: At the very first search, it gives the result to all the metro routes available
+    while on the second search, it gives the metro list from one endpoint to another
+    endpoint between two stations.
+  categories:
+  - Mobility & Travel FAQs
+  tags:
+  - search
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Why are fulfilment IDs?
+  answer: Based on the search there can be multiple routes to reach a destination
+    from one endpoint to another. So, everyone has its own ID that's called fulfillments
+    with all the in-between stations.
+  categories:
+  - Mobility & Travel FAQs
+  tags:
+  - search
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What are category IDs?
+  answer: A person may have different kinds of tickets. Some have counter tickets,
+    some have passes, and some have QR code scanners so each one has its own categorization
+    ID which is called categoryID.
+  categories:
+  - Mobility & Travel FAQs
+  tags: []
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What are the available items for purchase in case of metro? What are the
+    available items for purchase?
+  answer: 'Mobility offers two main types of items: Single Journey Ticket (SJT), Round
+    Journey Ticket (RJT).'
+  categories:
+  - Mobility & Travel FAQs
+  tags:
+  - mobility
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Are there any limits on the quantity of items I can purchase?
+  answer: Yes, there are quantity limits for each item that are provided by the seller
+    app in the item object.
+  categories:
+  - Mobility & Travel FAQs
+  tags:
+  - seller
+  - app
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Can I purchase items from multiple categories in a single transaction?
+  answer: Yes, you can purchase items from multiple categories in a single transaction.
+  categories:
+  - Mobility & Travel FAQs
+  tags:
+  - transaction
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is a quote in the context of a transaction?
+  answer: A quote represents the estimated cost provided by a seller (or provider)
+    for selected items or services, typically including details such as the total
+    price and a breakdown of individual charges.
+  categories:
+  - Mobility & Travel FAQs
+  tags:
+  - transaction
+  - seller
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What are the components included in the "breakup" section?
+  answer: The "breakup" section typically includes titles specifying different charge
+    types (e.g., base fare, taxes, fees) and corresponding details such as the selected
+    items or services contributing to each charge and their respective prices.
+  categories:
+  - Mobility & Travel FAQs
+  tags: []
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is a fulfilment in transportation services?
+  answer: Fulfilment refers to the complete journey or trip or route provided by a
+    transportation service, for example a trip is from the starting point to the final
+    destination, including any intermediate stops along the route.
+  categories:
+  - Mobility & Travel FAQs
+  tags: []
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: How can I access the terms and conditions of the booking?
+  answer: The terms and conditions are provided through a static URL included in the
+    "SETTLEMENT_TERMS" descriptor. You can access the terms by following the provided
+    URL.
+  categories:
+  - Mobility & Travel FAQs
+  tags:
+  - settlement
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What are the cancellation terms?
+  answer: The cancellation terms outline the conditions and procedures for cancelling
+    a booking or transaction.
+  categories:
+  - Mobility & Travel FAQs
+  tags:
+  - transaction
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What type of information does the "GTFS" descriptor refer to?
+  answer: The "GTFS" descriptor typically refers to General Transit Feed Specification,
+    which is a standardized format for public transportation schedules and associated
+    geographic information.
+  categories:
+  - Mobility & Travel FAQs
+  tags: []
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is GTFS real-time?
+  answer: GTFS-realtime is an extension of GTFS that allows public transportation
+    agencies to provide real-time updates about vehicle locations, arrival predictions,
+    and other service alerts.
+  categories:
+  - Mobility & Travel FAQs
+  tags: []
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What are SETTLEMENT_TERMS?
+  answer: Settlement Terms refer to the specific conditions and arrangements agreed
+    upon between parties involved in a transaction regarding the settlement process.
+  categories:
+  - Mobility & Travel FAQs
+  tags:
+  - settlement
+  - transaction
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the SETTLEMENT_WINDOW?
+  answer: The Settlement Window refers to the time frame within which settlement of
+    the transaction must occur from the settlement_basis event. If it is like PT60M,
+    which means 60 minutes.
+  categories:
+  - Mobility & Travel FAQs
+  tags:
+  - settlement
+  - transaction
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is SETTLEMENT_BASIS?
+  answer: Settlement Basis determines the event or method or conditions under which
+    settlement will take place. In this context, it is set to "Delivery," indicating
+    that settlement occurs upon delivery of the goods or services.
+  categories:
+  - Mobility & Travel FAQs
+  tags:
+  - settlement
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is SETTLEMENT_TYPE “UPI” referring to?
+  answer: SETTLEMENT_TYPE is a payment method through which NPs pay for any item for
+    example UPI, NEFT RTGS etc.
+  categories:
+  - Mobility & Travel FAQs
+  tags:
+  - settlement
+  - upi
+  - payment
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Is MANDATORY_ARBITRATION required in this agreement?
+  answer: Yes, MANDATORY_ARBITRATION  is required as indicated by the value "true."
+  categories:
+  - Mobility & Travel FAQs
+  tags: []
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the COURT_JURISDICTION specified in this agreement?
+  answer: The COURT_JURISDICTION is New Delhi, indicating that legal matters arising
+    from the transaction would be subject to the jurisdiction of courts in New Delhi.
+  categories:
+  - Mobility & Travel FAQs
+  tags:
+  - transaction
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Why are there two cancel calls in the cancellation process?
+  answer: 'In the cancellation process, there are two instances of cancelling: one
+    for a soft cancel and another for confirming the cancellation. During a soft cancel,
+    we inquired with the customer, "Are you sure you want to cancel?" along with provision
+    of cancellation fees applicable if any. If the customer confirms, we proceed with
+    the confirm cancel action, effectively cancelling the process and updating the
+    quote object and the order object.'
+  categories:
+  - Mobility & Travel FAQs
+  tags:
+  - cancel
+  - confirm
+  - order
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What are stop authorization types in TRV10 (on demand)?
+  answer: There are two authorization types present in TRV 10 OTP (One time password)
+    QR (Quick Response code)
+  categories:
+  - Mobility & Travel FAQs
+  tags: []
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What are fulfilment states present inside TRV10 (on demand)?
+  answer: 'RIDE_STARTED: Describes when the rider initiates the journey. RIDE_ASSIGNED:
+    Describes the state when a ride is assigned. RIDE_ENROUTE_PICKUP: Ride en route
+    to pick up RIDE_ARRIVED_PICKUP: Describes the state when the rider arrived at
+    the pickup point. RIDE_ENDED: Describes when the rider concludes the journey.
+    RIDE_CANCELLED: The rider has cancelled the ride'
+  categories:
+  - Mobility & Travel FAQs
+  tags: []
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What are payment types present inside TRV10 (on demand)?
+  answer: 'There are three payment types present inside TRV10 PRE-ORDER: Payment occurs
+    prior to order placement ON-ORDER: Payment occurs on order placement ON-FULFILMENT:
+    Payment occurs upon the completion of the journey'
+  categories:
+  - Mobility & Travel FAQs
+  tags:
+  - payment
+  - order
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the SETTLEMENT_AMOUNT?
+  answer: The amount of settlement of the Settlement Basis within which the Payment
+    Collector will settle with counterparty Network Participant(s).
+  categories:
+  - Mobility & Travel FAQs
+  tags:
+  - settlement
+  - payment
+  - network
+  - participant
+  lastUpdated: '2024-07-10T10:00:00Z'

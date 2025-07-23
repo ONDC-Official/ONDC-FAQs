@@ -1,0 +1,417 @@
+- question: Can lookup responses be cached?
+  answer: 'Yes, caching lookup responses can help optimize performance. However, it’s
+    important to refresh the cache periodically—for example, every few hours—or in
+    real time for critical operations such as order confirmations, to ensure data
+    remains accurate and up to date. Here are some common errors you might see:'
+  categories:
+  - Common Errors
+  tags:
+  - order
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Subscriber not found
+  answer: 'Reason: Invalid format of the signature, subscriber_id not found, presence
+    of backslashes or escape characters in the header, or the subscriber_id used while
+    generating the header does not exist in the registry records. Resolution: Ensure
+    that the header format strictly matches the expected structure (as shown below),
+    without any backslashes, escape characters, or unintended formatting. Additionally,
+    verify that the subscriber_id used exists in the registry as a SUBSCRIBED one.
+    Sample format of header: Signature keyId="buyer-app.ondc.org|207|ed25519",algorithm="ed25519",created="1641287875",expires="1641291475",headers="(created)
+    (expires) digest",signature="fKQWvXhln4UdyZdL87ViXQObdBme0dHnsclD2LvvnHoNxIgcvAwUZOmwAnH5QKi9Upg5tRaxpoGhCFGHD+d+Bw=="'
+  categories:
+  - Common Errors
+  tags:
+  - signature
+  - registry
+  - ondc
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: There is mismatch in the algorithm
+  answer: 'Reason: The error indicates an issue with the highlighted part of the header
+    — possibly due to invalid format, extra characters, or slashes. Resolution: Check
+    that the header format matches the expected structure (as shown below) and ensure
+    there are no backslashes or extra characters. Signature keyId="|207|ed25519",algorithm="ed25519",created="1641287875",expires="1641291475",headers="(created(expires)digest",signature="fKQWvXhln4UdyZdL87ViXQObdBme0dHnsclD2LvvnHoNxIgcvAwUZOmwAnH5QKi9Upg5tRaxpoGhCFGHD+d+Bw=="'
+  categories:
+  - Common Errors
+  tags:
+  - error
+  - signature
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: The request has expired
+  answer: "Reason: This error indicates that the expires timestamp in the signature\
+    \ header has either passed or is incorrectly formatted. Since the expiry timestamp\
+    \ is part of the signed data, any change to this value without regenerating the\
+    \ signature will cause signature verification to fail. Issues may also arise from\
+    \ extra characters, slashes, or incorrect formatting within the highlighted part\
+    \ of the header. Resolution: Ensure that the created and expires timestamps are\
+    \ correctly set relative to the current time and are within the valid window.\
+    \ Also verify that the header format strictly adheres to the expected structure\
+    \ with no additional characters, slashes, or escape sequences. If any timestamp\
+    \ is modified, regenerate the signature to maintain integrity. Signature \nkeyId=\"\
+    |207|ed25519\",algorithm=\"ed25519\",created=\"1641287875\",expires=\"1641291475\"\
+    ,headers=\"(created)(expires)digest\",signature=\"fKQWvXhln4UdyZdL87ViXQObdBme0dHnsclD2LvvnHoNxIgcvAwUZOmwAnH5QKi9Upg5tRaxpoGhCFGHD+d+Bw==\""
+  categories:
+  - Common Errors
+  tags:
+  - error
+  - signature
+  - verification
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Header parsing failed OR Invalid headers are present in header parameters
+  answer: 'Reason: The error indicates an issue with the highlighted part of the header
+    — possibly due to invalid format, extra characters, or slashes. Resolution: Check
+    the header format carefully and ensure there are no extra characters, slashes,
+    or escape sequences. Signature keyId="|207|ed25519",algorithm="ed25519",created="1641287875",expires="1641291475",headers="(created)(expires)digest",signature="fKQWvXhln4UdyZdL87ViXQObdBme0dHnsclD2LvvnHoNxIgcvAwUZOmwAnH5QKi9Upg5tRaxpoGhCFGHD+d+Bw=="'
+  categories:
+  - Common Errors
+  tags:
+  - error
+  - signature
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What are valid return reason codes?
+  answer: 001 002 003 004 005
+  categories:
+  - Product delivered is different from what was shown and ordered
+  tags:
+  - return
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: As we are aggregating multiple buyers for multiple cities, the search
+    gets initiated and every search result via the gateway results in 3 GB of data.
+  answer: Search should be initiated for each city and cached on your end. Since the
+    catalog includes full details of the seller app/sellers and their serviceability,
+    you may ingest, process, and cache it on your side. The buyer can then search
+    directly from these cached results. As the number of seller NPs and sellers on
+    the network grows, the volume of resultant data will also increase. Therefore,
+    effective filtering and catalog rejection processes should be implemented to eliminate
+    poor-quality catalogs or payloads.Also, please note that the /on_search response
+    is sent directly to the buyer app’s endpoint and not routed through the gateway.
+    /on_search
+  categories:
+  - Product delivered is different from what was shown and ordered
+  tags:
+  - search
+  - gateway
+  - catalog
+  - seller
+  - app
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is on_search? Who sends on_search and to whom?
+  answer: The /on_search call is the response from the Seller NP to the Buyer NP's
+    /search request.  It contains the requested catalog data (for full refresh) or
+    the incremental updates.  The Buyer NP acknowledges the /on_search response with
+    an ACK or NACK.  A NACK indicates an issue with ingesting the response, such as
+    missing providers, locations, or items.  The on_search response can also include
+    deep links to the provider's store on the buyer app and options for the Buyer
+    NP to communicate promotions.
+  categories:
+  - Product delivered is different from what was shown and ordered
+  tags:
+  - search
+  - seller
+  - buyer
+  - catalog
+  - app
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the difference between a custom menu and custom group?
+  answer: custom_menu is where items are displayed.category_ids is for a custom menu
+    used mainly in F&B. Format of category_ids is [custom menu item id:display sequence
+    within custom menu item] Custom_group is used for grouping customisation for items.custom_group
+    is type of variant group
+  categories:
+  - Product delivered is different from what was shown and ordered
+  tags: []
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the difference between category_id and category_ids?
+  answer: category_id is the category of that domain as mentioned in the taxonomy
+    for that domain except for F&B (RET11). For RET11 it would always be F&B. category_ids
+    is for a custom menu used mainly in F&B. Format of category_ids is custom menu
+    item id:display sequence within custom menu item.
+  categories:
+  - Product delivered is different from what was shown and ordered
+  tags: []
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is frequency in provider.locations.schedule?
+  answer: Frequency and times are for timing the store will open and by how much time
+    it will open. As in API contract frequency in PT4H and times are 1100 and 1900
+    it means the Store will open at 1100 for next 4 hours and then will open from
+    1900 to 4 hours. Either frequency and times is given or range is provided with
+    timings of open to close.
+  categories:
+  - Product delivered is different from what was shown and ordered
+  tags:
+  - api
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: I have huge data. Can I send through pagination?
+  answer: '- Yes you can send through pagination and all buyer apps in production
+    support pagination. /select'
+  categories:
+  - Product delivered is different from what was shown and ordered
+  tags:
+  - buyer
+  - production
+  - select
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the URL for select API? When should I call select API.
+  answer: After receiving catalog from seller app in on_search buyers app display
+    products on their application. When the end buyer selects any item and adds it
+    to the cart then select should be called. The URL of select is <bpp_uri>/select.
+    bpp_uri is sent by the seller app in the context of on_search payload.
+  categories:
+  - Product delivered is different from what was shown and ordered
+  tags:
+  - select
+  - api
+  - catalog
+  - seller
+  - app
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Should select have the same transaction_id as in on_search?
+  answer: Not mandatory. Select can have a unique transaction_id. But transaction_id
+    sent in select will remain same in all future calls till order delivered or return
+    date expired. Transaction_id is unique for particular order /on_select
+  categories:
+  - Product delivered is different from what was shown and ordered
+  tags:
+  - select
+  - transaction
+  - search
+  - order
+  - return
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the difference between 40002 and 40009 error codes?
+  answer: 40002 is for out of stock 40009 is for maximum quantity limit exceeded.
+  categories:
+  - Product delivered is different from what was shown and ordered
+  tags:
+  - error
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Can we have multiple fulfillments? Can each item in order have different
+    fulfillment
+  answer: There could be multiple fulfillments.The trail should  be maintained and
+    tracked for each fulfillment. /init
+  categories:
+  - Product delivered is different from what was shown and ordered
+  tags:
+  - order
+  - fulfillment
+  - init
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: When is the init call made?
+  answer: '- The /init call is made by the buyer app directly to the seller app after
+    the /select call. It signifies the initiation of the order process.  The primary
+    purpose of this call is to collect the buyer''s delivery and billing addresses
+    and formally initiate the order.  The seller app responds to the /init call with
+    the /on_init callback, confirming the order initialization and potentially providing
+    additional details.  After the /init and /on_init exchange, both the buyer and
+    seller apps possess the necessary product and address information to proceed further
+    in the order fulfillment process.  The /init call marks the transition from product
+    discovery and selection to the actual order processing stage.  It sets the stage
+    for subsequent steps like payment processing and order confirmation.  The direct
+    peer-to-peer communication between buyer and seller apps, established during the
+    /select call, continues in the /init call, ensuring efficient and real-time information
+    exchange. /on_init'
+  categories:
+  - Product delivered is different from what was shown and ordered
+  tags:
+  - init
+  - buyer
+  - app
+  - seller
+  - select
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: When is on_inti call made?
+  answer: 'The on_init call is made by the seller app in response to the init call
+    from the buyer app.  The init call signifies the buyer''s intention to initialize
+    an order after selecting products through the /search and /select calls.  The
+    on_init call serves two primary purposes: Acknowledge Order Initialization and
+    Provide Quote: The seller app acknowledges the order initialization request and
+    sends back a detailed quote for the order. This quote includes the final price
+    breakdown, including item costs, taxes, delivery charges, and any applicable discounts
+    or offers.  This allows the buyer to review the final cost before confirming the
+    order. Collect Payment (if applicable):  If the seller requires pre-payment, the
+    on_init call can also include information necessary for the buyer to proceed with
+    payment. This might involve redirecting the buyer to a payment gateway or providing
+    payment instructions.  If the payment is handled through a separate process (e.g.,
+    Cash on Delivery), this step might be skipped.'
+  categories:
+  - Product delivered is different from what was shown and ordered
+  tags:
+  - init
+  - seller
+  - app
+  - buyer
+  - order
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Can we use the same error codes in on_init as in on_select?
+  answer: If after on_select when init was called product status has changed then
+    we can use the same error codes. Validation applied on on_select should also be
+    done in on_init and on_confirm /confirm
+  categories:
+  - Product delivered is different from what was shown and ordered
+  tags:
+  - error
+  - init
+  - select
+  - status
+  - confirm
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: When is the confirmed API call made?
+  answer: The /confirm call is made by the Buyer Network Participant (BNP) to the
+    Seller Network Participant (SNP) after the buyer has reviewed and accepted the
+    final order details provided in the /on_init response.  It signifies the buyer's
+    commitment to the purchase.  The SNP should not initiate processing or fulfillment
+    of the order until it receives an ACK for the subsequent /on_confirm call.  It's
+    crucial that both /confirm and /on_confirm are idempotent to handle potential
+    network issues and retries.  The order id, created by the BNP and unique across
+    the network, and must be the same in both the /confirm and /on_confirm calls.
+  categories:
+  - Product delivered is different from what was shown and ordered
+  tags:
+  - api
+  - confirm
+  - buyer
+  - network
+  - participant
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What should be the quote in the /confirm call?
+  answer: The quote in /confirm will be the same as you got in the response of /on_init
+    call
+  categories:
+  - Product delivered is different from what was shown and ordered
+  tags:
+  - confirm
+  - init
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is @ondc/org/settlement_basis?
+  answer: It  indicates from when settlement window starts, enum - "delivery" (from
+    delivery), "shipment" (from shipment), "return_window_expiry" (from expiry of
+    return window)
+  categories:
+  - Product delivered is different from what was shown and ordered
+  tags:
+  - ondc
+  - settlement
+  - return
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is order.id?
+  answer: Unique id generated by buyer app for order and sent in payload.
+  categories:
+  - Product delivered is different from what was shown and ordered
+  tags:
+  - order
+  - buyer
+  - app
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: If seller app doesn’t accept Cash on Delivery(COD) can they NACK confirm
+    or they should send error in on_confirm
+  answer: Seller app can NACK confirm call if they don’t accept Cash on Delivery(COD)
+    /on_confirm
+  categories:
+  - Product delivered is different from what was shown and ordered
+  tags:
+  - seller
+  - app
+  - confirm
+  - error
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: When is the on_confirm call made?
+  answer: 'The /on_confirm call is made by the Seller Network Participant (SNP) to
+    the Buyer Network Participant (BNP) after receiving the /confirm call from the
+    BNP.  It signifies the seller''s confirmation of the order.  Here''s a breakdown
+    of the process: /confirm Call (BNP to SNP): The buyer application initiates the
+    /confirm call to the seller application. This call contains the final order details,
+    including items, quantities, and the agreed-upon quote (which should be the same
+    as the quote received in the /on_init call).  The buyer creates a unique order_id
+    at this stage. SNP Validations: Upon receiving the /confirm call, the SNP performs
+    validations to ensure the order details are accurate and acceptable.  This includes
+    checking item availability, pricing, and any other relevant factors.  The SNP
+    does not forward the order to the merchant at this point. ACK or NACK to /confirm
+    (SNP to BNP): Successful Validation (ACK): If the validation is successful, the
+    SNP responds with an ACK (Acknowledgement) to the /confirm call.  This indicates
+    to the BNP that the order is accepted.  The SNP creates the order in their system,
+    but still does not forward it to the merchant. Validation Failure (NACK): If the
+    validation fails, the SNP responds with a NACK (Negative Acknowledgement) along
+    with an error code (e.g., 31002 for order validation failure). The BNP should
+    then cancel the order with a specific reason code (e.g., 999). Internal Errors
+    (NACK): The SNP might also send a NACK due to internal errors (e.g., HTTP 504).  This
+    would include a retriable error code (e.g., 31001), prompting the BNP to retry
+    the /confirm call. /on_confirm Call (SNP to BNP):  After sending the ACK to the
+    /confirm call, the SNP initiates the /on_confirm call to the BNP. This call includes
+    the same order_id provided by the BNP in the /confirm call, along with the final
+    order details, including the quote, payment details (as in /confirm), and cancellation
+    terms.  It may also include additional information like fulfillment slots, agent
+    details, or e-way bill numbers (especially for logistics). BNP Validations: The
+    BNP, upon receiving the /on_confirm call, performs its own validations to ensure
+    the order details match what was sent in the /confirm call. ACK or NACK to /on_confirm
+    (BNP to SNP): Successful Validation (ACK): If the BNP''s validation is successful,
+    it responds with an ACK to the /on_confirm call.  This triggers the SNP to forward
+    the order to the merchant for processing and fulfillment. Validation Failure (NACK):
+    If the validation fails, the BNP responds with a NACK and an error code (e.g.,
+    23002). The SNP should then cancel the order with a specific reason code (e.g.,
+    998) and notify the BNP of the cancellation through an /on_status call. Internal
+    Errors (NACK):  Similar to the /confirm call, the BNP might send a NACK due to
+    internal errors, prompting the SNP to retry the /on_confirm call. Retries and
+    Cancellation: Both the /confirm and /on_confirm calls should be idempotent.  If
+    either party doesn''t receive an ACK/NACK within a defined retry interval, they
+    should cancel the order with the appropriate reason code.  This ensures that orders
+    are not left in an undefined state.'
+  categories:
+  - Product delivered is different from what was shown and ordered
+  tags:
+  - confirm
+  - seller
+  - network
+  - participant
+  - buyer
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What happens if an item goes out of stock when the buyer sends a confirmation
+    call for ORDER? Should we NACK it or send an error message in on_confirm?
+  answer: Seller should send an error message with out-of-stock just as it is sent
+    in on_select. /status
+  categories:
+  - Product delivered is different from what was shown and ordered
+  tags:
+  - buyer
+  - order
+  - error
+  - confirm
+  - seller
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: When to call /status API
+  answer: The /status call is a request initiated by the Buyer Network Participant
+    (Buyer App) to the Seller Network Participant (Seller App) to retrieve the current
+    status of an order.  It uses the same transaction_id that was used for the /confirm
+    call when the order was placed. This ensures that the status request is linked
+    to the correct order. /on_status
+  categories:
+  - Product delivered is different from what was shown and ordered
+  tags:
+  - status
+  - api
+  - buyer
+  - network
+  - participant
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Do we need to call status every time for new on_status?
+  answer: status call is made to get the real time status of order. Unsolicited on_status
+    are sent by the seller whenever there is change in fulfillment of order like order-picked,order
+    out-for-delivery,order delivered etc. /update
+  categories:
+  - Product delivered is different from what was shown and ordered
+  tags:
+  - status
+  - order
+  - seller
+  - fulfillment
+  - update
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: '- When update settlement is triggered by the buyer app?'
+  answer: '- When /on-update with fulfillment Liquidated or Return_Delivered/Return_Dispose
+    is triggered by seller app then buyer app triggers update settlement /on_update'
+  categories:
+  - Product delivered is different from what was shown and ordered
+  tags:
+  - update
+  - settlement
+  - buyer
+  - app
+  - fulfillment
+  lastUpdated: '2024-07-10T10:00:00Z'

@@ -6,22 +6,91 @@ class FAQManager {
     this.analytics = {
       searches: []
     };
+    this.categoryFileMap = {
+      'Getting Started with ONDC': 'getting_started_with_ondc.yaml',
+      'Technical Architecture': 'technical_architecture.yaml',
+      'Integration': 'integration.yaml',
+      'Registry & Network': 'registry_and_network.yaml',
+      'Retail': 'retail.yaml',
+      'Mobility & Travel': 'mobility_and_travel.yaml',
+      'Logistics': 'logistics.yaml',
+      'Financial Services (FIS)': 'financial_services_fis.yaml',
+      'Log Submissions': 'log_submissions.yaml',
+      'Reference Applications': 'reference_applications.yaml',
+      'Reconciliation and Settlement Framework (RSF)': 'reconciliation_and_settlement_framework_rsf.yaml',
+      'IGM & Support': 'igm_and_support.yaml',
+      'Priority Features': 'priority_features.yaml',
+      'Errors & Troubleshooting': 'errors_and_troubleshooting.yaml',
+      'Network Observability': 'network_observability.yaml'
+    };
+    this.loadedCategories = new Set();
+    this.isFullyLoaded = false;
   }
 
   async loadFAQs() {
     try {
-      const response = await fetch('data/faqs.yaml');
-      const yamlText = await response.text();
-      const rawFAQs = window.jsyaml.load(yamlText);
+      console.log('Loading FAQs from multiple domain files...');
       
-      this.faqs = this.processFAQs(rawFAQs);
+      // Load all category files and merge them
+      const loadPromises = Object.entries(this.categoryFileMap).map(async ([category, filename]) => {
+        try {
+          const filePath = `data/domains/${filename}`;
+          console.log(`Loading ${category} from ${filePath}`);
+          const response = await fetch(filePath);
+          
+          if (!response.ok) {
+            console.warn(`Failed to load ${filename}: ${response.status}`);
+            return [];
+          }
+          
+          const yamlText = await response.text();
+          const rawFAQs = window.jsyaml.load(yamlText);
+          console.log(`Loaded ${rawFAQs ? rawFAQs.length : 0} FAQs from ${category}`);
+          
+          return rawFAQs || [];
+        } catch (error) {
+          console.warn(`Error loading ${filename}:`, error);
+          return [];
+        }
+      });
+      
+      const results = await Promise.all(loadPromises);
+      const allFAQs = results.flat();
+      
+      console.log(`Total FAQs loaded from domain files: ${allFAQs.length}`);
+      
+      // Mark all categories as loaded
+      Object.keys(this.categoryFileMap).forEach(category => {
+        this.loadedCategories.add(category);
+      });
+      
+      this.faqs = this.processFAQs(allFAQs);
       this.extractCategories();
       this.extractTags();
+      this.isFullyLoaded = true;
       
       return this.faqs;
     } catch (error) {
-      console.error('Error loading FAQs:', error);
-      throw error;
+      console.error('Error loading FAQs from domain files:', error);
+      
+      // Fallback to original single file
+      try {
+        console.log('Falling back to original faqs.yaml file...');
+        const response = await fetch('data/faqs.yaml');
+        const yamlText = await response.text();
+        const rawFAQs = window.jsyaml.load(yamlText);
+        
+        this.faqs = this.processFAQs(rawFAQs);
+        this.extractCategories();
+        this.extractTags();
+        this.isFullyLoaded = true;
+        
+        console.log(`Fallback: Loaded ${this.faqs.length} FAQs from original file`);
+        return this.faqs;
+      } catch (fallbackError) {
+        console.error('Error loading fallback FAQs:', fallbackError);
+        throw fallbackError;
+      }
     }
   }
 
@@ -51,7 +120,7 @@ class FAQManager {
     if (!categories || !Array.isArray(categories)) return 'General';
     
     const categoryMappings = {
-      'Getting Started': ['getting started', 'introduction', 'basics', 'ondc'],
+      'Getting Started with ONDC': ['getting started', 'introduction', 'basics', 'ondc'],
       'Technical Architecture': ['technical', 'architecture', 'api', 'protocol'],
       'Integration': ['integration', 'api flow', 'implementation'],
       'Errors & Troubleshooting': ['error', 'troubleshooting', 'issue', 'problem'],
@@ -214,6 +283,10 @@ class FAQManager {
     });
     
     return markdown;
+  }
+
+  getFAQsByCategory(category) {
+    return this.faqs.filter(faq => faq.category === category);
   }
 }
 

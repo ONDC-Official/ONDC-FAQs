@@ -1,0 +1,194 @@
+- question: "What is multicart in ONDC and how does it work?"
+  answer: "Multicart allows buyers to add items from different domains (e.g., retail, mobility, logistics) into a single cart. The buyer app consolidates items across domains, but processes them as separate orders per domain during confirmation. Each domain maintains its own transaction flow while providing a unified experience to the buyer."
+  categories:
+    - Priority Features
+  tags:
+    - multicart
+    - order_management
+    - priority_features
+  lastUpdated: '2024-01-01T00:00:00Z'
+
+- question: "How are API calls structured in a multicart flow?"
+  answer: "In multicart scenarios, separate API calls are made for each domain. For example, if a cart contains retail and mobility items, the buyer app makes separate /select, /init, and /confirm calls for each domain. Each domain's flow remains independent while maintaining the unified cart experience on the frontend."
+  categories:
+    - Priority Features
+  tags:
+    - multicart
+    - api_flows
+    - priority_features
+  lastUpdated: '2024-01-01T00:00:00Z'
+
+- question: "How are transaction_id, order_id, and message_id handled in multicart?"
+  answer: "Each domain in a multicart flow maintains its own transaction_id, order_id, and message_id. These are domain-specific and should not be shared across different domains within the same multicart session. The buyer app should generate unique identifiers for each domain's transaction flow."
+  categories:
+    - Priority Features
+  tags:
+    - multicart
+    - order_management
+    - api_flows
+    - priority_features
+  lastUpdated: '2024-01-01T00:00:00Z'
+
+- question: "Are multicart orders confirmed atomically across all domains?"
+  answer: "No, multicart orders are not atomic across domains. Each domain's order is confirmed independently. If one domain's confirmation fails, orders from other domains can still proceed successfully. The buyer app should handle partial failures gracefully and inform users about the status of each domain's order."
+  categories:
+    - Priority Features
+  tags:
+    - multicart
+    - order_management
+    - error_handling
+    - priority_features
+  lastUpdated: '2024-01-01T00:00:00Z'
+
+- question: "How does a buyer app receive status updates for multicart orders?"
+  answer: "Status updates are received separately for each domain through individual /on_status calls. The buyer app should aggregate these statuses to provide a unified view to the customer. Each domain sends updates independently based on its own order lifecycle."
+  categories:
+    - Priority Features
+  tags:
+    - multicart
+    - order_management
+    - priority_features
+  lastUpdated: '2024-01-01T00:00:00Z'
+
+- question: "Can a single invoice be used for a multicart order across multiple domains?"
+  answer: "Yes, a single invoice can be generated for multicart orders spanning multiple domains. The invoice should consolidate all items and charges from different domains while maintaining clear breakdowns for each domain's contribution to the total order value."
+  categories:
+    - Priority Features
+  tags:
+    - multicart
+    - invoicing
+    - priority_features
+  lastUpdated: '2024-01-01T00:00:00Z'
+
+- question: "How are cancellations handled in multicart scenarios?"
+  answer: "Cancellations in multicart can be partial or complete. Buyers can cancel items from specific domains while keeping others active. Each domain processes cancellations independently through its own /cancel and /on_cancel flow. The buyer app should clearly communicate which parts of the multicart order are being cancelled."
+  categories:
+    - Priority Features
+  tags:
+    - multicart
+    - cancellation
+    - order_management
+    - priority_features
+  lastUpdated: '2024-01-01T00:00:00Z'
+
+- question: "How are returns processed in a multicart order?"
+  answer: "Returns are processed independently for each domain. Buyers can initiate returns for specific items or entire domain orders through separate /return and /on_return calls. The multicart structure doesn't affect the return process - each domain handles returns according to its own policies and procedures."
+  categories:
+    - Priority Features
+  tags:
+    - multicart
+    - returns
+    - order_management
+    - priority_features
+  lastUpdated: '2024-01-01T00:00:00Z'
+
+- question: "What happens if quote prices change during multicart checkout?"
+  answer: "If prices change for items in any domain during checkout, those changes are reflected in the respective domain's quote. The buyer app should update the total cart value and inform the customer about price changes before final confirmation. Each domain handles price updates independently."
+  categories:
+    - Priority Features
+  tags:
+    - multicart
+    - order_management
+    - priority_features
+  lastUpdated: '2024-01-01T00:00:00Z'
+
+- question: "How should timeout scenarios be handled in multicart flows?"
+  answer: "Timeout handling in multicart should be domain-specific. If one domain times out, it shouldn't affect other domains' processing. The buyer app should implement appropriate timeout values for each domain and handle failures gracefully, allowing successful domains to proceed while managing failed ones separately."
+  categories:
+    - Priority Features
+  tags:
+    - multicart
+    - error_handling
+    - priority_features
+  lastUpdated: '2024-01-01T00:00:00Z'
+
+- question: "How should retry logic be handled in multicart confirm failures?"
+  answer: "Retry logic should be implemented separately for each domain in a multicart flow. If confirmation fails for one domain, retries should only apply to that specific domain without affecting others. Implement exponential backoff and maximum retry limits per domain to prevent cascade failures."
+  categories:
+    - Priority Features
+  tags:
+    - multicart
+    - error_handling
+    - priority_features
+  lastUpdated: '2024-01-01T00:00:00Z'
+
+- question: "What are the key test scenarios for multicart functionality?"
+  answer: "Key test scenarios include: 1) Adding items from multiple domains to cart, 2) Successful confirmation across all domains, 3) Partial failure handling (one domain fails, others succeed), 4) Price changes during checkout, 5) Individual domain cancellations, 6) Returns processing per domain, 7) Status update aggregation, 8) Timeout handling per domain, 9) Invoice generation for multicart, 10) Error handling and user communication for complex failure scenarios."
+  categories:
+    - Priority Features
+  tags:
+    - multicart
+    - testing
+    - validation
+    - priority_features
+  lastUpdated: '2024-01-01T00:00:00Z'
+
+- question: "How should buyer apps handle user experience in multicart flows?"
+  answer: "Buyer apps should provide clear visual separation of domains within the cart, show individual domain statuses, communicate partial failures clearly, allow domain-specific actions (cancel/return), display consolidated pricing with domain breakdowns, and provide unified tracking while maintaining domain-specific details. The UX should make the complexity transparent to users."
+  categories:
+    - Priority Features
+  tags:
+    - multicart
+    - order_management
+    - priority_features
+  lastUpdated: '2024-01-01T00:00:00Z'
+
+- question: "Are there any limitations or constraints for multicart implementations?"
+  answer: "Multicart implementations should consider: 1) Domain-specific business rules and policies, 2) Different fulfillment timelines across domains, 3) Varying payment terms per domain, 4) Independent settlement cycles, 5) Domain-specific compliance requirements, 6) Different return/exchange policies, 7) Separate customer service channels per domain, 8) Varying availability and stock management across domains."
+  categories:
+    - Priority Features
+  tags:
+    - multicart
+    - order_management
+    - priority_features
+  lastUpdated: '2024-01-01T00:00:00Z'
+
+- question: "How should payment collection be handled in multicart scenarios?"
+  answer: "Payment collection in multicart can be handled as a single consolidated payment or separate payments per domain, depending on the implementation. The buyer app should clearly indicate payment allocation across domains and handle payment failures gracefully. If using consolidated payment, ensure proper settlement distribution to respective domain providers."
+  categories:
+    - Priority Features
+  tags:
+    - multicart
+    - order_management
+    - priority_features
+  lastUpdated: '2024-01-01T00:00:00Z'
+
+- question: "What information should be tracked for multicart analytics?"
+  answer: "Track metrics like: 1) Multicart adoption rates, 2) Domain combinations in carts, 3) Conversion rates per domain within multicart, 4) Partial failure rates and causes, 5) Average cart value across domains, 6) Time to complete multicart checkout, 7) Domain-specific return/cancellation rates, 8) User satisfaction with multicart experience, 9) Common error patterns across domains, 10) Performance metrics for each domain's API responses."
+  categories:
+    - Priority Features
+  tags:
+    - multicart
+    - testing
+    - priority_features
+  lastUpdated: '2024-01-01T00:00:00Z'
+
+- question: "How should seller apps prepare for multicart scenarios?"
+  answer: "Seller apps should: 1) Ensure robust API performance for concurrent multicart requests, 2) Implement proper error handling and graceful failures, 3) Maintain accurate inventory across multicart scenarios, 4) Handle quote validity periods appropriately, 5) Prepare for increased transaction volumes, 6) Implement proper timeout handling, 7) Ensure order processing remains independent of other domains, 8) Maintain clear status communication back to buyer apps."
+  categories:
+    - Priority Features
+  tags:
+    - multicart
+    - order_management
+    - priority_features
+  lastUpdated: '2024-01-01T00:00:00Z'
+
+- question: "What are the compliance considerations for multicart implementations?"
+  answer: "Compliance considerations include: 1) Ensuring each domain meets its specific regulatory requirements, 2) Maintaining proper audit trails per domain, 3) Implementing appropriate data privacy measures across domains, 4) Following domain-specific tax and billing regulations, 5) Ensuring proper dispute resolution channels per domain, 6) Maintaining required documentation per domain, 7) Adhering to settlement and payment regulations for each domain involved."
+  categories:
+    - Priority Features
+  tags:
+    - multicart
+    - order_management
+    - priority_features
+  lastUpdated: '2024-01-01T00:00:00Z'
+- question: "How should order_id and message_id be handled?\n A:"
+  answer: 'order_id: Unique per domain-level cart. message_id: Unique per API call,
+    even within the same domain. These ensure each payload can be tracked and independently
+    processed while being linked via ref_order_ids.'
+  categories:
+  - Priority Features
+  tags:
+  - order
+  - api
+  lastUpdated: '2024-07-10T10:00:00Z'

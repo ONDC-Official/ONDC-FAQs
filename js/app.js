@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Initialize FAQ Manager
     faqManager = new FAQManager();
     
-    // Load FAQs
-    console.log('Loading FAQs...');
+    // Load FAQs from multiple domain files
+    console.log('Loading FAQs from multiple domain files...');
     const faqs = await faqManager.loadFAQs();
-    console.log(`Loaded ${faqs.length} FAQs`);
+    console.log(`Loaded ${faqs.length} FAQs from domain files`);
     
     // Initialize Search Engine
     searchEngine = new SearchEngine(faqManager);

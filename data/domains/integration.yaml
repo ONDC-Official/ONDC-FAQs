@@ -1,0 +1,167 @@
+- question: Is ONDC live in production?
+  answer: 'ONDC is live in its production environment.  The ONDC integration process
+    involves three environments: Staging, Pre-Production, and Production.  After a
+    Network Participant (NP) completes the integration and testing process in the
+    Staging and Pre-Production environments, they move to the Production environment.  This
+    Production environment is where real-time transactions occur on the ONDC network.  Successfully
+    completing functional testing, complying with the final checklist, and navigating
+    a probationary period in the Production environment qualifies an NP to "Go-Live"
+    on Production, meaning they can begin real e-commerce operations on ONDC.  The
+    ONDC website and documentation refer to NPs and their applications as "live" on
+    the network, indicating the Production environment is active and facilitating
+    real transactions.'
+  categories:
+  - Environments and Integration Flow
+  tags:
+  - ondc
+  - production
+  - integration
+  - network
+  - participant
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Can I use one environment to test and go live?
+  answer: "No. ONDC operates across three isolated environments: Staging: For development\
+    \ and alpha testing Pre-Production: For beta testing and final validation Production:\
+    \ Live environment with real orders\n Participants must separately onboard and\
+    \ subscribe to each environment."
+  categories:
+  - Environments and Integration Flow
+  tags:
+  - ondc
+  - production
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What tools does ONDC provide for testing?
+  answer: Reference apps (sample BAP/BPP) All relevant tool links have been consolidated
+    and are accessible via our .
+  categories:
+  - Environments and Integration Flow
+  tags:
+  - ondc
+  - bap
+  - bpp
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: How do participants test their integration?
+  answer: ONDC provides mock servers, log validation tools and utilities. Participants
+    must complete log submissions and pass conformance testing before going live.
+  categories:
+  - Integration Support & Developer Tools
+  tags:
+  - integration
+  - ondc
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Does ONDC provide code for integration or development?
+  answer: 'ONDC does not provide custom code for individual participants or specific
+    use cases. However, to assist with the onboarding process, QA validations, and
+    general understanding of the protocol, we offer a set of utilities and reference
+    applications that are openly available on GitHub. These resources are designed
+    to help participants accelerate their integration efforts by demonstrating best
+    practices and standard protocol implementations. You can explore them here:'
+  categories:
+  - Integration Support & Developer Tools
+  tags:
+  - ondc
+  - integration
+  - onboarding
+  - protocol
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What are the steps involved in onboarding to ONDC?
+  answer: Role identification (BAP, BPP.) ONDC Integration Test Bench (via Pramaan)
+  categories:
+  - Environment promotion to Production after approval
+  tags:
+  - onboarding
+  - ondc
+  - bap
+  - bpp
+  - integration
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Do multiple on_status responses share the same message ID?
+  answer: "No, all unsolicited on_status responses will have a unique message ID.\
+    \ Q. Is there any log verification utility for the logistic domain? A. Yes there\
+    \ is a log verification utility for the logistic domain, NP can follow the link\
+    \ below to clone the repository and can use the utility for payload check.\n\n\
+    Link:- \n\nSteps to use utility:- Clone the repository on your local machine and\
+    \ then run the script “npm i” to install all the packages. Create a public/logs\
+    \ folder inside logistics-b2b/log-verification-utility/public/logs Put all the\
+    \ flow json files inside the public/logs folder. Go to the directory logistics-b2b/log-verification-utility\
+    \ Run the script in the terminal “node index logistics” A log_report.json file\
+    \ will be created automatically inside the public/logs folder where NP can find\
+    \ the issue in their payload or flows."
+  categories:
+  - FIS Related Queries
+  tags:
+  - status
+  - verification
+  - logistics
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What happens after submitting a text/html form?
+  answer: 'If successful, the buyer receives a submission_id in response. In case
+    of an error, a NACK response with an error code/message is returned. Example success
+    response: json { "submission_id": "f5a9f4fe-fc3a-4432-aa2d-d397724a5061" } Example
+    error response: json { "message": { "ack": { "status": "NACK" } }, "error": {
+    "code": "07", "message": "Data sent in request is not correct" } } Note: Use Content-Type:
+    multipart/form-data in headers for text/html submissions.'
+  categories:
+  - FIS Related Queries
+  tags:
+  - Xinput
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the meaning of items.descriptor.code?
+  answer: 'This is the unique code identifying the loan item, used for programmatic
+    filtering. Example: "PERSONAL_LOAN".
+
+    '
+  categories:
+  - FIS Related Queries
+  tags: []
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What information does a loan quote include?
+  answer: 'The loan quote provides a breakdown of the principal, interest, processing
+    fees, insurance charges, net disbursal amount, and other applicable charges. It
+    also includes a time-to-live (TTL) duration.
+
+    '
+  categories:
+  - FIS Related Queries
+  tags: []
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: . What fees are typically associated with a personal loan?
+  answer: 'The loan may include a finder’s fee, usually calculated as a percentage
+    of the annualised loan amount.
+
+    '
+  categories:
+  - FIS Related Queries
+  tags: []
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the process to confirm a loan agreement?
+  answer: 'The borrower completes and submits the loan agreement form through a provided
+    link. Once submitted, the loan confirmation process is triggered.
+
+    '
+  categories:
+  - FIS Related Queries
+  tags:
+  - confirm
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Is offline loan agreement processing supported?
+  answer: 'Yes, borrowers can request offline processing of the loan agreement if
+    they prefer.
+
+    '
+  categories:
+  - FIS Related Queries
+  tags: []
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: 'Integration with settlement agencies is required for both receiver and
+    collector?
+
+    '
+  answer: 'Yes'
+  categories:
+  - integration
+  - Reconciliation and Settlement Framework (RSF)
+  tags:
+  - integration
+  - settlement
+  lastUpdated: '2024-07-10T10:00:00Z'

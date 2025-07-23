@@ -430,8 +430,8 @@ class UIController {
     const faq = this.faqManager.faqs.find(f => f.id === faqId);
     if (!faq) return;
     
-    // Update modal content
-    this.elements.modalTitle.textContent = faq.question;
+    // Update modal header
+    this.elements.modalTitle.innerHTML = `<i class="fas fa-question-circle"></i> ${faq.question}`;
     
     // Render answer with markdown support
     const renderedAnswer = marked ? marked.parse(faq.answer) : faq.answer.replace(/\n/g, '<br>');
@@ -439,45 +439,109 @@ class UIController {
     // Get related FAQs
     const relatedFAQs = this.faqManager.findRelatedFAQs(faqId, 3);
     const relatedHtml = relatedFAQs.length > 0 ? `
-      <hr>
-      <h5>Related FAQs</h5>
-      <ul class="list-unstyled">
+      <div class="related-faqs">
+        <h5><i class="fas fa-link"></i> Related FAQs</h5>
         ${relatedFAQs.map(related => `
-          <li class="mb-2">
-            <a href="#" class="text-decoration-none" onclick="return false;" 
-               data-faq-id="${related.id}">
-              ${related.question}
-            </a>
-          </li>
+          <div class="related-faq-item" data-faq-id="${related.id}">
+            <div class="related-faq-question">${related.question}</div>
+            <div class="related-faq-preview">${related.answerPreview}</div>
+          </div>
         `).join('')}
-      </ul>
+      </div>
     ` : '';
     
+    // Create enhanced modal body content
     this.elements.modalBody.innerHTML = `
-      ${renderedAnswer}
+      <div class="answer-content">
+        ${renderedAnswer}
+      </div>
       ${relatedHtml}
-      <div class="mt-3">
-        <small class="text-muted">
-          Category: ${faq.category} | 
-          ${faq.tags.length > 0 ? `Tags: ${faq.tags.join(', ')} | ` : ''}
-          Last updated: ${new Date(faq.lastUpdated).toLocaleDateString()}
-        </small>
+    `;
+    
+    // Update modal footer with enhanced metadata and copy button
+    const modalFooter = document.querySelector('#faqModal .modal-footer');
+    modalFooter.innerHTML = `
+      <div class="modal-meta-info">
+        <div class="modal-category-badge">${faq.category}</div>
+        ${faq.tags.length > 0 ? `
+          <div class="modal-tags">
+            ${faq.tags.map(tag => `<span class="modal-tag">${tag}</span>`).join('')}
+          </div>
+        ` : ''}
+        <div class="modal-updated">
+          <i class="fas fa-clock"></i>
+          Last updated: ${new Date(faq.lastUpdated).toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'short', 
+            day: 'numeric' 
+          })}
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-copy" data-faq-content="${faqId}">
+          <i class="fas fa-copy"></i> Copy Answer
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     `;
     
     // Add click handlers for related FAQs
-    this.elements.modalBody.querySelectorAll('[data-faq-id]').forEach(link => {
-      link.addEventListener('click', (e) => {
+    this.elements.modalBody.querySelectorAll('[data-faq-id]').forEach(item => {
+      item.addEventListener('click', (e) => {
         e.preventDefault();
-        const relatedId = e.target.dataset.faqId;
-        bootstrap.Modal.getInstance(this.elements.faqModal).hide();
-        setTimeout(() => this.showFAQDetail(relatedId), 300);
+        const relatedId = e.currentTarget.dataset.faqId;
+        this.showFAQDetail(relatedId);
       });
+    });
+    
+    // Add copy functionality
+    const copyBtn = modalFooter.querySelector('.btn-copy');
+    copyBtn.addEventListener('click', () => {
+      this.copyFAQContent(faq);
     });
     
     // Show modal
     const modal = new bootstrap.Modal(this.elements.faqModal);
     modal.show();
+  }
+
+  copyFAQContent(faq) {
+    const textContent = `${faq.question}\n\n${faq.answer}\n\nCategory: ${faq.category}\nTags: ${faq.tags.join(', ')}`;
+    
+    navigator.clipboard.writeText(textContent).then(() => {
+      const copyBtn = document.querySelector('.btn-copy');
+      const originalHTML = copyBtn.innerHTML;
+      
+      copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+      copyBtn.classList.add('copied');
+      
+      setTimeout(() => {
+        copyBtn.innerHTML = originalHTML;
+        copyBtn.classList.remove('copied');
+      }, 2000);
+    }).catch(err => {
+      console.error('Failed to copy:', err);
+      alert('Failed to copy content to clipboard');
+    });
+  }
+
+  showError(message) {
+    // Create or get error toast element
+    let errorToast = document.getElementById('errorToast');
+    if (!errorToast) {
+      errorToast = document.createElement('div');
+      errorToast.id = 'errorToast';
+      errorToast.className = 'error-toast';
+      document.body.appendChild(errorToast);
+    }
+    
+    errorToast.textContent = message;
+    errorToast.classList.add('show');
+    
+    // Auto-hide after 5 seconds
+    setTimeout(() => {
+      errorToast.classList.remove('show');
+    }, 5000);
   }
 
 

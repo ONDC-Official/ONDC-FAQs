@@ -1,0 +1,12 @@
+- question: Do both buyer NP and seller NP need to push logs for Network Observability?
+  answer: Yes, both **Buyer Network Participants (Buyer NPs)** and **Seller Network
+    Participants (Seller NPs)** are required to push logs for Network Observability.
+    This ensures comprehensive monitoring and visibility across the entire network
+    ecosystem, covering both buyer-side and seller-side operations and transactions.
+  categories:
+  - Network Observability
+  tags:
+  - network_observability
+  - logging
+  - implementation
+  lastUpdated: '2024-01-01T10:00:00Z'

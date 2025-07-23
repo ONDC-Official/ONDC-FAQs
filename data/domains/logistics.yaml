@@ -1,0 +1,509 @@
+- question: What are STATIC_TERMS inside a payment object?
+  answer: 'This will be the URL of a web page where the standard Terms and Conditions
+    of the Network Participant - which are not covered in the API Specification (e.g.:
+    indemnity) - will be hosted. These terms will apply to the transaction, in addition
+    to the terms decided through the ONDC Protocol. If there is a conflict between
+    the terms decided through the Protocol, and the Static Terms, the terms decided
+    through the ONDC Protocol will prevail. Also, if there is a conflict between the
+    Static Terms and the ONDC Network Policy or the Static Terms and the Network Participant
+    Agreement, the terms of the ONDC Network Policy or the Network Participant Agreement
+    (as the case may be) will prevail.'
+  categories:
+  - Logistics Related Queries
+  tags:
+  - payment
+  - network
+  - participant
+  - api
+  - transaction
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Who can procure logistics services and how?
+  answer: Logistics Service Providers (LSPs) directly engage with sellers, who function
+    as logistics buyers. Retail sellers then call action API requests to the logistics
+    service providers and receive corresponding on_action responses from them. Additionally,
+    the buyer app also has the capability to procure logistics services.
+  categories:
+  - Logistics Related Queries
+  tags:
+  - logistics
+  - retail
+  - api
+  - buyer
+  - app
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Why is there no select and on-select call in the logistics contract?
+  answer: "There's no \"select and on select\" process because once the retail buyer\
+    \ builds a cart (in /select call), the seller app starts searching for logistics\
+    \ service providers to fulfil the order. LSPs send their catalog of available\
+    \ options through /on_search. Logistics buyer which is also the retail seller\
+    \ then goes ahead with one of the LSP and cascades back the delivery charges in\
+    \ /on_select of the retail contract. Therefore when the buyer app sends the/ init\
+    \ request, the logistics buyer also initialises the logistics order with the chosen\
+    \ LSP. From then on, all subsequent calls are cascaded. \n\nB. For standalone\
+    \ logistic implementation api calls will be as per logistic api contract search\
+    \ /search"
+  categories:
+  - Logistics Related Queries
+  tags:
+  - select
+  - logistics
+  - retail
+  - buyer
+  - seller
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What does the categoryId represent in the message?
+  answer: Category ID represents the type of delivery wanted by the logistics buyer.
+    It can be standard Delivery, Immediate Delivery and Express Delivery etc.
+  categories:
+  - Logistics Related Queries
+  tags:
+  - logistics
+  - buyer
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What are the different types of delivery options available?
+  answer: "Below are the Delivery options: 1. Express Delivery Mode: By air Applicable\
+    \ for: P2H2P (Point to Hub to Person) Explanation:\n This is the fastest delivery\
+    \ method. Goods are transported by air from the pickup point to a hub and then\
+    \ delivered to the final destination. Best suited for time-sensitive shipments.\
+    \ 2. Standard Delivery Mode: By surface Applicable for: P2P (Point toPoint) and\
+    \ P2H2P Explanation:\n A common and cost-effective option using surface transport.\
+    \ Slower than air, but suitable for shipments that are not extremely time-sensitive.\
+    \ Can be used for both direct point-to-point and hub-based delivery models. 3.\
+    \ Immediate Delivery Time Limit: S2D (Search to Delivery) ≤ 60 minutes Explanation:\n\
+    \ Ultra-fast delivery, typically for hyperlocal services. The entire order—from\
+    \ request to drop—is completed in under 60 minutes. 4. Same-Day Delivery Explanation:\n\
+    \ The item is delivered on the same calendar day the order is placed. 5. Next-Day\
+    \ Delivery Explanation:\n The item is delivered the day after the order is placed."
+  categories:
+  - Logistics Related Queries
+  tags:
+  - search
+  - order
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the payment type for the delivery?
+  answer: There are 3 types of payment options. "ON-ORDER" (prepaid), "ON-FULFILLMENT"
+    (CoD), "POST-FULFILLMENT" (post fulfillment).
+  categories:
+  - Logistics Related Queries
+  tags:
+  - payment
+  - fulfillment
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the provider object in the search call?
+  answer: Provider object indicates the details of the retail seller or the logistics
+    buyer, including the time when seller/LBNP is available, or the holidays when
+    the seller/LBNP store will be closed. Order preparation time can also be provided
+    by the seller/LBNP in case of hyperlocal orders.
+  categories:
+  - Logistics Related Queries
+  tags:
+  - search
+  - retail
+  - seller
+  - logistics
+  - buyer
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is "@ondc/org/payload_details" inside the payment object?
+  answer: This information is provided by the logistics buyer regarding the product
+    details, including dimensions (length, breadth, and height), type of category,
+    and whether it is classified as dangerous goods. These details were sent to the
+    logistics seller by the logistics buyer during the /search call.
+  categories:
+  - Logistics Related Queries
+  tags:
+  - ondc
+  - payment
+  - logistics
+  - buyer
+  - seller
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What range and durations define a search call?
+  answer: Duration refers to the order preparation time, indicating the estimated
+    time for logistics readiness (ready_to_ship). The range defines the store's order
+    pickup timings. When specified in "days," it means the store's pickup hours are
+    from 11:00 AM to 9:00 PM (1100 to 2100) from Monday to Sunday.
+  categories:
+  - Logistics Related Queries
+  tags:
+  - search
+  - order
+  - logistics
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the "Return" fulfillment type, and when is it used?
+  answer: The "Return" fulfillment type is a crucial aspect of the ONDC network's
+    order management process, specifically designed to handle return requests from
+    buyers. It is used when a buyer wishes to return one or more items from a previously
+    delivered order. A "Return" fulfillment is created when a buyer initiates a return
+    request for one or more items within the defined return window of the purchased
+    items. This return window is specified in the product catalog.
+  categories:
+  - Logistics Related Queries
+  tags:
+  - return
+  - fulfillment
+  - ondc
+  - network
+  - order
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the payment type ON-FULFILLMENT, ON-ORDER, POST-FULFILLMENT?
+  answer: '"ON-ORDER" refers to a prepaid order. "ON-FULFILLMENT" refers to a cash-on-delivery
+    (COD) order, where payment is made upon delivery. "POST-FULFILLMENT" refers to
+    a consolidated payment made after multiple deliveries from the logistics service
+    provider (LSP). In case of post fulfillment LSP will define the settlement_window
+    which refers that within that days payment need to be settle Payment Wallet refers
+    to the Payment Wallet process for Logistics Service Providers (LSPs), enabling
+    them to establish a prepaid wallet system for logistics buyers. Payments for services
+    are deducted directly from this wallet, ensuring a seamless and efficient transaction
+    process. A prepaid payment system for logistics can be facilitated through a payment
+    wallet managed by the Logistics Service Provider (LSP) on behalf of the Logistics
+    Buyer Network Partner (LBNP).
+
+    Payment wallet can be used when you want LBNP to pay at the confirmation of the
+    order and not later.'
+  categories:
+  - Logistics Related Queries
+  tags:
+  - payment
+  - order
+  - logistics
+  - lsp
+  - fulfillment
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Is it mandatory to send an RTO item in on_search call?
+  answer: Yes, it is mandatory to send the RTO item associated with the items array.
+    The logistic service provider must provide details for both forward and backward
+    items.
+  categories:
+  - Logistics Related Queries
+  tags:
+  - search
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the item descriptor code P2P and P2H2P?
+  answer: P2P stands for point-to-point and P2H2P stands for point-to-hub-to-point.
+    These codes indicate the type of shipment. P2P is used for hyperlocal deliveries
+    where the rider delivers the package directly from the pickup location to the
+    drop-off location. P2H2P is used for intercity deliveries where the package is
+    routed through a hub. P2H2P fulfillments require different packaging and an Air
+    Waybill (AWB) number. This information is required for merchants to decide on
+    the packaging required for shipment. /on_search
+  categories:
+  - Logistics Related Queries
+  tags:
+  - search
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is bpp/provider?
+  answer: Bpp/provider denotes different kinds of providers that are serviceable to
+    that area with that requirement of delivery type.
+  categories:
+  - Logistics Related Queries
+  tags:
+  - bpp
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the timestamp in categories?
+  answer: The timestamp within the category indicates when the delivery is scheduled.
+    For example, if it's for same-day delivery, it should match the current date in
+    the context timestamp. If it's for next-day delivery, it will be one day later
+    than the current context timestamp, and the same applies for other types of delivery.
+  categories:
+  - Logistics Related Queries
+  tags: []
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Where will the catalog response be sent to?
+  answer: The catalog response will be directly sent to the logistics buyer.
+  categories:
+  - Logistics Related Queries
+  tags:
+  - catalog
+  - logistics
+  - buyer
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is RTO (Return to Origin) service?
+  answer: RTO, or Return to Origin, is a service where the courier returns the package
+    to its origin (sender) due to various reasons such as undeliverable address, recipient
+    refusal, or any other issue preventing delivery. LSP Courier Inc. provides this
+    service efficiently.
+  categories:
+  - Logistics Related Queries
+  tags:
+  - return
+  - lsp
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What are forward and backward shipments?
+  answer: 'Forward shipment is relatively simple: the logistics buyer provides the
+    start and end locations for the order to be delivered. However, reverse shipment,
+    also known as backward shipment, occurs when the buyer refuses the order or for
+    any other reason does not want the product anymore. In such cases, the order or
+    product needs to be returned to the place from which it was originally picked
+    (RTO). /init & /on_init'
+  categories:
+  - Logistics Related Queries
+  tags:
+  - logistics
+  - buyer
+  - order
+  - init
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the payment object in the Init call?
+  answer: In the /init call, the payment object specifies the payment method and the
+    entity responsible for collecting payment from the end buyer, along with settlement
+    details. If "collected_by" is BPP, the logistics service provider will handle
+    payment collection, as seen in Cash on Delivery (COD) transactions. Within the
+    settlement_details, information regarding the party with whom the payment needs
+    to be settled will be provided. If the payment mode is "ON_ORDER", the Buyer App
+    (BAP) will collect payment from the buyer. In this scenario, the Logistics Service
+    Provider (LSP) will provide their details in on_Init call for the settlement of
+    the delivery charges.
+  categories:
+  - Logistics Related Queries
+  tags:
+  - payment
+  - init
+  - buyer
+  - settlement
+  - bpp
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What does the "price" section indicate in the quote?
+  answer: The "price" section specifies the total price of the quoted item or service.
+    For example, the total price is 59.00 Indian Rupees (INR). This will be tax inclusive.
+  categories:
+  - Logistics Related Queries
+  tags: []
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the purpose of ttl inside the quote object?
+  answer: How long will the price mentioned in the quote object remain valid? For
+    example, if the quote is P1D it means the quote is valid for one day. Post which
+    if LBNP confirms the order then LSP can respond with NACK.
+  categories:
+  - Logistics Related Queries
+  tags:
+  - order
+  - lsp
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What are the instructions object in start and end object of fulfillment?
+  answer: The instructions object within the start and end sections of a fulfillment
+    provides clear pickup and delivery guidelines. This ensures a seamless process
+    by guiding both the buyer and the delivery agent. Order verification is conducted
+    using a Pickup Confirmation Code (PCC) at pickup and a Delivery Confirmation Code
+    (DCC) at delivery.
+  categories:
+  - Logistics Related Queries
+  tags:
+  - fulfillment
+  - buyer
+  - order
+  - verification
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the purpose of the update call?
+  answer: 'In logistics, the update call is primarily used to mark an order ready
+    to ship.
+
+    Additionally, it can be used to update authorization OTPs and linked order details
+    by LBNP.'
+  categories:
+  - Logistics Related Queries
+  tags:
+  - update
+  - logistics
+  - order
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is the difference between update and status call?
+  answer: '1. Update Call: In logistics, the update call is primarily used to mark
+    an order as ready to ship. Additionally, it can update authorization OTPs and
+    linked order details. 2. Status Call: The /status call in ONDC logistics allows
+    the logistics buyer app to request the current status of an order. In response,
+    the logistics seller app uses the /on_status endpoint to provide the order''s
+    current status. This communication helps keep the buyer app informed about the
+    progress of their order.'
+  categories:
+  - Logistics Related Queries
+  tags:
+  - update
+  - status
+  - logistics
+  - order
+  - ondc
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What does the "breakup" section represent in the quote?
+  answer: The "breakup" section provides a detailed breakdown of the total price into
+    its constituent parts. Each part typically represents different components contributing
+    to the total cost, such as delivery charges, taxes, etc.
+  categories:
+  - Logistics Related Queries
+  tags: []
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: How do cancellation terms vary based on fulfilment state?
+  answer: Cancellation terms can differ based on the fulfilment state. Various stages
+    of fulfilment may result in distinct cancellation fees or penalties. For example,
+    cancelling an order while it's in a pending state may or may not involve any cancellation
+    charges. However, once an agent is assigned or the order is picked up, cancellation
+    charges may be incurred upon cancelling the order.
+  categories:
+  - Logistics Related Queries
+  tags:
+  - order
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is meant by "fulfilment state" in cancellation terms?
+  answer: The fulfillment state represents the status of an order before cancellation,
+    such as pending, agent-assigned, order-picked-up, or out-for-delivery. It helps
+    determine the applicable cancellation terms based on the transaction stage.
+  categories:
+  - Logistics Related Queries
+  tags:
+  - fulfillment
+  - status
+  - order
+  - transaction
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is PCC?
+  answer: PCC stands for Pickup Code, which serves as verification for the rider arriving
+    to collect the order. It's categorised into enums, where, for instance, 2 corresponds
+    to merchant order number, 3 to other pickup confirmation codes, and 4 to OTP.
+  categories:
+  - Logistics Related Queries
+  tags:
+  - verification
+  - order
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: When can we initiate a search call for logistics?
+  answer: If it is a cascaded flow, logistics search can be initiated after receiving
+    a retail /select call. If it is an uncascaded flow, it can be initiated when LBNP
+    wants to search for a logistics provider. B. Non cascaded flow is independent
+    logistics flow. In non cascaded flow search calls are made after a retail order
+    is confirmed. LBNP triggers search after order is placed. In /on_select seller
+    sends estimated delivery charges. SNP have to procure logistics and bear the cost
+    if estimated delivery charges are less as compared to charges sent by LSP in on_search
+  categories:
+  - Logistics Related Queries
+  tags:
+  - search
+  - logistics
+  - retail
+  - select
+  - order
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Where can I find the logistic API contract?
+  answer: Logistic version v1.2.0 Link:- Logistic v1.2.5 Link:-
+  categories:
+  - Logistics Related Queries
+  tags:
+  - api
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Is there any different API contract for logistic B2B and logistic B2C?
+  answer: 'Yes, there is developer docs for B2B and Api contract for B2C
+
+    B2B Developer guide:- B2C Api contract :-'
+  categories:
+  - Logistics Related Queries
+  tags:
+  - api
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What scenarios are required to be tested for log verification for B2C?
+  answer: Test case scenario for B2C Link:- Q. After which retail API we can initiate
+    a search request to logistics. Once the order is selected by the end user (buyer)
+    in the /select call, the retail seller — now acting as the LBNP — can initiate
+    the /search call to the LSP. Q. When can we initiate a search call for logistics?
+    The /search call must be initiated by the LBNP (buyer) and sent to the gateway
+    URL. The gateway will then broadcast this request to all sellers who can service
+    the item or are available in the specified area. Below are the Gateway URL for
+    each environment:- Staging:- https://staging.gateway.proteantech.in/search Pre-Production:-
+    https://preprod.gateway.ondc.org/search Production:- Q. What does @ondc/org/payload_details
+    tags defines @ondc/org/payload_details specifies the length, breadth, height,
+    and overall dimensions of the packages to be delivered. It also includes the actual
+    item price and its category, indicating whether the item is classified as a dangerous
+    good or not. Q. What is forward and backward shippment? A forward shipment refers
+    to the process where the logistics buyer (LBNP) provides both the pickup (start)
+    and drop-off (end) locations to facilitate the delivery of an order to the end
+    customer. This is the standard flow for delivering a product once an order is
+    placed. On the other hand, a reverse shipment (also known as a backward shipment
+    or return to origin - RTO) occurs when the end customer refuses to accept the
+    order, cancels it after dispatch, or initiates a return for any reason (e.g.,
+    damaged item, incorrect product, or no longer needed). In such cases, the logistics
+    provider is responsible for picking up the product from the customer's location
+    and returning it to the original seller's location or warehouse.
+  categories:
+  - Logistics Related Queries
+  tags:
+  - verification
+  - retail
+  - api
+  - search
+  - logistics
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: What is RTO initiated and RTO Disposed?
+  answer: RTO (Return to Origin) is a key part of the order fulfillment lifecycle
+    and involves multiple stages. Two critical states in this process are "RTO-Initiated"
+    and "RTO-Delivered" or "RTO-Disposed". RTO-Initiated This state marks the beginning
+    of the return-to-origin process. It is triggered when the forward delivery attempt
+    fails due to reasons such as recipient refusal, an undeliverable address, or other
+    valid causes. At this point, the item is prepared for return to its original pickup
+    location. The timestamp recorded in this state represents the official start of
+    the RTO process. The location typically reflects the last delivery attempt location,
+    where the delivery failed. RTO-Delivered / RTO-Disposed These states indicate
+    the closure of the RTO cycle. RTO-Delivered signifies that the item has been successfully
+    returned to the original pickup location. The timestamp for this state marks the
+    completion of the return journey. The associated location is usually the seller's
+    warehouse or the origin point of the shipment. RTO-Disposed indicates that the
+    item has been discarded instead of being returned. This usually applies to goods
+    that are perishable, damaged, or otherwise not fit for return. The timestamp here
+    marks the completion of the disposal process, and the location corresponds to
+    where the item was disposed of. Q. On which call RTO can be initiated? RTO can
+    be initiated in an unsolicited / solicited /on_cancel event. In such cases, a
+    return (RTO) fulfillment entry will be added immediately after the original delivery
+    fulfillment within the fulfillments array. This RTO fulfillment will include a
+    timestamp indicating when the return process was initiated.
+  categories:
+  - Logistics Related Queries
+  tags:
+  - return
+  - order
+  - fulfillment
+  - seller
+  - cancel
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: Is it possible to have only cascaded logistics flow with retail?
+  answer: Both cascaded and uncascaded logistics flows are possible. In a typical
+    cascaded flow, a retail buyer selects items in the cart, and the Logistics Buyer
+    (LBNP) searches for a logistics service provider (LSP) to fulfill the order. It
+    receives multiple catalogs and initiates the logistics order with one of the LSPs.
+    After the buyer confirms the order, LBNP confirms the logistics order. However,
+    there is a possibility that the chosen LSP may delay pickup or cancel the order
+    after confirmation. In such cases, LBNP can cancel the logistics order, cascading
+    it back so that the seller can cancel the retail order. Alternatively, LBNP can
+    search for another LSP and confirm the order with them. Non cascaded flow is independent
+    logistics flow. Where an independent logistics buyer wants to buy logistics, and
+    it should be implemented as per contract api calls.
+  categories:
+  - Logistics Related Queries
+  tags:
+  - logistics
+  - retail
+  - buyer
+  - lsp
+  - order
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: When to call /init in logistics?
+  answer: It is called when a Retail buyer makes an init call then a logistic buyer
+    LBNP initiates a /init to logistic service provider (LSP). /on_status
+  categories:
+  - Logistics Related Queries
+  tags:
+  - init
+  - logistics
+  - retail
+  - buyer
+  - lsp
+  lastUpdated: '2024-07-10T10:00:00Z'
+- question: On which call RTO can be initiated?
+  answer: 'RTO can be initiated in an unsolicited / solicited /on_cancel event. In
+    such cases, a return (RTO) fulfillment entry will be added immediately after the
+    original delivery fulfillment within the fulfillments array. This RTO fulfillment
+    will include a timestamp indicating when the return process was initiated.
+
+    '
+  categories:
+  - Logistics Related Queries
+  tags:
+  - cancel
+  - return
+  - fulfillment
+  lastUpdated: '2024-07-10T10:00:00Z'

@@ -1,10 +1,9 @@
-// UI Controller - Manages all UI interactions
 class UIController {
   constructor(faqManager, searchEngine) {
     this.faqManager = faqManager;
     this.searchEngine = searchEngine;
     this.currentPage = 1;
-    this.itemsPerPage = 20;
+    this.itemsPerPage = 30;
     this.currentResults = [];
     this.selectedCategory = null;
     this.selectedTags = [];
@@ -12,22 +11,21 @@ class UIController {
     
     this.elements = this.cacheElements();
     this.debounceTimer = null;
+    
+    this.feedbackComponent = new FeedbackComponent();
   }
 
   cacheElements() {
     return {
-      // Search elements
       searchInput: document.getElementById('searchInput'),
       clearSearch: document.getElementById('clearSearch'),
       searchSuggestions: document.getElementById('searchSuggestions'),
       
-      // Filter elements
       categoryList: document.getElementById('categoryList'),
       dateFilter: document.getElementById('dateFilter'),
       clearFilters: document.getElementById('clearFilters'),
       sortBy: document.getElementById('sortBy'),
       
-      // Results elements
       resultsContainer: document.getElementById('resultsContainer'),
       faqResults: document.getElementById('faqResults'),
       resultsCount: document.getElementById('resultsCount'),
@@ -36,19 +34,14 @@ class UIController {
       noResults: document.getElementById('noResults'),
       pagination: document.getElementById('pagination'),
       
-      // Stats
       totalFAQs: document.getElementById('totalFAQs'),
       totalCategories: document.getElementById('totalCategories'),
       
-      // Modal
       faqModal: document.getElementById('faqModal'),
       modalTitle: document.getElementById('modalTitle'),
       modalBody: document.getElementById('modalBody'),
       
-      // Export
-      exportBtn: document.getElementById('exportBtn'),
-      
-      // Mobile
+      exportBtn: document.getElementById('exportBtn'),      
       sidebar: document.getElementById('sidebar'),
       sidebarToggle: document.getElementById('sidebarToggle'),
       sidebarOverlay: document.getElementById('sidebarOverlay')
@@ -60,31 +53,28 @@ class UIController {
     this.renderCategories();
     this.updateStats();
     this.performSearch();
+    
+    this.feedbackComponent.init();
   }
 
   setupEventListeners() {
-    // Search input with debouncing
     this.elements.searchInput.addEventListener('input', (e) => {
       clearTimeout(this.debounceTimer);
       const query = e.target.value;
       
-      // Show/hide clear button
       this.elements.clearSearch.style.display = query ? 'block' : 'none';
       
-      // Show suggestions for partial queries
       if (query.length >= 2) {
         this.showSuggestions(query);
       } else {
         this.hideSuggestions();
       }
       
-      // Debounce actual search
       this.debounceTimer = setTimeout(() => {
         this.performSearch();
       }, 300);
     });
 
-    // Clear search
     this.elements.clearSearch.addEventListener('click', () => {
       this.elements.searchInput.value = '';
       this.elements.clearSearch.style.display = 'none';
@@ -92,7 +82,6 @@ class UIController {
       this.performSearch();
     });
 
-    // Quick filters
     document.querySelectorAll('.quick-filter').forEach(btn => {
       btn.addEventListener('click', (e) => {
         this.elements.searchInput.value = e.target.dataset.query;
@@ -100,14 +89,12 @@ class UIController {
       });
     });
 
-    // Sort dropdown
     this.elements.sortBy.addEventListener('change', () => {
       this.sortBy = this.elements.sortBy.value;
       this.performSearch();
     });
 
 
-    // Clear filters
     this.elements.clearFilters.addEventListener('click', () => {
       this.selectedCategory = null;
       this.selectedTags = [];
@@ -116,24 +103,20 @@ class UIController {
       this.performSearch();
     });
 
-    // Date filter
     this.elements.dateFilter.addEventListener('change', () => {
       this.performSearch();
     });
 
-    // Export button
     this.elements.exportBtn.addEventListener('click', () => {
       this.showExportOptions();
     });
 
-    // Mobile sidebar toggle
     if (this.elements.sidebarToggle) {
       this.elements.sidebarToggle.addEventListener('click', () => {
         this.toggleSidebar();
       });
     }
 
-    // Close sidebar on overlay click
     if (this.elements.sidebarOverlay) {
       this.elements.sidebarOverlay.addEventListener('click', () => {
         this.closeSidebar();
@@ -141,7 +124,6 @@ class UIController {
     }
 
 
-    // Handle suggestion clicks
     this.elements.searchSuggestions.addEventListener('click', (e) => {
       const suggestionItem = e.target.closest('.suggestion-item');
       if (suggestionItem) {
@@ -156,7 +138,6 @@ class UIController {
       }
     });
 
-    // Click outside to hide suggestions
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.search-wrapper')) {
         this.hideSuggestions();
@@ -176,7 +157,6 @@ class UIController {
     
     this.elements.categoryList.innerHTML = categoryHtml;
     
-    // Add click handlers
     this.elements.categoryList.querySelectorAll('.category-item').forEach(item => {
       item.addEventListener('click', () => {
         const category = item.dataset.category;
@@ -192,7 +172,6 @@ class UIController {
         }
         this.performSearch();
         
-        // Close sidebar on mobile after selection
         if (window.innerWidth <= 768) {
           this.closeSidebar();
         }
@@ -203,41 +182,35 @@ class UIController {
   performSearch() {
     const query = this.elements.searchInput.value.trim();
     
-    // Show loading state
     this.showLoading();
     
-    // Apply date filter
     let filteredFaqs = this.faqManager.faqs;
     const dateFilter = this.elements.dateFilter.value;
     if (dateFilter) {
       filteredFaqs = this.faqManager.getRecentFAQs(parseInt(dateFilter));
     }
     
-    // Perform search
     const searchOptions = {
       category: this.selectedCategory,
       tags: this.selectedTags,
       sortBy: this.sortBy,
-      faqs: filteredFaqs  // Pass the filtered FAQs
+      faqs: filteredFaqs
     };
     
     if (query) {
       this.currentResults = this.searchEngine.search(query, searchOptions);
     } else {
-      // No query - just filter and sort
       this.currentResults = this.searchEngine.getFilteredResults(
         this.selectedCategory,
         this.selectedTags,
         this.sortBy,
-        1000, // Get all for filtering
-        filteredFaqs  // Pass the filtered FAQs
+        1000,
+        filteredFaqs
       );
     }
     
-    // Reset to first page
     this.currentPage = 1;
     
-    // Update UI
     this.updateResultsHeader(query);
     this.renderResults();
     this.renderPagination();
@@ -280,18 +253,15 @@ class UIController {
     this.elements.noResults.style.display = 'none';
     this.elements.faqResults.style.display = 'block';
     
-    // Get paginated results
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
     const pageResults = this.currentResults.slice(startIndex, endIndex);
     
-    // Render FAQ results
     this.elements.faqResults.className = 'faq-results';
     this.elements.faqResults.innerHTML = pageResults
       .map(faq => this.renderFAQItem(faq))
       .join('');
     
-    // Add click handlers
     this.elements.faqResults.querySelectorAll('.faq-item').forEach(item => {
       item.addEventListener('click', (e) => {
         if (!e.target.closest('.faq-tag')) {
@@ -300,7 +270,6 @@ class UIController {
       });
     });
     
-    // Add tag click handlers
     this.elements.faqResults.querySelectorAll('.faq-tag').forEach(tag => {
       tag.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -320,6 +289,8 @@ class UIController {
       `<span class="faq-tag">${tag}</span>`
     ).join('');
     
+    const feedbackHtml = this.feedbackComponent.createFeedbackHTML(faq.id, faq.question);
+    
     return `
       <div class="faq-item" data-faq-id="${faq.id}">
         <div class="faq-question">${highlightedQuestion}</div>
@@ -328,6 +299,7 @@ class UIController {
           <span class="faq-category">${faq.category}</span>
           ${tags ? `<div class="faq-tags">${tags}</div>` : ''}
         </div>
+        ${feedbackHtml}
       </div>
     `;
   }
@@ -342,14 +314,12 @@ class UIController {
     
     let paginationHtml = '';
     
-    // Previous button
     paginationHtml += `
       <li class="page-item ${this.currentPage === 1 ? 'disabled' : ''}">
         <a class="page-link" href="#" data-page="${this.currentPage - 1}">Previous</a>
       </li>
     `;
     
-    // Page numbers
     const maxPages = 5;
     let startPage = Math.max(1, this.currentPage - Math.floor(maxPages / 2));
     let endPage = Math.min(totalPages, startPage + maxPages - 1);
@@ -366,7 +336,6 @@ class UIController {
       `;
     }
     
-    // Next button
     paginationHtml += `
       <li class="page-item ${this.currentPage === totalPages ? 'disabled' : ''}">
         <a class="page-link" href="#" data-page="${this.currentPage + 1}">Next</a>
@@ -375,7 +344,6 @@ class UIController {
     
     this.elements.pagination.innerHTML = paginationHtml;
     
-    // Add click handlers
     this.elements.pagination.querySelectorAll('.page-link').forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -384,7 +352,6 @@ class UIController {
           this.currentPage = page;
           this.renderResults();
           this.renderPagination();
-          // Scroll to top
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }
       });
@@ -430,13 +397,10 @@ class UIController {
     const faq = this.faqManager.faqs.find(f => f.id === faqId);
     if (!faq) return;
     
-    // Update modal header
     this.elements.modalTitle.innerHTML = `<i class="fas fa-question-circle"></i> ${faq.question}`;
     
-    // Render answer with markdown support
     const renderedAnswer = marked ? marked.parse(faq.answer) : faq.answer.replace(/\n/g, '<br>');
     
-    // Get related FAQs
     const relatedFAQs = this.faqManager.findRelatedFAQs(faqId, 3);
     const relatedHtml = relatedFAQs.length > 0 ? `
       <div class="related-faqs">
@@ -450,7 +414,6 @@ class UIController {
       </div>
     ` : '';
     
-    // Create enhanced modal body content
     this.elements.modalBody.innerHTML = `
       <div class="answer-content">
         ${renderedAnswer}
@@ -458,34 +421,40 @@ class UIController {
       ${relatedHtml}
     `;
     
-    // Update modal footer with enhanced metadata and copy button
+    const feedbackHtml = this.feedbackComponent.createFeedbackHTML(faq.id, faq.question);
+    
     const modalFooter = document.querySelector('#faqModal .modal-footer');
     modalFooter.innerHTML = `
-      <div class="modal-meta-info">
-        <div class="modal-category-badge">${faq.category}</div>
-        ${faq.tags.length > 0 ? `
-          <div class="modal-tags">
-            ${faq.tags.map(tag => `<span class="modal-tag">${tag}</span>`).join('')}
+      <div class="w-100">
+        ${feedbackHtml}
+        <hr class="my-3">
+        <div class="d-flex justify-content-between align-items-start">
+          <div class="modal-meta-info">
+            <div class="modal-category-badge">${faq.category}</div>
+            ${faq.tags.length > 0 ? `
+              <div class="modal-tags">
+                ${faq.tags.map(tag => `<span class="modal-tag">${tag}</span>`).join('')}
+              </div>
+            ` : ''}
+            <div class="modal-updated">
+              <i class="fas fa-clock"></i>
+              Last updated: ${new Date(faq.lastUpdated).toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
+              })}
+            </div>
           </div>
-        ` : ''}
-        <div class="modal-updated">
-          <i class="fas fa-clock"></i>
-          Last updated: ${new Date(faq.lastUpdated).toLocaleDateString('en-US', { 
-            year: 'numeric', 
-            month: 'short', 
-            day: 'numeric' 
-          })}
+          <div class="modal-actions">
+            <button type="button" class="btn btn-copy" data-faq-content="${faqId}">
+              <i class="fas fa-copy"></i> Copy Answer
+            </button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
         </div>
-      </div>
-      <div class="modal-actions">
-        <button type="button" class="btn btn-copy" data-faq-content="${faqId}">
-          <i class="fas fa-copy"></i> Copy Answer
-        </button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     `;
     
-    // Add click handlers for related FAQs
     this.elements.modalBody.querySelectorAll('[data-faq-id]').forEach(item => {
       item.addEventListener('click', (e) => {
         e.preventDefault();
@@ -494,13 +463,11 @@ class UIController {
       });
     });
     
-    // Add copy functionality
     const copyBtn = modalFooter.querySelector('.btn-copy');
     copyBtn.addEventListener('click', () => {
       this.copyFAQContent(faq);
     });
     
-    // Show modal
     const modal = new bootstrap.Modal(this.elements.faqModal);
     modal.show();
   }
@@ -526,7 +493,6 @@ class UIController {
   }
 
   showError(message) {
-    // Create or get error toast element
     let errorToast = document.getElementById('errorToast');
     if (!errorToast) {
       errorToast = document.createElement('div');
@@ -538,7 +504,6 @@ class UIController {
     errorToast.textContent = message;
     errorToast.classList.add('show');
     
-    // Auto-hide after 5 seconds
     setTimeout(() => {
       errorToast.classList.remove('show');
     }, 5000);
@@ -578,12 +543,10 @@ class UIController {
       </div>
     `;
     
-    // Add modal to page
     document.body.insertAdjacentHTML('beforeend', exportModal);
     const modal = new bootstrap.Modal(document.getElementById('exportModal'));
     modal.show();
     
-    // Clean up on hide
     document.getElementById('exportModal').addEventListener('hidden.bs.modal', (e) => {
       e.target.remove();
     });
@@ -612,7 +575,6 @@ class UIController {
         break;
     }
     
-    // Download file
     const blob = new Blob([content], { type: mimeType });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -621,7 +583,6 @@ class UIController {
     a.click();
     URL.revokeObjectURL(url);
     
-    // Close modal
     bootstrap.Modal.getInstance(document.getElementById('exportModal')).hide();
   }
 
@@ -654,12 +615,10 @@ class UIController {
     }, 3000);
   }
 
-  // Mobile sidebar methods
   toggleSidebar() {
     this.elements.sidebar.classList.toggle('show');
     this.elements.sidebarOverlay.classList.toggle('show');
     
-    // Prevent body scroll when sidebar is open
     if (this.elements.sidebar.classList.contains('show')) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -674,5 +633,4 @@ class UIController {
   }
 }
 
-// Export for use in main app
 window.UIController = UIController;

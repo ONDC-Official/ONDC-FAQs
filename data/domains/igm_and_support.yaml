@@ -1,570 +1,579 @@
 - question: What is the ONDC Portal and what is its use?
-  answer: 'The  is a centralized platform designed to support participants throughout
-    their journey on the ONDC Network — from onboarding to going live. Through the
-    portal, participants can: It serves as the primary interface to ensure a smooth
-    and guided integration into the ONDC ecosystem.'
+  answer: 'The  is a centralized platform designed to support participants throughout their journey on the ONDC Network — from onboarding to going live. Through the portal, participants can: It serves as the primary interface to ensure a smooth and guided integration into the ONDC ecosystem.'
   categories:
-  - Coordinate with the ONDC team for approvals and readiness
+    - Coordinate with the ONDC team for approvals and readiness
   tags:
-  - ondc
-  - platform
-  - network
-  - onboarding
-  - integration
+    - api_integration
+    - integration
+    - network
+    - np_onboarding
+    - onboarding
+    - ondc
+    - ondc_network
+    - ondc_platform
+    - open_commerce_network
+    - open_network
+    - participant_onboarding
+    - platform
+    - technical_integration
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: How can I get technical support for ONDC integration or onboarding issues?
-  answer: 'For any technical support related to ONDC integration, onboarding, or platform-related
-    queries, you can reach out to the ONDC technical team via email at:'
+  answer: 'For any technical support related to ONDC integration, onboarding, or platform-related queries, you can reach out to the ONDC technical team via email at:'
   categories:
-  - Coordinate with the ONDC team for approvals and readiness
+    - Coordinate with the ONDC team for approvals and readiness
   tags:
-  - ondc
-  - integration
-  - onboarding
+    - api_integration
+    - integration
+    - np_onboarding
+    - onboarding
+    - ondc
+    - ondc_network
+    - open_network
+    - participant_onboarding
+    - technical_integration
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What should developers know about managing keys on ONDC?
-  answer: "ONDC requires all protocol messages to be signed using digital signatures.\
-    \ Store private keys securely in .env files (never expose them in code repos)\
-    \ Only public keys are stored in the Registry\n Best practice: Add .env to .gitignore\
-    \ to prevent accidental commits of secrets."
+  answer: |-
+    ONDC requires all protocol messages to be signed using digital signatures. Store private keys securely in .env files (never expose them in code repos) Only public keys are stored in the Registry
+     Best practice: Add .env to .gitignore to prevent accidental commits of secrets.
   categories:
-  - Coordinate with the ONDC team for approvals and readiness
+    - Coordinate with the ONDC team for approvals and readiness
   tags:
-  - ondc
-  - protocol
-  - digital
-  - registry
+    - digital
+    - digital_commerce
+    - digital_signature
+    - network_registry
+    - ondc
+    - ondc_network
+    - ondc_registry
+    - open_network
+    - protocol
+    - registry
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What happens if I send a request with an expired timestamp?
-  answer: ONDC requires a timestamp in context to be within ±10 seconds of current
-    server time. Use NTP-synced clocks.
+  answer: ONDC requires a timestamp in context to be within ±10 seconds of current server time. Use NTP-synced clocks.
   categories:
-  - Coordinate with the ONDC team for approvals and readiness
+    - Coordinate with the ONDC team for approvals and readiness
   tags:
-  - ondc
+    - ondc
+    - ondc_network
+    - open_network
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: "What are logs in the context of ONDC, and how are they used? \n "
-  answer: 'Logs are detailed records of requests and responses for all enabled APIs,
-    captured during specific scenarios or workflows. They provide a comprehensive
-    history of interactions between Network Participants within the ONDC network and
-    are essential for debugging, validation, and certification.  For example:- TRV11,the
-    logs can be validated using a POST request to the Log Validation Utility at https://log-validation.ondc.org/api/validate/trv/trv11.
-    The structure for the validation payload is: { "domain": "ONDC: TRV11", "version":
-    "2.0.0", "flow": "STATION_CODE", // or GPS or CANCEL "payload": { "search_1":
-    {}, "on_search_1": {}, "search_2": {}, "on_search_2": {}, "select": {}, "on_select":
-    {}, "init": {}, "on_init": {}, "confirm": {}, "on_confirm": {}, "status": {},
-    "on_status": {} } } Each key in the payload corresponds to a specific API call
-    and its response. For instance: "search_1" contains the initial Search request
-    payload, "on_search_1" contains the corresponding on_search response from the
-    seller app. The exact sequence and structure of API calls depend on the selected
-    flow — such as "STATION_CODE", "GPS", or "CANCEL". For retail logs (version 1.2.0),
-    a similar validation utility exists at https://log-validation.ondc.org/api/validate,
-    with a different payload structure and available flows.  The logs for retail,
-    IGM (Issue & Grievance Management), and RSF (Reconciliation and Settlement Framework)
-    need to be submitted to a designated GitHub repository after self-testing.'
+- question: |-
+    What are logs in the context of ONDC, and how are they used? 
+     
+  answer: 'Logs are detailed records of requests and responses for all enabled APIs, captured during specific scenarios or workflows. They provide a comprehensive history of interactions between Network Participants within the ONDC network and are essential for debugging, validation, and certification.  For example:- TRV11,the logs can be validated using a POST request to the Log Validation Utility at https://log-validation.ondc.org/api/validate/trv/trv11. The structure for the validation payload is: { "domain": "ONDC: TRV11", "version": "2.0.0", "flow": "STATION_CODE", // or GPS or CANCEL "payload": { "search_1": {}, "on_search_1": {}, "search_2": {}, "on_search_2": {}, "select": {}, "on_select": {}, "init": {}, "on_init": {}, "confirm": {}, "on_confirm": {}, "status": {}, "on_status": {} } } Each key in the payload corresponds to a specific API call and its response. For instance: "search_1" contains the initial Search request payload, "on_search_1" contains the corresponding on_search response from the seller app. The exact sequence and structure of API calls depend on the selected flow — such as "STATION_CODE", "GPS", or "CANCEL". For retail logs (version 1.2.0), a similar validation utility exists at https://log-validation.ondc.org/api/validate, with a different payload structure and available flows.  The logs for retail, IGM (Issue & Grievance Management), and RSF (Reconciliation and Settlement Framework) need to be submitted to a designated GitHub repository after self-testing.'
   categories:
-  - Coordinate with the ONDC team for approvals and readiness
+    - Coordinate with the ONDC team for approvals and readiness
   tags:
-  - ondc
-  - network
-  - certification
-  - api
-  - cancel
+    - api
+    - beckn_api
+    - cancel
+    - cancellation_flow
+    - certification
+    - network
+    - ondc
+    - ondc_network
+    - ondc_protocol
+    - open_commerce_network
+    - open_network
+    - order_cancel
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: How can I verify what went wrong in a failed transaction?
-  answer: Check error.code and error.message in the response or callback body. Logs
-    and ACKs contain diagnostic info.
+  answer: Check error.code and error.message in the response or callback body. Logs and ACKs contain diagnostic info.
   categories:
-  - Coordinate with the ONDC team for approvals and readiness
+    - Coordinate with the ONDC team for approvals and readiness
   tags:
-  - transaction
-  - error
+    - error
+    - error_handling
+    - error_response
+    - order_transaction
+    - transaction
+    - transaction_flow
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is the log submission process?
-  answer: Create a fork of the  repository. Commit your logs in the folder (logs should
-    include request & response payloads for all enabled APIs as per the scenarios
-    below) Once submitted, please refer to the comments on the logs submitted and
-    update the PR based on the comments provided Once the reviews are done, the PR
-    will be merged and the logs shall be considered as approved on pr merge
+  answer: Create a fork of the  repository. Commit your logs in the folder (logs should include request & response payloads for all enabled APIs as per the scenarios below) Once submitted, please refer to the comments on the logs submitted and update the PR based on the comments provided Once the reviews are done, the PR will be merged and the logs shall be considered as approved on pr merge
   categories:
-  - Log Verification And Testing
+    - Log Verification And Testing
   tags:
-  - update
+    - order_update
+    - status_update
+    - update
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: In Flow 2, after "on_recon", if "recon_accord" is "true", when we reinitiate
-    the settle request to the RSF Mock Server, do we need to send the settle request
-    with the same transaction_id as the one used in Flow 2?.
-  answer: If we do, we are not receiving the expected responses in the RSF Mock Server.
-    Instead, a new RSF Server session is created. Could you please clarify whether
-    the reinitiation of the /settle flow will be carried out in the new RSF Mock Server
-    session with a new transaction_id?. you need to send the /settle request with
-    a different transaction_id.
+- question: In Flow 2, after "on_recon", if "recon_accord" is "true", when we reinitiate the settle request to the RSF Mock Server, do we need to send the settle request with the same transaction_id as the one used in Flow 2?.
+  answer: If we do, we are not receiving the expected responses in the RSF Mock Server. Instead, a new RSF Server session is created. Could you please clarify whether the reinitiation of the /settle flow will be carried out in the new RSF Mock Server session with a new transaction_id?. you need to send the /settle request with a different transaction_id.
   categories:
-  - Log Verification And Testing
+    - Log Verification And Testing
   tags:
-  - transaction
+    - order_transaction
+    - transaction
+    - transaction_flow
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Is the transaction id the same in the report call for the mock server?
-  answer: Yes, the transaction id is the same in the report call for testing with
-    a mock server. For real cases, this is up to the implementation of the NP. Refer
-    notes provided in the instructions document for leveraging the mock server for
-    testing purposes.
+  answer: Yes, the transaction id is the same in the report call for testing with a mock server. For real cases, this is up to the implementation of the NP. Refer notes provided in the instructions document for leveraging the mock server for testing purposes.
   categories:
-  - Log Verification And Testing
+    - Log Verification And Testing
   tags:
-  - transaction
-  - implementation
+    - implementation
+    - np_implementation
+    - order_transaction
+    - protocol_implementation
+    - transaction
+    - transaction_flow
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Do we have RSF flow in reference buyer apps?
-  answer: No, we don't have the RSF flows built for the reference buyer app. For API
-    testing, you may leverage the mock server (available ), but testing with another
-    NP should be done to make sure implementation is appropriately handled.
+  answer: No, we don't have the RSF flows built for the reference buyer app. For API testing, you may leverage the mock server (available ), but testing with another NP should be done to make sure implementation is appropriately handled.
   categories:
-  - Log Verification And Testing
+    - Log Verification And Testing
   tags:
-  - buyer
-  - app
-  - api
-  - implementation
+    - api
+    - app
+    - bap_entity
+    - beckn_api
+    - buyer
+    - buyer_np
+    - implementation
+    - network_participant_app
+    - np_implementation
+    - ondc_protocol
+    - protocol_implementation
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: How does the settlement process for the refund scenario occur in RSF 2.0?
-  answer: In the RSF 2.0 (Revised Settlement Framework), how a refund is handled depends
-    on whether the seller has already received the payment when the refund is requested.
-    Let’s say a customer receives a damaged product and asks for a refund after the
-    order has been delivered. If the settlement rule was based on “Order Delivered”
-    and the seller was supposed to be paid within two days of delivery, then by the
-    time the refund is requested, the seller might have already received the money.
-    In this case, since the settlement window is closed and the seller has been paid,
-    the refund process needs to follow a different path. The system has to manage
-    the refund carefully and may even involve recovering the amount from the seller,
-    depending on the situation. To understand exactly how this works—including the
-    steps involved, which parties do what, and how the APIs support this process—you
-    can refer to the    documentation.
+  answer: In the RSF 2.0 (Revised Settlement Framework), how a refund is handled depends on whether the seller has already received the payment when the refund is requested. Let’s say a customer receives a damaged product and asks for a refund after the order has been delivered. If the settlement rule was based on “Order Delivered” and the seller was supposed to be paid within two days of delivery, then by the time the refund is requested, the seller might have already received the money. In this case, since the settlement window is closed and the seller has been paid, the refund process needs to follow a different path. The system has to manage the refund carefully and may even involve recovering the amount from the seller, depending on the situation. To understand exactly how this works—including the steps involved, which parties do what, and how the APIs support this process—you can refer to the    documentation.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags:
-  - settlement
-  - refund
-  - seller
-  - payment
-  - order
+    - bpp_entity
+    - order
+    - payment
+    - payment_collection
+    - payment_gateway
+    - purchase_order
+    - refund
+    - refund_process
+    - retail_order
+    - rsf_settlement
+    - seller
+    - seller_np
+    - settlement
+    - settlement_framework
+    - settlement_refund
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: How can I test IGM 2.0.0 as a buyer or seller?
-  answer: 'To test IGM 2.0.0, you have two options: Connect with a Network Participant:
-    Collaborate with an existing Network Participant who has already implemented IGM
-    2.0.0 for testing. Use Mock Server: The mock server supports both buyer side and
-    seller side testing for all flows. For guidance on using the mock server, refer
-    to the. Use Pramaan: Pramaan supports both buyer and seller testing for flows,
-    available .'
+  answer: 'To test IGM 2.0.0, you have two options: Connect with a Network Participant: Collaborate with an existing Network Participant who has already implemented IGM 2.0.0 for testing. Use Mock Server: The mock server supports both buyer side and seller side testing for all flows. For guidance on using the mock server, refer to the. Use Pramaan: Pramaan supports both buyer and seller testing for flows, available .'
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags:
-  - igm
-  - buyer
-  - seller
-  - network
-  - participant
+    - bap_entity
+    - bpp_entity
+    - buyer
+    - buyer_np
+    - grievance_management
+    - igm
+    - igm_framework
+    - network
+    - network_participant_np
+    - ondc_network
+    - open_commerce_network
+    - participant
+    - seller
+    - seller_np
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: How many flows are present in IGM 2.0.0?
-  answer: 'There are three flows in IGM 2.0.0 developer guide that cover the use cases:
-    Illustrative Flow 1 (Buyer raises a complaint related to an item category) Illustrative
-    Flow 2 (Seller raises a complaint regarding a policy issue) Illustrative Flow
-    3 (Buyer raises a complaint related to the fulfillment category) Illustrative
-    Flow 4 (Buyer raises a complaint related to the multiple items) Illustrative Flow
-    5 (TRV) (Buyer raises a complaint related to an item category)'
+  answer: 'There are three flows in IGM 2.0.0 developer guide that cover the use cases: Illustrative Flow 1 (Buyer raises a complaint related to an item category) Illustrative Flow 2 (Seller raises a complaint regarding a policy issue) Illustrative Flow 3 (Buyer raises a complaint related to the fulfillment category) Illustrative Flow 4 (Buyer raises a complaint related to the multiple items) Illustrative Flow 5 (TRV) (Buyer raises a complaint related to an item category)'
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags:
-  - igm
-  - buyer
-  - seller
-  - fulfillment
+    - bap_entity
+    - bpp_entity
+    - buyer
+    - buyer_np
+    - delivery_fulfillment
+    - fulfillment
+    - grievance_management
+    - igm
+    - igm_framework
+    - order_fulfillment
+    - seller
+    - seller_np
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What are refs in IGM 2.0.0, and which refs are mandatory in Flow 1?
-  answer: Refs in IGM 2.0.0 are used to reference order details such as order, provider,
-    fulfillment, item, etc., along with their respective IDs. These references help
-    identify the order, provider, and item related to an issue. Mandatory Refs depend
-    on the category of the complaint. Item category complaints required item object
-    and fulfilment category complaints required fulfilment object.
+  answer: Refs in IGM 2.0.0 are used to reference order details such as order, provider, fulfillment, item, etc., along with their respective IDs. These references help identify the order, provider, and item related to an issue. Mandatory Refs depend on the category of the complaint. Item category complaints required item object and fulfilment category complaints required fulfilment object.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags:
-  - igm
-  - order
-  - fulfillment
+    - delivery_fulfillment
+    - fulfillment
+    - grievance_management
+    - igm
+    - igm_framework
+    - order
+    - order_fulfillment
+    - purchase_order
+    - retail_order
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What are actions in IGM 2.0.0?
-  answer: Actions in IGM 2.0.0 represent how actors take actions/ communicate after
-    a complaint is raised. These actions are defined using multiple enums, which indicate
-    the specific actions taken by each actor during the complaint resolution process.
+  answer: Actions in IGM 2.0.0 represent how actors take actions/ communicate after a complaint is raised. These actions are defined using multiple enums, which indicate the specific actions taken by each actor during the complaint resolution process.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags:
-  - igm
+    - grievance_management
+    - igm
+    - igm_framework
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is the meaning of the update_target field in the message object?
-  answer: The update_target field indicates the exact path within the issue object
-    that has been modified and also specifies the type of update (e.g., APPENDED,
-    UPDATED).
+  answer: The update_target field indicates the exact path within the issue object that has been modified and also specifies the type of update (e.g., APPENDED, UPDATED).
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags:
-  - update
+    - order_update
+    - status_update
+    - update
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What does the last_action_id field signify in the issue object?
-  answer: The last_action_id field refers to the unique identifier of the most recent
-    action taken on the issue, helping systems trace the current status of the complaint.
+  answer: The last_action_id field refers to the unique identifier of the most recent action taken on the issue, helping systems trace the current status of the complaint.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags:
-  - status
+    - fulfillment_status
+    - order_status
+    - status
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Why is the status field in the issue object important?
-  answer: The status field captures the current lifecycle stage of the issue, such
-    as OPEN, PROCESSING, RESOLVED, or CLOSED, allowing platforms to manage the issue
-    appropriately.
+  answer: The status field captures the current lifecycle stage of the issue, such as OPEN, PROCESSING, RESOLVED, or CLOSED, allowing platforms to manage the issue appropriately.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags:
-  - status
+    - fulfillment_status
+    - order_status
+    - status
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What information does the expected_response_time field provide?
-  answer: The expected_response_time field specifies the time duration within which
-    the respondent is expected to acknowledge or address the issue after it has been
-    raised.
+  answer: The expected_response_time field specifies the time duration within which the respondent is expected to acknowledge or address the issue after it has been raised.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What does the expected_resolution_time field represent?
-  answer: The expected_resolution_time field sets the upper limit on how long it should
-    take for the complaint to be resolved from the time it was created.
+  answer: The expected_resolution_time field sets the upper limit on how long it should take for the complaint to be resolved from the time it was created.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is the role of the refs array within the issue object?
-  answer: The refs array links the issue to various external entities like orders,
-    items, providers, or fulfillments, creating meaningful contextual relationships.
+  answer: The refs array links the issue to various external entities like orders, items, providers, or fulfillments, creating meaningful contextual relationships.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is the purpose of the ref_type field inside the refs array?
-  answer: The ref_type field specifies what kind of entity is being referenced — such
-    as ORDER, ITEM, or PROVIDER — helping systems understand the nature of the reference.
+  answer: The ref_type field specifies what kind of entity is being referenced — such as ORDER, ITEM, or PROVIDER — helping systems understand the nature of the reference.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags:
-  - order
+    - order
+    - purchase_order
+    - retail_order
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Why is a tags field included within the refs array for items?
-  answer: The tags field provides structured data for additional attributes like item’s
-    quantity, type, or other relevant metadata necessary for processing the issue.
+  answer: The tags field provides structured data for additional attributes like item’s quantity, type, or other relevant metadata necessary for processing the issue.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What does the actors array signify in the issue payload?
-  answer: The actors array enumerates all stakeholders involved in the issue, including
-    the complainant, respondent, GROs, and other network participants.
+  answer: The actors array enumerates all stakeholders involved in the issue, including the complainant, respondent, GROs, and other network participants.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags:
-  - network
+    - network
+    - ondc_network
+    - open_commerce_network
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What kind of information is stored under the info field of each actor?
-  answer: The info field contains identity and contact details, such as organization
-    name, phone number, email, and representative name, useful for verification and
-    communication.
+  answer: The info field contains identity and contact details, such as organization name, phone number, email, and representative name, useful for verification and communication.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags:
-  - verification
+    - auth_verification
+    - signature_verification
+    - verification
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Why is the source_id field included in the issue object?
-  answer: The source_id field identifies which actor originally initiated or created
-    the issue, serving as the origin point of the complaint.
+  answer: The source_id field identifies which actor originally initiated or created the issue, serving as the origin point of the complaint.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is the meaning of the complainant_id field?
-  answer: The complainant_id field represents the actor who has officially submitted
-    the complaint.
+  answer: The complainant_id field represents the actor who has officially submitted the complaint.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is the role of the respondent_ids field?
-  answer: The respondent_ids field lists all the actors who are responding to the
-    complaint and possibly provide resolutions or clarifications.
+  answer: The respondent_ids field lists all the actors who are responding to the complaint and possibly provide resolutions or clarifications.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What does the resolver_ids field indicate in the issue?
-  answer: The resolver_ids field contains the identifiers of actors who are resolving
-    the complaint.
+  answer: The resolver_ids field contains the identifiers of actors who are resolving the complaint.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Why is the description object significant in an issue?
-  answer: The description object provides the details about the complaint being raised
-    both a short and long description of the complaint and may include additional
-    materials like images or URLs to support the claim.
+  answer: The description object provides the details about the complaint being raised both a short and long description of the complaint and may include additional materials like images or URLs to support the claim.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What purpose does the images array serve inside the description?
-  answer: The images array allows the inclusion of visual evidence or context, such
-    as photos of damaged goods, incorrect orders, or service failures.
+  answer: The images array allows the inclusion of visual evidence or context, such as photos of damaged goods, incorrect orders, or service failures.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Why is the id field critical in each action object?
-  answer: The id field uniquely identifies each action taken on the issue, allowing
-    precise tracking and referencing throughout the lifecycle.
+  answer: The id field uniquely identifies each action taken on the issue, allowing precise tracking and referencing throughout the lifecycle.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is the significance of the ref_id field in action objects?
-  answer: The ref_id field is used to link a particular action as a response or follow-up
-    to a previous action, maintaining the conversational or transactional flow.
+  answer: The ref_id field is used to link a particular action as a response or follow-up to a previous action, maintaining the conversational or transactional flow.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Why might some actions include a ref_id while others do not?
-  answer: Actions with ref_id refer back to a related resolution or previous action,
-    whereas independent actions (like issue creation) do not need such references.
+  answer: Actions with ref_id refer back to a related resolution or previous action, whereas independent actions (like issue creation) do not need such references.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: How is the descriptior.name field used within an action or resolution?
-  answer: The descriptior.name field often acts as a label or title that categorizes
-    the action, especially helpful for documentation in INFO_REQUESTED or INFO_PROVIDED
-    cases.
+  answer: The descriptior.name field often acts as a label or title that categorizes the action, especially helpful for documentation in INFO_REQUESTED or INFO_PROVIDED cases.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags:
-  - documentation
+    - api_documentation
+    - documentation
+    - technical_documentation
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What information does the action_by field convey in each action?
-  answer: The action_by field identifies the actor (from the actors array through
-    id) who has executed the particular action, ensuring clear attribution.
+  answer: The action_by field identifies the actor (from the actors array through id) who has executed the particular action, ensuring clear attribution.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Why is actor_details provided separately in every action object?
-  answer: Actor_details ensures the system captures the actor’s metadata at the time
-    of the action, even if that information changes later for example the literal
-    agent of an entity acting on the complaint
+  answer: Actor_details ensures the system captures the actor’s metadata at the time of the action, even if that information changes later for example the literal agent of an entity acting on the complaint
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What types of data are stored in the media field of an action?
-  answer: The media field can include URLs to documents, images, or other multimedia
-    attachments that serve as part of the complaint or response.
+  answer: The media field can include URLs to documents, images, or other multimedia attachments that serve as part of the complaint or response.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Why can multiple INFO_REQUESTED actions exist in a single issue?
-  answer: Each instance of INFO_REQUESTED represents a different request for information,
-    often from different actors or concerning distinct aspects of the issue.
+  answer: Each instance of INFO_REQUESTED represents a different request for information, often from different actors or concerning distinct aspects of the issue.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is the function of the descriptor.code field in resolution objects?
-  answer: The descriptor.code categorizes the type of resolution being proposed, such
-    as REFUND, RETURN, or REPLACEMENT.
+  answer: The descriptor.code categorizes the type of resolution being proposed, such as REFUND, RETURN, or REPLACEMENT.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags:
-  - refund
-  - return
+    - refund
+    - refund_process
+    - return
+    - return_to_origin
+    - rto_flow
+    - settlement_refund
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What does the proposed_by field indicate in a resolution?
-  answer: The proposed_by field shows which actor (by ID) has proposed the resolution,
-    indicating the initiator of the proposed remedy.
+  answer: The proposed_by field shows which actor (by ID) has proposed the resolution, indicating the initiator of the proposed remedy.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Why might a resolution contain a ref_id field?
-  answer: The ref_id links the resolution to an earlier resolution or action that
-    it builds upon, responds to, or modifies.
+  answer: The ref_id links the resolution to an earlier resolution or action that it builds upon, responds to, or modifies.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Why is a tags array sometimes present in resolution objects?
-  answer: The tags array allows the inclusion of detailed metadata, such as specific
-    refund amounts, item details, or fulfillment instructions.
+  answer: The tags array allows the inclusion of detailed metadata, such as specific refund amounts, item details, or fulfillment instructions.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags:
-  - refund
-  - fulfillment
+    - delivery_fulfillment
+    - fulfillment
+    - order_fulfillment
+    - refund
+    - refund_process
+    - settlement_refund
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What role does descriptor.short_desc play in a resolution?
-  answer: The descriptor.short_desc provides a concise explanation of the resolution
-    for quick understanding by users and platforms alike.
+  answer: The descriptor.short_desc provides a concise explanation of the resolution for quick understanding by users and platforms alike.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Can different actors propose different resolutions for the same issue?
-  answer: Yes, multiple eligible actors (like seller or lsp) can submit various resolution
-    options for the same complaint in case of a cascaded complaint
+  answer: Yes, multiple eligible actors (like seller or lsp) can submit various resolution options for the same complaint in case of a cascaded complaint
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags:
-  - seller
-  - lsp
+    - bpp_entity
+    - logistics_np
+    - lsp
+    - lsp_provider
+    - seller
+    - seller_np
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What does the descriptor.code represent in the context of an action?
-  answer: The descriptor.code defines the nature of the action, such as OPEN, PROCESSING,
-    CLOSED, etc., which is essential for workflow progression.
+  answer: The descriptor.code defines the nature of the action, such as OPEN, PROCESSING, CLOSED, etc., which is essential for workflow progression.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Why do multiple actions sometimes share the same description.code?
-  answer: This happens when similar actions occur repeatedly, for example, multiple
-    INFO_REQUESTED steps at different stages or from different actors.
+  answer: This happens when similar actions occur repeatedly, for example, multiple INFO_REQUESTED steps at different stages or from different actors.
   categories:
-  - IGM Related Queries
+    - IGM Related Queries
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is message.catalog.providers.id?
-  answer: 'This is a unique system-generated identifier for the loan provider entity.
-    It distinguishes each provider in the ecosystem, even if multiple providers have
-    the same display name.
-
-    '
+  answer: |
+    This is a unique system-generated identifier for the loan provider entity. It distinguishes each provider in the ecosystem, even if multiple providers have the same display name.
   categories:
-  - Log Submissions
+    - Log Submissions
   tags:
-  - catalog
+    - catalog
+    - product_catalog
+    - seller_catalog
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is message.catalog.providers.descriptor.name used for?
-  answer: 'Similar to the catalog descriptor, this repeats the official name of the
-    provider at the individual provider level within the catalog, e.g., "ICICI Bank".
-
-    '
+  answer: |
+    Similar to the catalog descriptor, this repeats the official name of the provider at the individual provider level within the catalog, e.g., "ICICI Bank".
   categories:
-  - Log Submissions
+    - Log Submissions
   tags:
-  - catalog
+    - catalog
+    - product_catalog
+    - seller_catalog
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is message.catalog.providers.descriptor.short_desc?
-  answer: 'A brief description of the provider to be shown in UI components. For example,
-    "ICICI Bank Ltd"—suitable for compact displays like mobile cards or quick view
-    tiles.
-
-    '
+  answer: |
+    A brief description of the provider to be shown in UI components. For example, "ICICI Bank Ltd"—suitable for compact displays like mobile cards or quick view tiles.
   categories:
-  - Log Submissions
+    - Log Submissions
   tags:
-  - catalog
+    - catalog
+    - product_catalog
+    - seller_catalog
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is message.catalog.providers.descriptor.long_desc?
-  answer: 'A detailed narrative about the provider, e.g., "ICICI Bank Ltd, India".
-    Useful in profile views or when displaying additional information to the user.
-
-    '
+  answer: |
+    A detailed narrative about the provider, e.g., "ICICI Bank Ltd, India". Useful in profile views or when displaying additional information to the user.
   categories:
-  - Log Submissions
+    - Log Submissions
   tags:
-  - catalog
+    - catalog
+    - product_catalog
+    - seller_catalog
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is the function of message.catalog.providers.descriptor.images.url?
-  answer: 'This field carries the URL of the provider’s logo or brand image. This
-    helps in better visual presentation and branding on the buyer app. Example: https://www.icicibank.com/content/dam/icicibank/india/assets/images/header/logo.png
-
-    '
+  answer: |
+    This field carries the URL of the provider’s logo or brand image. This helps in better visual presentation and branding on the buyer app. Example: https://www.icicibank.com/content/dam/icicibank/india/assets/images/header/logo.png
   categories:
-  - Log Submissions
+    - Log Submissions
   tags:
-  - catalog
-  - buyer
-  - app
+    - app
+    - bap_entity
+    - buyer
+    - buyer_np
+    - catalog
+    - network_participant_app
+    - product_catalog
+    - seller_catalog
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What does message.catalog.providers.categories.id represent?
-  answer: 'This is a unique category identifier (e.g., 101123) that groups items under
-    loan types like personal loans, business loans, etc. It helps in categorization
-    and filtering on the frontend.
-
-    '
+  answer: |
+    This is a unique category identifier (e.g., 101123) that groups items under loan types like personal loans, business loans, etc. It helps in categorization and filtering on the frontend.
   categories:
-  - Log Submissions
+    - Log Submissions
   tags:
-  - catalog
+    - catalog
+    - product_catalog
+    - seller_catalog
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What does message.catalog.providers.items.descriptor.name refer to?
   answer: It provides the display name of the item, such as "Personal Loan".
   categories:
-  - Log Submissions
+    - Log Submissions
   tags:
-  - catalog
+    - catalog
+    - product_catalog
+    - seller_catalog
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What does message.catalog.providers.items.descriptor.images.url do?
-  answer: 'It specifies the image or logo URL associated with the item, helping users
-    visually identify the provider or product.
-
-    '
+  answer: |
+    It specifies the image or logo URL associated with the item, helping users visually identify the provider or product.
   categories:
-  - Log Submissions
+    - Log Submissions
   tags:
-  - catalog
+    - catalog
+    - product_catalog
+    - seller_catalog
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is message.catalog.providers.items.category_ids used for?
-  answer: 'It connects an item to its respective category, ensuring proper hierarchical
-    structuring under the category defined earlier (e.g., 101123).
-
-    '
+  answer: |
+    It connects an item to its respective category, ensuring proper hierarchical structuring under the category defined earlier (e.g., 101123).
   categories:
-  - Log Submissions
+    - Log Submissions
   tags:
-  - catalog
+    - catalog
+    - product_catalog
+    - seller_catalog
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'How does the buyer track the status of a form submitted via application/html,
-    especially after redirection?
-
-    '
-  answer: 'The seller sends unsolicited /on_status calls with the corresponding Submission_ID.
-    The buyer can also send a status call using ref_id to fetch the latest form status.
-
-    '
+- question: |
+    How does the buyer track the status of a form submitted via application/html, especially after redirection?
+  answer: |
+    The seller sends unsolicited /on_status calls with the corresponding Submission_ID. The buyer can also send a status call using ref_id to fetch the latest form status.
   categories:
-  - Log Submissions
+    - Log Submissions
   tags:
-  - buyer
-  - track
-  - status
-  - seller
+    - bap_entity
+    - bpp_entity
+    - buyer
+    - buyer_np
+    - fulfillment_status
+    - logistics_tracking
+    - order_status
+    - seller
+    - seller_np
+    - shipment_tracking
+    - status
+    - track
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'There can be multiple orders sent in /on_settle, among which some are
-    correctly settled while others are not settled. In such cases, should we partially
-    ACK the /on_settle in for the correctly settled orders or NACK the entire /on_settle?
-
-    '
-  answer: 'Ack or Nack are dependent on schema validations primarily and it is not
-    partial. It is either Ack for all or Nack for all orders.
-
-    '
+- question: |
+    There can be multiple orders sent in /on_settle, among which some are correctly settled while others are not settled. In such cases, should we partially ACK the /on_settle in for the correctly settled orders or NACK the entire /on_settle?
+  answer: |
+    Ack or Nack are dependent on schema validations primarily and it is not partial. It is either Ack for all or Nack for all orders.
   categories:
-  - Log Submissions
+    - Log Submissions
   tags:
-  - schema
+    - api_schema
+    - beckn_schema
+    - schema
   lastUpdated: '2024-07-10T10:00:00Z'

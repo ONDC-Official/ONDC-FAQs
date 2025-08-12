@@ -1,135 +1,130 @@
 - question: Why are reference applications important?
-  answer: 'They enable:
-
+  answer: |-
+    They enable:
 
     * **Independent and end-to-end testing** of APIs and services
-
     * **Positive and negative scenario coverage**
-
     * **Compliance validation** before production onboarding
-
-    * **Scalability and security testing**'
+    * **Scalability and security testing**
   categories:
-  - Reference Applications
+    - Reference Applications
   tags:
-  - reference_applications
-  - testing
-  - validation
+    - api_testing
+    - conformance_testing
+    - log_validation
+    - reference_applications
+    - schema_validation
+    - testing
+    - validation
   lastUpdated: '2024-01-01T10:00:00Z'
 - question: Do I need to test with both Buyer and Seller reference apps?
-  answer: Yes, if you're a network participant (NP), you must test your application
-    against **both BAP and BPP reference applications** for your domain (e.g., personal
-    loan, insurance) to complete the certification and log verification process.
+  answer: Yes, if you're a network participant (NP), you must test your application against **both BAP and BPP reference applications** for your domain (e.g., personal loan, insurance) to complete the certification and log verification process.
   categories:
-  - Reference Applications
+    - Reference Applications
   tags:
-  - reference_applications
-  - testing
-  - validation
+    - api_testing
+    - conformance_testing
+    - log_validation
+    - reference_applications
+    - schema_validation
+    - testing
+    - validation
   lastUpdated: '2024-01-01T10:00:00Z'
 - question: What environments are available for testing?
-  answer: 'Testing is supported in:
-
+  answer: |-
+    Testing is supported in:
 
     * **Staging**
-
     * **Pre-Production**
 
-
-    Each use case may have different URLs and onboarding instructions.'
+    Each use case may have different URLs and onboarding instructions.
   categories:
-  - Environment Access
+    - Environment Access
   tags:
-  - environment_access
-  - testing
+    - api_testing
+    - conformance_testing
+    - environment_access
+    - testing
   lastUpdated: '2024-01-01T10:00:00Z'
 - question: What is the process for onboarding to reference applications?
-  answer: 'The onboarding process typically involves:
-
+  answer: |-
+    The onboarding process typically involves:
 
     1. **Contact the reference application provider** (e.g., Cliniq360, Cornex, SequelString)
-
     2. **Request access credentials** for the specific domain and environment
-
     3. **Receive testing URLs and documentation**
-
     4. **Configure your application** to interact with the reference app
-
     5. **Begin testing and validation** of your APIs and flows
-
-    6. **Submit logs and results** for review and certification'
+    6. **Submit logs and results** for review and certification
   categories:
-  - Environment Access
+    - Environment Access
   tags:
-  - environment_access
-  - onboarding
-  - testing
+    - api_testing
+    - conformance_testing
+    - environment_access
+    - np_onboarding
+    - onboarding
+    - participant_onboarding
+    - testing
   lastUpdated: '2024-01-01T10:00:00Z'
 - question: What types of testing scenarios do reference applications support?
-  answer: 'Reference applications support various testing scenarios including:
-
+  answer: |-
+    Reference applications support various testing scenarios including:
 
     * **Happy path flows** - Standard successful transactions
-
     * **Error scenarios** - Testing error handling and edge cases
-
     * **Performance testing** - Load and scalability validation
-
     * **Security testing** - Authentication and authorization validation
-
     * **Compliance testing** - Protocol adherence verification
-
-    * **Integration testing** - End-to-end workflow validation'
+    * **Integration testing** - End-to-end workflow validation
   categories:
-  - Reference Applications
+    - Reference Applications
   tags:
-  - reference_applications
-  - testing
-  - validation
+    - api_testing
+    - conformance_testing
+    - log_validation
+    - reference_applications
+    - schema_validation
+    - testing
+    - validation
   lastUpdated: '2024-01-01T10:00:00Z'
 - question: How do I report issues or get support for reference applications?
-  answer: 'For issues or support with reference applications:
+  answer: |-
+    For issues or support with reference applications:
 
-
-    1. **Contact the specific reference app provider** directly (Cliniq360, Cornex,
-    SequelString)
-
+    1. **Contact the specific reference app provider** directly (Cliniq360, Cornex, SequelString)
     2. **Use their designated support channels** (email, support portals)
-
-    3. **Provide detailed information** about the issue, including logs and error
-    messages
-
+    3. **Provide detailed information** about the issue, including logs and error messages
     4. **Follow their escalation process** for critical issues
-
-    5. **Document issues in your testing reports** for certification purposes'
+    5. **Document issues in your testing reports** for certification purposes
   categories:
-  - Reference Applications
+    - Reference Applications
   tags:
-  - reference_applications
-  - testing
+    - api_testing
+    - conformance_testing
+    - reference_applications
+    - testing
   lastUpdated: '2024-01-01T10:00:00Z'
 - question: What documentation is available for reference applications?
-  answer: 'Documentation for reference applications typically includes:
-
+  answer: |-
+    Documentation for reference applications typically includes:
 
     * **API specifications** and endpoint details
-
     * **Testing guidelines** and best practices
-
     * **Environment-specific configurations** and URLs
-
     * **Sample payloads** and request/response examples
-
     * **Troubleshooting guides** for common issues
-
     * **Contact information** for support and escalation
 
-
-    Check with each reference application provider for their specific documentation.'
+    Check with each reference application provider for their specific documentation.
   categories:
-  - Reference Applications
+    - Reference Applications
   tags:
-  - reference_applications
-  - testing
-  - documentation
+    - api_documentation
+    - api_testing
+    - conformance_testing
+    - documentation
+    - reference_applications
+    - technical_documentation
+    - testing
   lastUpdated: '2024-01-01T10:00:00Z'

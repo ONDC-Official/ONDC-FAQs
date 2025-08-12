@@ -1,740 +1,778 @@
 - question: What is ONDC?
-  answer: ONDC (Open Network for Digital Commerce) is an Indian government-backed
-    initiative aimed at democratizing digital commerce by enabling open, inclusive,
-    and interoperable e-commerce eco-system. It allows buyers and sellers to connect
-    across different platforms. Like UPI transformed digital payments, ONDC seeks
-    to empower small businesses, local retailers, and consumers by providing equal
-    access to digital markets. The network supports multiple apps for buying, selling,
-    and logistics, ensuring transparency, lower costs, and wider choices.
+  answer: ONDC (Open Network for Digital Commerce) is an Indian government-backed initiative aimed at democratizing digital commerce by enabling open, inclusive, and interoperable e-commerce eco-system. It allows buyers and sellers to connect across different platforms. Like UPI transformed digital payments, ONDC seeks to empower small businesses, local retailers, and consumers by providing equal access to digital markets. The network supports multiple apps for buying, selling, and logistics, ensuring transparency, lower costs, and wider choices.
   categories:
-  - Getting Started with ONDC
+    - Getting Started with ONDC
   tags:
-  - ondc
-  - network
-  - digital
-  - e-commerce
-  - upi
+    - digital
+    - digital_commerce
+    - digital_signature
+    - e-commerce
+    - network
+    - ondc
+    - ondc_network
+    - open_commerce_network
+    - open_network
+    - payment_method
+    - upi
+    - upi_payment
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: How is ONDC different from traditional e-commerce platforms?
-  answer: Unlike traditional platforms that are centralized and closed, ONDC is a
-    decentralized open network. Any buyer app can interact with any seller app, enabling
-    fair competition and wider reach.
+  answer: Unlike traditional platforms that are centralized and closed, ONDC is a decentralized open network. Any buyer app can interact with any seller app, enabling fair competition and wider reach.
   categories:
-  - Getting Started with ONDC
+    - Getting Started with ONDC
   tags:
-  - ondc
-  - e-commerce
-  - network
-  - buyer
-  - app
+    - app
+    - bap_entity
+    - buyer
+    - buyer_np
+    - e-commerce
+    - network
+    - network_participant_app
+    - ondc
+    - ondc_network
+    - open_commerce_network
+    - open_network
   lastUpdated: '2024-06-10T10:00:00Z'
 - question: How Does ONDC Work?
-  answer: 'Protocol-Based: ONDC uses open-source Beckn Protocol to standardize transactions.
-
-    Interoperability: A seller listed on one app (e.g., Meesho) becomes visible on
-    all ONDC buyer apps (e.g., Paytm).
-
-    No Middleman: Sellers set prices, manage inventory, and choose logistics independently.
-    ONDC works as an open network that connects buyers, sellers, and service providers
-    (like logistics) through a common digital protocol, instead of relying on a single
-    e-commerce platform. Participants (apps or businesses) join the network in roles
-    such as: Buyer Apps – Used by customers to search and shop (e.g., Paytm, PhonePe)
-    Seller Apps – Used by merchants to list products and manage orders Logistics Providers
-    – Handle delivery across the network When a customer places an order on a buyer
-    app, ONDC matches it with a seller and delivery provider from different platforms
-    — all seamlessly integrated. This creates a decentralized and interoperable e-commerce
-    system, much like how UPI enables payments between different banks and apps.'
+  answer: |-
+    Protocol-Based: ONDC uses open-source Beckn Protocol to standardize transactions.
+    Interoperability: A seller listed on one app (e.g., Meesho) becomes visible on all ONDC buyer apps (e.g., Paytm).
+    No Middleman: Sellers set prices, manage inventory, and choose logistics independently. ONDC works as an open network that connects buyers, sellers, and service providers (like logistics) through a common digital protocol, instead of relying on a single e-commerce platform. Participants (apps or businesses) join the network in roles such as: Buyer Apps – Used by customers to search and shop (e.g., Paytm, PhonePe) Seller Apps – Used by merchants to list products and manage orders Logistics Providers – Handle delivery across the network When a customer places an order on a buyer app, ONDC matches it with a seller and delivery provider from different platforms — all seamlessly integrated. This creates a decentralized and interoperable e-commerce system, much like how UPI enables payments between different banks and apps.
   categories:
-  - Getting Started with ONDC
+    - Getting Started with ONDC
   tags:
-  - ondc
-  - beckn
-  - protocol
-  - seller
-  - app
+    - app
+    - beckn
+    - beckn_api
+    - beckn_protocol
+    - bpp_entity
+    - network_participant_app
+    - ondc
+    - ondc_network
+    - open_network
+    - protocol
+    - seller
+    - seller_np
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Is ONDC a government app?
-  answer: No, ONDC is not an app but a government-backed open protocol (like UPI for
-    e-commerce). Private companies build apps (e.g., Paytm, Magicpin) that use ONDC’s
-    network.
+  answer: No, ONDC is not an app but a government-backed open protocol (like UPI for e-commerce). Private companies build apps (e.g., Paytm, Magicpin) that use ONDC’s network.
   categories:
-  - Getting Started with ONDC
+    - Getting Started with ONDC
   tags:
-  - ondc
-  - app
-  - protocol
-  - upi
-  - e-commerce
+    - app
+    - e-commerce
+    - network_participant_app
+    - ondc
+    - ondc_network
+    - open_network
+    - payment_method
+    - protocol
+    - upi
+    - upi_payment
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Is ONDC Free to Use?
-  answer: 'ONDC itself does not charge buyers or sellers for using the network. However,
-    individual Network Participants (like Seller Apps, Buyer Apps, or Gateways) may
-    apply their own fees for onboarding, transactions, or services. These fees are
-    typically lower than those on traditional e-commerce platforms. Buyers:  Buyer
-    Apps may apply convenience fees (if any). The actual costs depend on the participants
-    you engage with, not ONDC directly.'
+  answer: 'ONDC itself does not charge buyers or sellers for using the network. However, individual Network Participants (like Seller Apps, Buyer Apps, or Gateways) may apply their own fees for onboarding, transactions, or services. These fees are typically lower than those on traditional e-commerce platforms. Buyers:  Buyer Apps may apply convenience fees (if any). The actual costs depend on the participants you engage with, not ONDC directly.'
   categories:
-  - Getting Started with ONDC
+    - Getting Started with ONDC
   tags:
-  - ondc
-  - network
-  - seller
-  - buyer
-  - onboarding
+    - bap_entity
+    - bpp_entity
+    - buyer
+    - buyer_np
+    - network
+    - np_onboarding
+    - onboarding
+    - ondc
+    - ondc_network
+    - open_commerce_network
+    - open_network
+    - participant_onboarding
+    - seller
+    - seller_np
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Benefits of ONDC?
-  answer: 'For Sellers: Low Fees: No 20-30% commission of Buyer and seller app. Wider
-    Reach: Sell across multiple apps without separate listings. Control: Own pricing,
-    inventory, and customer data. For Buyers: More Choices: Access to local sellers,
-    niche products. Better Prices: No platform-driven surge pricing. For India: Digital
-    Inclusion: Empowers small businesses in Tier 2/3 cities. Innovation: Startups
-    can build apps on ONDC’s open network.'
+  answer: 'For Sellers: Low Fees: No 20-30% commission of Buyer and seller app. Wider Reach: Sell across multiple apps without separate listings. Control: Own pricing, inventory, and customer data. For Buyers: More Choices: Access to local sellers, niche products. Better Prices: No platform-driven surge pricing. For India: Digital Inclusion: Empowers small businesses in Tier 2/3 cities. Innovation: Startups can build apps on ONDC’s open network.'
   categories:
-  - Key Concepts and Roles
+    - Key Concepts and Roles
   tags:
-  - ondc
-  - commission
-  - buyer
-  - seller
-  - app
+    - app
+    - bap_entity
+    - bpp_entity
+    - buyer
+    - buyer_np
+    - commission
+    - finder_fee
+    - network_participant_app
+    - np_commission
+    - ondc
+    - ondc_network
+    - open_network
+    - seller
+    - seller_np
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is a Network Participant (NP)?
-  answer: A Network Participant is any entity that integrates with ONDC and plays
-    a role such as Buyer App (BAP), Seller App (BPP), Gateway, Logistics Provider.
+  answer: A Network Participant is any entity that integrates with ONDC and plays a role such as Buyer App (BAP), Seller App (BPP), Gateway, Logistics Provider.
   categories:
-  - Key Concepts and Roles
+    - Key Concepts and Roles
   tags:
-  - network
-  - participant
-  - ondc
-  - buyer
-  - app
+    - app
+    - bap_entity
+    - buyer
+    - buyer_np
+    - network
+    - network_participant_app
+    - network_participant_np
+    - ondc
+    - ondc_network
+    - open_commerce_network
+    - open_network
+    - participant
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'What are the main roles in ONDC?
-
-    '
-  answer: 'Network Participants (NPs) : These are entities that directly integrate
-    with ONDC protocols (Beckn Protocol) and exchange protocol messages on the network.
-    They are the core technical actors in ONDC. Ecosystem Participants: These are
-    all other actors who enable, support, or benefit from the ONDC ecosystem. Not
-    all of them directly interact using the protocol.'
+- question: |
+    What are the main roles in ONDC?
+  answer: 'Network Participants (NPs) : These are entities that directly integrate with ONDC protocols (Beckn Protocol) and exchange protocol messages on the network. They are the core technical actors in ONDC. Ecosystem Participants: These are all other actors who enable, support, or benefit from the ONDC ecosystem. Not all of them directly interact using the protocol.'
   categories:
-  - Key Concepts and Roles
+    - Key Concepts and Roles
   tags:
-  - ondc
-  - network
-  - beckn
-  - protocol
+    - beckn
+    - beckn_api
+    - beckn_protocol
+    - network
+    - ondc
+    - ondc_network
+    - open_commerce_network
+    - open_network
+    - protocol
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: How do I test error scenarios in a sandbox?
   answer: Use mock BAP/BPP endpoints or inject invalid payloads to test error handling.
   categories:
-  - General
+    - General
   tags:
-  - error
-  - sandbox
-  - bap
-  - bpp
+    - bap
+    - bpp
+    - buyer_app
+    - buyer_np
+    - error
+    - error_handling
+    - error_response
+    - sandbox
+    - sandbox_testing
+    - seller_app
+    - seller_np
+    - test_environment
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: How to move from staging to pre-prod?
-  answer: Firstly, the NP will have to give the demo for the staging environment.
-    Once the  demo is done then they will have to get their subscriber_id whitelisted
-    for pre-prod. For that, NP has to submit the request for whitelisting on the NP
-    Portal. Once whitelisted, they can call the /subscribe API to get registered on
-    Pre-prod.
+  answer: Firstly, the NP will have to give the demo for the staging environment. Once the  demo is done then they will have to get their subscriber_id whitelisted for pre-prod. For that, NP has to submit the request for whitelisting on the NP Portal. Once whitelisted, they can call the /subscribe API to get registered on Pre-prod.
   categories:
-  - General
+    - General
   tags:
-  - api
-  - compliance
+    - api
+    - beckn_api
+    - compliance
+    - compliance_checklist
+    - np_compliance
+    - ondc_protocol
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Can we submit Pramaan logs if we don't get any seller np?
-  answer: Yes Pramaan logs can be submitted but incase any flow is not supported in
-    Pramaan it has to be generated with some approved seller NP or you can use reference
-    seller app for log generation
+  answer: Yes Pramaan logs can be submitted but incase any flow is not supported in Pramaan it has to be generated with some approved seller NP or you can use reference seller app for log generation
   categories:
-  - General
+    - General
   tags:
-  - pramaan
+    - pramaan
+    - pramaan_testing
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: No Requests Received from ONDC Network
-  answer: Please check the lookup and vlookup API. Also check if your API service
-    is accepting requests at url <bpp_id>?/search. If still you are not receiving
-    search request kindly react out to beckn_support@proteantech.in
+  answer: Please check the lookup and vlookup API. Also check if your API service is accepting requests at url <bpp_id>?/search. If still you are not receiving search request kindly react out to beckn_support@proteantech.in
   categories:
-  - General
+    - General
   tags:
-  - ondc
-  - network
-  - api
-  - bpp
-  - search
+    - api
+    - beckn_api
+    - bpp
+    - catalog_search
+    - discovery_search
+    - network
+    - ondc
+    - ondc_network
+    - ondc_protocol
+    - open_commerce_network
+    - open_network
+    - search
+    - seller_app
+    - seller_np
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: I am not able to see my products in one of the buyer app in production
-  answer: Please connect with the respective buyer app for issue as ONDC don’t have
-    control on it. In case you are not able to connect to the respective buyer, reach
-    out to techsupport@ondc.org. Tech support team will help to interact with buyer
-    app
+  answer: Please connect with the respective buyer app for issue as ONDC don’t have control on it. In case you are not able to connect to the respective buyer, reach out to techsupport@ondc.org. Tech support team will help to interact with buyer app
   categories:
-  - General
+    - General
   tags:
-  - buyer
-  - app
-  - production
-  - ondc
+    - app
+    - bap_entity
+    - buyer
+    - buyer_np
+    - live_environment
+    - network_participant_app
+    - ondc
+    - ondc_network
+    - open_network
+    - production
+    - production_environment
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is the timestamp format?
-  answer: 'RFC3339 UTC format should be used for timestamp with exact 3 places for
-    milliseconds value eg: 2024-03-22T12:00:01.937Z.
-
-    Quick tip: Make sure that the on_action call timestamp is greater than the action
-    call timestamp (as /on_action API is called after the /action API is received)'
+  answer: |-
+    RFC3339 UTC format should be used for timestamp with exact 3 places for milliseconds value eg: 2024-03-22T12:00:01.937Z.
+    Quick tip: Make sure that the on_action call timestamp is greater than the action call timestamp (as /on_action API is called after the /action API is received)
   categories:
-  - General
+    - General
   tags:
-  - timestamp
+    - timestamp
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What does the key “domain” refer to ?
-  answer: The “domain” key refers to a specific category of products or services that
-    can be bought or sold through the network. For eg- ‘ONDC:RET10’ refers to Grocery
-    and “ONDC:RET11 ' refers to F&B.
+  answer: The “domain” key refers to a specific category of products or services that can be bought or sold through the network. For eg- ‘ONDC:RET10’ refers to Grocery and “ONDC:RET11 ' refers to F&B.
   categories:
-  - General
+    - General
   tags:
-  - network
-  - domain
+    - domain
+    - network
+    - ondc_network
+    - open_commerce_network
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: 'Q: What does ‘ttl’ refer to in ONDC?'
-  answer: TTL refers to - Time to Live. It specifies the duration for which a particular
-    message remains valid. TTL ensures that requests made within the network are relevant
-    and recent. It is usually specified as an ISO8601 period. e.g PT30S for 30 seconds.
+  answer: TTL refers to - Time to Live. It specifies the duration for which a particular message remains valid. TTL ensures that requests made within the network are relevant and recent. It is usually specified as an ISO8601 period. e.g PT30S for 30 seconds.
   categories:
-  - General
+    - General
   tags:
-  - network
-  - ttl
+    - network
+    - ondc_network
+    - open_commerce_network
+    - ttl
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Who can join ONDC?
-  answer: 'Any entity—such as a seller, buyer platform, logistics provider, or Technology
-    Service Provider—can join ONDC by onboarding through a Network Participant (NP)
-    role and complying with technical and policy requirements.
-
-    '
+  answer: |
+    Any entity—such as a seller, buyer platform, logistics provider, or Technology Service Provider—can join ONDC by onboarding through a Network Participant (NP) role and complying with technical and policy requirements.
   categories:
-  - Getting Started with ONDC
-  - onboarding
+    - Getting Started with ONDC
+    - onboarding
   tags:
-  - ondc
-  - seller
-  - buyer
-  - platform
-  - logistics
+    - bap_entity
+    - bpp_entity
+    - buyer
+    - buyer_np
+    - logistics
+    - logistics_domain
+    - ondc
+    - ondc_logistics
+    - ondc_network
+    - ondc_platform
+    - open_network
+    - platform
+    - seller
+    - seller_np
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: What is the major difference between the transaction_id and message_id
-    ?
-  answer: 'transaction_id remains the same for the whole transaction flow i.e. for
-    the discovery and fulfillment phases, the transaction_id will remain same.In contrast,
-    the message_id will be unique for every pair of action and on_action calls. Also
-    it’d be unique for unsolicited on_action calls
-
-    '
+- question: What is the major difference between the transaction_id and message_id ?
+  answer: |
+    transaction_id remains the same for the whole transaction flow i.e. for the discovery and fulfillment phases, the transaction_id will remain same.In contrast, the message_id will be unique for every pair of action and on_action calls. Also it’d be unique for unsolicited on_action calls
   categories:
-  - General
+    - General
   tags:
-  - transaction
-  - fulfillment
+    - delivery_fulfillment
+    - fulfillment
+    - order_fulfillment
+    - order_transaction
+    - transaction
+    - transaction_flow
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'What is the purpose of the Select call in the Buyer Platform (BAP) and
-    Seller Platform (BPP) interaction?
-
-    '
-  answer: 'The Select call is used within the Buyer Platform (BAP) to indicate the
-    selection of specific items for purchase from the Seller Platform (BPP).
-
-    '
+- question: |
+    What is the purpose of the Select call in the Buyer Platform (BAP) and Seller Platform (BPP) interaction?
+  answer: |
+    The Select call is used within the Buyer Platform (BAP) to indicate the selection of specific items for purchase from the Seller Platform (BPP).
   categories:
-  - Key Concepts and Roles
+    - Key Concepts and Roles
   tags:
-  - select
-  - buyer
-  - platform
-  - bap
-  - seller
+    - bap
+    - bap_entity
+    - bpp_entity
+    - buyer
+    - buyer_app
+    - buyer_np
+    - item_select
+    - ondc_platform
+    - open_network
+    - platform
+    - quote_select
+    - select
+    - seller
+    - seller_np
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: What is the significance of the "items" section within the Select call
-    message?
-  answer: 'The "items" section specifies the items selected for purchase, including
-    their unique IDs and the quantity selected by the buyer.
-
-    '
+- question: What is the significance of the "items" section within the Select call message?
+  answer: |
+    The "items" section specifies the items selected for purchase, including their unique IDs and the quantity selected by the buyer.
   categories:
-  - General
+    - General
   tags:
-  - select
-  - buyer
+    - bap_entity
+    - buyer
+    - buyer_np
+    - item_select
+    - quote_select
+    - select
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'What are cancellation_terms? Does this need to be sent? What if LBNP
-    does not accept it?
-
-    '
-  answer: 'During the pre-order flow, the Logistics Service Provider (LSP) defines
-    the cancellation terms, which apply to cancellations initiated by either the LSP
-    or the Logistics Buyer Network Participant (LBNP). These terms specify the fulfillment
-    state at which an order can be canceled and the applicable charges based on the
-    order’s status at the time of cancellation: If the order is canceled while in
-    the pending state, no cancellation charges will be applied. If the order is canceled
-    after pickup, agent assigned or while out for delivery, a 100% cancellation charge
-    will be applied. If the LBNP does not agree with the defined cancellation terms,
-    they have the option to reject (NACK) the /on_init or /on_confirm callback using
-    error code 62505.
-
-    '
+- question: |
+    What are cancellation_terms? Does this need to be sent? What if LBNP does not accept it?
+  answer: |
+    During the pre-order flow, the Logistics Service Provider (LSP) defines the cancellation terms, which apply to cancellations initiated by either the LSP or the Logistics Buyer Network Participant (LBNP). These terms specify the fulfillment state at which an order can be canceled and the applicable charges based on the order’s status at the time of cancellation: If the order is canceled while in the pending state, no cancellation charges will be applied. If the order is canceled after pickup, agent assigned or while out for delivery, a 100% cancellation charge will be applied. If the LBNP does not agree with the defined cancellation terms, they have the option to reject (NACK) the /on_init or /on_confirm callback using error code 62505.
   categories:
-  - Key Concepts and Roles
-  - error
+    - Key Concepts and Roles
+    - error
   tags:
-  - logistics
-  - lsp
-  - buyer
-  - network
-  - participant
+    - bap_entity
+    - buyer
+    - buyer_np
+    - logistics
+    - logistics_domain
+    - logistics_np
+    - lsp
+    - lsp_provider
+    - network
+    - network_participant_np
+    - ondc_logistics
+    - ondc_network
+    - open_commerce_network
+    - participant
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: After which retail API we can initiate a search request to logistics.
-  answer: 'Once the order is selected by the end user (buyer) in the /select call,
-    the retail seller — now acting as the LBNP — can initiate the /search call to
-    the LSP.
-
-    '
+  answer: |
+    Once the order is selected by the end user (buyer) in the /select call, the retail seller — now acting as the LBNP — can initiate the /search call to the LSP.
   categories:
-  - Key Concepts and Roles
-  - api
+    - Key Concepts and Roles
+    - api
   tags:
-  - retail
-  - api
-  - search
-  - logistics
-  - order
+    - api
+    - beckn_api
+    - catalog_search
+    - discovery_search
+    - logistics
+    - logistics_domain
+    - ondc_logistics
+    - ondc_protocol
+    - order
+    - purchase_order
+    - retail
+    - retail_b2c
+    - retail_domain
+    - retail_order
+    - search
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What does @ondc/org/payload_details tags defines
-  answer: '@ondc/org/payload_details specifies the length, breadth, height, and overall
-    dimensions of the packages to be delivered. It also includes the actual item price
-    and its category, indicating whether the item is classified as a dangerous good
-    or not.
-
-    '
+  answer: |
+    @ondc/org/payload_details specifies the length, breadth, height, and overall dimensions of the packages to be delivered. It also includes the actual item price and its category, indicating whether the item is classified as a dangerous good or not.
   categories:
-  - General
+    - General
   tags:
-  - ondc
+    - ondc
+    - ondc_network
+    - open_network
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is forward and backward shippment?
-  answer: 'A forward shipment refers to the process where the logistics buyer (LBNP)
-    provides both the pickup (start) and drop-off (end) locations to facilitate the
-    delivery of an order to the end customer. This is the standard flow for delivering
-    a product once an order is placed. On the other hand, a reverse shipment (also
-    known as a backward shipment or return to origin - RTO) occurs when the end customer
-    refuses to accept the order, cancels it after dispatch, or initiates a return
-    for any reason (e.g., damaged item, incorrect product, or no longer needed). In
-    such cases, the logistics provider is responsible for picking up the product from
-    the customer''s location and returning it to the original seller''s location or
-    warehouse.
-
-    '
+  answer: |
+    A forward shipment refers to the process where the logistics buyer (LBNP) provides both the pickup (start) and drop-off (end) locations to facilitate the delivery of an order to the end customer. This is the standard flow for delivering a product once an order is placed. On the other hand, a reverse shipment (also known as a backward shipment or return to origin - RTO) occurs when the end customer refuses to accept the order, cancels it after dispatch, or initiates a return for any reason (e.g., damaged item, incorrect product, or no longer needed). In such cases, the logistics provider is responsible for picking up the product from the customer's location and returning it to the original seller's location or warehouse.
   categories:
-  - Key Concepts and Roles
+    - Key Concepts and Roles
   tags:
-  - logistics
-  - buyer
-  - order
-  - return
-  - seller
+    - bap_entity
+    - bpp_entity
+    - buyer
+    - buyer_np
+    - logistics
+    - logistics_domain
+    - ondc_logistics
+    - order
+    - purchase_order
+    - retail_order
+    - return
+    - return_to_origin
+    - rto_flow
+    - seller
+    - seller_np
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: What does message.catalog.providers.descriptor.images.size_type refer
-    to?
-  answer: 'Specifies the intended display size of the image (e.g., "sm" for small).
-    This allows network participants to render optimized visuals based on layout requirements.
-
-    '
+- question: What does message.catalog.providers.descriptor.images.size_type refer to?
+  answer: |
+    Specifies the intended display size of the image (e.g., "sm" for small). This allows network participants to render optimized visuals based on layout requirements.
   categories:
-  - Key Concepts and Roles
+    - Key Concepts and Roles
   tags:
-  - catalog
-  - network
+    - catalog
+    - network
+    - ondc_network
+    - open_commerce_network
+    - product_catalog
+    - seller_catalog
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What does message.catalog.providers.items.matched mean?
-  answer: 'This boolean value (true or false) indicates if the item exactly matches
-    the search intent sent by the BAP.
-
-    '
+  answer: |
+    This boolean value (true or false) indicates if the item exactly matches the search intent sent by the BAP.
   categories:
-  - Key Concepts and Roles
+    - Key Concepts and Roles
   tags:
-  - catalog
-  - search
-  - bap
+    - bap
+    - buyer_app
+    - buyer_np
+    - catalog
+    - catalog_search
+    - discovery_search
+    - product_catalog
+    - search
+    - seller_catalog
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What does message.catalog.providers.items.recommended indicate?
-  answer: 'This boolean value shows whether the BPP recommends this item based on
-    eligibility, promotions, or fit with the user’s query—even if it doesn''t match
-    100%.
-
-    '
+  answer: |
+    This boolean value shows whether the BPP recommends this item based on eligibility, promotions, or fit with the user’s query—even if it doesn't match 100%.
   categories:
-  - Key Concepts and Roles
+    - Key Concepts and Roles
   tags:
-  - catalog
-  - bpp
+    - bpp
+    - catalog
+    - product_catalog
+    - seller_app
+    - seller_catalog
+    - seller_np
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is the purpose of message.catalog.providers.items.xinput?
-  answer: 'This object defines the form fields and submission behavior used to collect
-    additional user information before confirming an order (like PAN, salary details,
-    etc.).
-
-    '
+  answer: |
+    This object defines the form fields and submission behavior used to collect additional user information before confirming an order (like PAN, salary details, etc.).
   categories:
-  - Key Concepts and Roles
+    - Key Concepts and Roles
   tags:
-  - catalog
-  - order
+    - catalog
+    - order
+    - product_catalog
+    - purchase_order
+    - retail_order
+    - seller_catalog
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What does xinput.head.descriptor.name mean?
-  answer: 'It is the title of the data collection section, e.g., "Customer Information",
-    which helps group the form inputs meaningfully.
-
-    '
+  answer: |
+    It is the title of the data collection section, e.g., "Customer Information", which helps group the form inputs meaningfully.
   categories:
-  - Key Concepts and Roles
+    - Key Concepts and Roles
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: . How are multiple /select and /on_select calls handled?
-  answer: 'When the borrower selects a personal loan product, the lender platform
-    initiates a consent request. Upon approval by the BAP, the lender shares the loan
-    product, provider details, and customer identity. The lender may also return a
-    form for further inputs, which the borrower completes and submits. This cycle
-    can repeat with updated forms if needed.
-
-    '
+- question: How are multiple /select and /on_select calls handled?
+  answer: |
+    When the borrower selects a personal loan product, the lender platform initiates a consent request. Upon approval by the BAP, the lender shares the loan product, provider details, and customer identity. The lender may also return a form for further inputs, which the borrower completes and submits. This cycle can repeat with updated forms if needed.
   categories:
-  - Key Concepts and Roles
+    - Key Concepts and Roles
   tags:
-  - select
-  - platform
-  - bap
-  - return
+    - bap
+    - buyer_app
+    - buyer_np
+    - item_select
+    - ondc_platform
+    - open_network
+    - platform
+    - quote_select
+    - return
+    - return_to_origin
+    - rto_flow
+    - select
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Can the borrower change the loan tenure?
-  answer: 'Yes, the borrower can modify the loan tenure using a dedicated form shared
-    by the lender. After submitting the form, a new /select call is made with the
-    form submission ID in the xinput.
-
-    '
+  answer: |
+    Yes, the borrower can modify the loan tenure using a dedicated form shared by the lender. After submitting the form, a new /select call is made with the form submission ID in the xinput.
   categories:
-  - Key Concepts and Roles
+    - Key Concepts and Roles
   tags:
-  - select
+    - item_select
+    - quote_select
+    - select
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'Whose bank account number is shared under message.order.payments.params.bank_account_number?
-
-    '
+- question: |
+    Whose bank account number is shared under message.order.payments.params.bank_account_number?
   answer: This field refers to the bank account number of the BAP (Buyer App).
   categories:
-  - Key Concepts and Roles
+    - Key Concepts and Roles
   tags:
-  - order
-  - bap
-  - buyer
-  - app
+    - app
+    - bap
+    - bap_entity
+    - buyer
+    - buyer_app
+    - buyer_np
+    - network_participant_app
+    - order
+    - purchase_order
+    - retail_order
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: How do I know if my form was successfully submitted?
-  answer: 'You’ll receive an unsolicited /on_status call with form_response in the
-    xinput object, containing the submission ID and current status.
-
-    '
+  answer: |
+    You’ll receive an unsolicited /on_status call with form_response in the xinput object, containing the submission ID and current status.
   categories:
-  - Key Concepts and Roles
+    - Key Concepts and Roles
   tags:
-  - status
+    - fulfillment_status
+    - order_status
+    - status
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: How can I determine if I’ve completed all required forms?
-  answer: 'Check the index field in the xinput object. When the cur (current) index
-    matches the max index, it indicates that the final form has been submitted for
-    that particular call.
-
-    '
+  answer: |
+    Check the index field in the xinput object. When the cur (current) index matches the max index, it indicates that the final form has been submitted for that particular call.
   categories:
-  - Key Concepts and Roles
+    - Key Concepts and Roles
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'Could you please provide the details of the id field in the settlement
-    object? Is this id will be the same for both the collector and receiver? Who is
-    responsible for generating this id, and is it related to any payment ID?
-
-    '
-  answer: 'settlement_id is the identifier of the settlement instruction shared by
-    the respective NP. This is independent of the payment/ fund settlement or the
-    counterparty NP. It is an identifier for the NP for themselves to identify respective
-    settlement instructions at their end.
-
-    '
+- question: |
+    Could you please provide the details of the id field in the settlement object? Is this id will be the same for both the collector and receiver? Who is responsible for generating this id, and is it related to any payment ID?
+  answer: |
+    settlement_id is the identifier of the settlement instruction shared by the respective NP. This is independent of the payment/ fund settlement or the counterparty NP. It is an identifier for the NP for themselves to identify respective settlement instructions at their end.
   categories:
-  - Key Concepts and Roles
+    - Key Concepts and Roles
   tags:
-  - settlement
-  - payment
+    - payment
+    - payment_collection
+    - payment_gateway
+    - rsf_settlement
+    - settlement
+    - settlement_framework
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'What is the testing needed for my application once I have developed the
-    RSF 2.0 APIs?
-
-    '
-  answer: 'Settle, On_Settle, Report, On_Report with NIBBLes Pre-prod environment.
-    Recon, On_Recon with ONDC’s Mock Server or another NP
-
-    '
+- question: |
+    What is the testing needed for my application once I have developed the RSF 2.0 APIs?
+  answer: |
+    Settle, On_Settle, Report, On_Report with NIBBLes Pre-prod environment. Recon, On_Recon with ONDC’s Mock Server or another NP
   categories:
-  - Key Concepts and Roles
-  - api
+    - Key Concepts and Roles
+    - api
   tags:
-  - ondc
+    - ondc
+    - ondc_network
+    - open_network
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'In RECON payload there is Commission field , what it is and how it works
-    for Collector and Receiver ?
-
-    '
-  answer: 'Commission refers to the commission between the NPs for the transaction
-    executed among them. Illustratively buyer app''s commission on the transaction/
-    order.
-
-    '
+- question: |
+    In RECON payload there is Commission field , what it is and how it works for Collector and Receiver ?
+  answer: |
+    Commission refers to the commission between the NPs for the transaction executed among them. Illustratively buyer app's commission on the transaction/ order.
   categories:
-  - Key Concepts and Roles
+    - Key Concepts and Roles
   tags:
-  - commission
-  - transaction
-  - buyer
-  - app
-  - order
+    - app
+    - bap_entity
+    - buyer
+    - buyer_np
+    - commission
+    - finder_fee
+    - network_participant_app
+    - np_commission
+    - order
+    - order_transaction
+    - purchase_order
+    - retail_order
+    - transaction
+    - transaction_flow
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'In ON_RECON payload, there is a field diff_value. How can it act as a
-    negative difference ?
-
-    '
-  answer: 'It will only have a positive value. The other field for the respective
-    amount (value attribute) is to be leveraged to see whether it is positive difference
-    or negative difference.
-
-    '
+- question: |
+    In ON_RECON payload, there is a field diff_value. How can it act as a negative difference ?
+  answer: |
+    It will only have a positive value. The other field for the respective amount (value attribute) is to be leveraged to see whether it is positive difference or negative difference.
   categories:
-  - General
+    - General
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'How to initiate an IGM request for a settlement case. Specifically, how
-    will the IGM issue reference the settlement related to this request, and which
-    settlement would it be referring to?
-
-    '
-  answer: 'For settlement issues in case there are amount mismatches among the NPs
-    (as per the RSF 2.0 framework) or settlement has not been initiated for certain
-    orders, the reference of the order id shall be taken along with a specific issue.subcategory,
-    illustratively - underpaid, overpaid, not-paid, as the case may be.
-
-    '
+- question: |
+    How to initiate an IGM request for a settlement case. Specifically, how will the IGM issue reference the settlement related to this request, and which settlement would it be referring to?
+  answer: |
+    For settlement issues in case there are amount mismatches among the NPs (as per the RSF 2.0 framework) or settlement has not been initiated for certain orders, the reference of the order id shall be taken along with a specific issue.subcategory, illustratively - underpaid, overpaid, not-paid, as the case may be.
   categories:
-  - Key Concepts and Roles
+    - Key Concepts and Roles
   tags:
-  - igm
-  - settlement
-  - order
+    - grievance_management
+    - igm
+    - igm_framework
+    - order
+    - purchase_order
+    - retail_order
+    - rsf_settlement
+    - settlement
+    - settlement_framework
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'What if the NP has completed testing with the mock server, can they submit
-    the mock server logs ?
-
-    '
+- question: |
+    What if the NP has completed testing with the mock server, can they submit the mock server logs ?
   answer: 'Yes'
   categories:
-  - Key Concepts and Roles
+    - Key Concepts and Roles
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'The bap_id, bap_uri in /recon should be of the party triggering the /recon
-    and the bpp_id, bpp_uri should be of the counter party receiving the /recon. Is
-    this correct?
-
-    '
-  answer: 'No, the bap_id (buyer app id) and bpp_id (seller app id) should be the
-    same for the /recon as per the core transaction itself, irrespective of which
-    NP calls the recon API. This also works the same way for testing the recon flow
-    in the mock server as well.
-
-    '
+- question: |
+    The bap_id, bap_uri in /recon should be of the party triggering the /recon and the bpp_id, bpp_uri should be of the counter party receiving the /recon. Is this correct?
+  answer: |
+    No, the bap_id (buyer app id) and bpp_id (seller app id) should be the same for the /recon as per the core transaction itself, irrespective of which NP calls the recon API. This also works the same way for testing the recon flow in the mock server as well.
   categories:
-  - Key Concepts and Roles
-  - api
+    - Key Concepts and Roles
+    - api
   tags:
-  - bap
-  - bpp
-  - buyer
-  - app
-  - seller
+    - app
+    - bap
+    - bap_entity
+    - bpp
+    - bpp_entity
+    - buyer
+    - buyer_app
+    - buyer_np
+    - network_participant_app
+    - seller
+    - seller_app
+    - seller_np
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: Can we use either bap/bpp id or bap/bpp uri as the collector/receiver
-    app id?
-  answer: 'The settle call’s collector/receiver app id is as per the collector and
-    receiver pair for the order being executed among the NPs.
-
-    '
+- question: Can we use either bap/bpp id or bap/bpp uri as the collector/receiver app id?
+  answer: |
+    The settle call’s collector/receiver app id is as per the collector and receiver pair for the order being executed among the NPs.
   categories:
-  - Key Concepts and Roles
+    - Key Concepts and Roles
   tags:
-  - bap
-  - bpp
-  - app
-  - order
+    - app
+    - bap
+    - bpp
+    - buyer_app
+    - buyer_np
+    - network_participant_app
+    - order
+    - purchase_order
+    - retail_order
+    - seller_app
+    - seller_np
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'In the "settle" call of the Settlement Agency, how are taxes handled—does
-    the collector deduct them before sending the "inter_participant" value, or is
-    it inclusive, requiring sellers to handle deductions?
-
-    '
-  answer: 'The calculations are outside of the /settle call, the amount that needs
-    to be sent from the collector to the receiver is provided as in the inter_participant
-    amount and whatever is held by the collector is sent as part of the collector
-    amount. Self is where the respective NP provides the amount to be transferred
-    to their own operative account.
-
-    '
+- question: |
+    In the "settle" call of the Settlement Agency, how are taxes handled—does the collector deduct them before sending the "inter_participant" value, or is it inclusive, requiring sellers to handle deductions?
+  answer: |
+    The calculations are outside of the /settle call, the amount that needs to be sent from the collector to the receiver is provided as in the inter_participant amount and whatever is held by the collector is sent as part of the collector amount. Self is where the respective NP provides the amount to be transferred to their own operative account.
   categories:
-  - Key Concepts and Roles
+    - Key Concepts and Roles
   tags:
-  - settlement
-  - participant
+    - network_participant_np
+    - participant
+    - rsf_settlement
+    - settlement
+    - settlement_framework
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'Do we need to include bank_details of both collector (debit from account)
-    and receiver (credit to account) where to add both in /settle API, as the current
-    payload only specifies adding the provider bank details?
-
-    '
-  answer: 'The bank account information of NPs will be provided to the settlement
-    agency directly at the time of the settlement agency’s onboarding journey. This
-    flow will be communicated subsequently very soon. NPs may reach out to the settlement
-    agency’s POC for further details.
-
-    '
+- question: |
+    Do we need to include bank_details of both collector (debit from account) and receiver (credit to account) where to add both in /settle API, as the current payload only specifies adding the provider bank details?
+  answer: |
+    The bank account information of NPs will be provided to the settlement agency directly at the time of the settlement agency’s onboarding journey. This flow will be communicated subsequently very soon. NPs may reach out to the settlement agency’s POC for further details.
   categories:
-  - Key Concepts and Roles
-  - api
-  - onboarding
+    - Key Concepts and Roles
+    - api
+    - onboarding
   tags:
-  - api
-  - settlement
-  - onboarding
+    - api
+    - beckn_api
+    - np_onboarding
+    - onboarding
+    - ondc_protocol
+    - participant_onboarding
+    - rsf_settlement
+    - settlement
+    - settlement_framework
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: OCA account is not required for Seller NP. Right.?
-  answer: 'No, OCA (operative current account) is mandatory for Seller NP. This is
-    where funds would be settled for the orders being transacted. This can be of any
-    bank, no restrictions here.
-
-    '
+  answer: |
+    No, OCA (operative current account) is mandatory for Seller NP. This is where funds would be settled for the orders being transacted. This can be of any bank, no restrictions here.
   categories:
-  - Key Concepts and Roles
+    - Key Concepts and Roles
   tags:
-  - seller
+    - bpp_entity
+    - seller
+    - seller_np
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'As per the doc, we (receiver) need to respond on_recon immediately (solicited)
-    with recon_accord status, BUT this is not possible. there may be a case when we
-    need to review a request and provide on_recon as an unsolicited response later.
-    So is this possible right now?
-
-    '
-  answer: 'TTL for on_recon provided in the examples are only placeholders. It would
-    typically be around 5-7 days.
-
-    '
+- question: |
+    As per the doc, we (receiver) need to respond on_recon immediately (solicited) with recon_accord status, BUT this is not possible. there may be a case when we need to review a request and provide on_recon as an unsolicited response later. So is this possible right now?
+  answer: |
+    TTL for on_recon provided in the examples are only placeholders. It would typically be around 5-7 days.
   categories:
-  - General
+    - General
   tags:
-  - status
+    - fulfillment_status
+    - order_status
+    - status
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'What are actors in IGM 2.0.0? What roles do INTERFACING_NP and COUNTERPARTY_NP
-    play?
-
-    '
-  answer: 'Actors in IGM 2.0.0 are participants involved in managing an issue, such
-    as INTERFACING_NP and COUNTERPARTY_NP: INTERFACING_NP: Responsible for creating
-    the complaint (for example buyer app) COUNTERPARTY_NP: Responsible for resolving
-    the complaint (for example seller app)
-
-    '
+- question: |
+    What are actors in IGM 2.0.0? What roles do INTERFACING_NP and COUNTERPARTY_NP play?
+  answer: |
+    Actors in IGM 2.0.0 are participants involved in managing an issue, such as INTERFACING_NP and COUNTERPARTY_NP: INTERFACING_NP: Responsible for creating the complaint (for example buyer app) COUNTERPARTY_NP: Responsible for resolving the complaint (for example seller app)
   categories:
-  - Key Concepts and Roles
+    - Key Concepts and Roles
   tags:
-  - igm
-  - buyer
-  - app
-  - seller
+    - app
+    - bap_entity
+    - bpp_entity
+    - buyer
+    - buyer_np
+    - grievance_management
+    - igm
+    - igm_framework
+    - network_participant_app
+    - seller
+    - seller_np
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: What is the use of updated_at timestamps within action and resolution
-    objects?
-  answer: 'The updated_at field provides the exact time of the action taken or the
-    most recent modification to ensure an accurate audit trail.
-
-    '
+- question: What is the use of updated_at timestamps within action and resolution objects?
+  answer: |
+    The updated_at field provides the exact time of the action taken or the most recent modification to ensure an accurate audit trail.
   categories:
-  - General
+    - General
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'How is the relationship between parent and child resolutions represented
-    in the payload?
-
-    '
-  answer: 'A child resolution includes a ref_id pointing to a parent resolution, creating
-    a hierarchy for more complex or alternative outcomes. This is used to provide
-    multiple resolution options grouped together for the complainant to consume it
-    accordingly
-
-    '
+- question: |
+    How is the relationship between parent and child resolutions represented in the payload?
+  answer: |
+    A child resolution includes a ref_id pointing to a parent resolution, creating a hierarchy for more complex or alternative outcomes. This is used to provide multiple resolution options grouped together for the complainant to consume it accordingly
   categories:
-  - General
+    - General
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'What is the relationship between actions and resolutions in the payload
-    structure?
-
-    '
-  answer: 'Actions may reference resolutions to indicate whether they were accepted,
-    rejected, or acknowledged by actors.
-
-    '
+- question: |
+    What is the relationship between actions and resolutions in the payload structure?
+  answer: |
+    Actions may reference resolutions to indicate whether they were accepted, rejected, or acknowledged by actors.
   categories:
-  - General
+    - General
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What happens if one of the /confirm requests fails?
-  answer: 'All associated orders in that transaction_id must be cancelled to maintain
-    consistency and ensure that the buyer does not receive partial fulfillment.
-
-    '
+  answer: |
+    All associated orders in that transaction_id must be cancelled to maintain consistency and ensure that the buyer does not receive partial fulfillment.
   categories:
-  - General
+    - General
   tags:
-  - confirm
-  - transaction
-  - buyer
-  - fulfillment
+    - bap_entity
+    - buyer
+    - buyer_np
+    - confirm
+    - delivery_fulfillment
+    - fulfillment
+    - order_confirm
+    - order_fulfillment
+    - order_transaction
+    - transaction
+    - transaction_confirm
+    - transaction_flow
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: How is cancellation propagated across related carts?
-  answer: 'Unsolicited /on_cancel should be sent for all reference order IDs, each
-    reflecting updated quote and charges if applicable.
-
-    '
+  answer: |
+    Unsolicited /on_cancel should be sent for all reference order IDs, each reflecting updated quote and charges if applicable.
   categories:
-  - General
+    - General
   tags:
-  - cancel
-  - order
+    - cancel
+    - cancellation_flow
+    - order
+    - order_cancel
+    - purchase_order
+    - retail_order
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Can partial order confirmation be supported?
   answer: No. The multicart design mandates atomic confirmation—all or none must succeed.
   categories:
-  - General
+    - General
   tags:
-  - order
+    - order
+    - purchase_order
+    - retail_order
   lastUpdated: '2024-07-10T10:00:00Z'

@@ -1,700 +1,731 @@
 - question: Why do I get error signature verification failed?
   answer: 'Common causes: Header signing mismatch (e.g., extra spaces)'
   categories:
-  - Signature & Verification FAQs
+    - Signature & Verification FAQs
   tags:
-  - error
-  - signature
-  - verification
+    - auth_verification
+    - ed25519_signing
+    - error
+    - error_handling
+    - error_response
+    - signature
+    - signature_verification
+    - verification
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Why is a subscription to the ONDC Registry required?
-  answer: 'Subscription to the ONDC Registry is mandatory to: Participate in ONDC
-    protocol-based interactions Enable gateway routing and domain-level filtering
-    Each NP must subscribe separately to Staging, Preprod, and Production registries
-    to transact in those environments.'
+  answer: 'Subscription to the ONDC Registry is mandatory to: Participate in ONDC protocol-based interactions Enable gateway routing and domain-level filtering Each NP must subscribe separately to Staging, Preprod, and Production registries to transact in those environments.'
   categories:
-  - Be discoverable on the network
+    - Be discoverable on the network
   tags:
-  - subscription
-  - ondc
-  - registry
-  - gateway
-  - production
+    - gateway
+    - live_environment
+    - network_gateway
+    - network_registry
+    - np_subscription
+    - ondc
+    - ondc_gateway
+    - ondc_network
+    - ondc_registry
+    - open_network
+    - production
+    - production_environment
+    - registry
+    - registry_subscription
+    - subscription
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'What is to be used as a subscriber_id: http domain or some text id in
-    a particular format?'
-  answer: 'In Open Network for Digital Commerce (ONDC), the subscriber_id is a unique
-    identifier associated with a network participant (such as a seller app, buyer
-    app, logistics provider) during the onboarding process. It is typically the domain
-    name or endpoint that uniquely identifies that participant within the ONDC network.
-    The subscriber_id’s default value will be the Fully Qualified Domain Name of the
-    subscriber unless specified otherwise as a network policy. (usually a domain format
-    like ondc.seller.example) It is used in API requests to identify who is making
-    the call, and appears in the context object of ONDC payloads. It is linked with
-    authentication — used along with keys like unique_key_id (UKID) to sign and verify
-    API requests. It is part of the ONDC Registry''s Subscriber object which stores
-    details of the participant. Buyer Apps (bap_id) and Seller Apps (bpp_id) in payloads
-    are both subscriber_ids. { "context": { "domain": "nic2004:52110", "bap_id": "buyerapp.example.com",  //
-    subscriber_id of buyer app "bpp_id": "ondc.seller.example",   // subscriber_id
-    of seller app "timestamp": "2023-05-15T10:00:00Z" } }'
+- question: 'What is to be used as a subscriber_id: http domain or some text id in a particular format?'
+  answer: 'In Open Network for Digital Commerce (ONDC), the subscriber_id is a unique identifier associated with a network participant (such as a seller app, buyer app, logistics provider) during the onboarding process. It is typically the domain name or endpoint that uniquely identifies that participant within the ONDC network. The subscriber_id’s default value will be the Fully Qualified Domain Name of the subscriber unless specified otherwise as a network policy. (usually a domain format like ondc.seller.example) It is used in API requests to identify who is making the call, and appears in the context object of ONDC payloads. It is linked with authentication — used along with keys like unique_key_id (UKID) to sign and verify API requests. It is part of the ONDC Registry''s Subscriber object which stores details of the participant. Buyer Apps (bap_id) and Seller Apps (bpp_id) in payloads are both subscriber_ids. { "context": { "domain": "nic2004:52110", "bap_id": "buyerapp.example.com",  // subscriber_id of buyer app "bpp_id": "ondc.seller.example",   // subscriber_id of seller app "timestamp": "2023-05-15T10:00:00Z" } }'
   categories:
-  - Be discoverable on the network
+    - Be discoverable on the network
   tags:
-  - network
-  - digital
-  - ondc
-  - participant
-  - seller
+    - bpp_entity
+    - digital
+    - digital_commerce
+    - digital_signature
+    - network
+    - network_participant_np
+    - ondc
+    - ondc_network
+    - open_commerce_network
+    - open_network
+    - participant
+    - seller
+    - seller_np
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is the difference between subscriber id and subscriber url?
-  answer: 'The ONDC network utilises two identifiers for subscribers: a subscriber
-    ID and a subscriber URL. While both serve the purpose of identifying participants
-    within the network, they differ in their nature and function. Subscriber_id: A
-    unique, identifier assigned to each subscriber within the ONDC network Subscriber_url:
-    A publicly accessible URL that points to the subscriber''s information and endpoints
-    hosted within the ONDC network. It is an extension to the subscriber id domain.
-    Make sure subscriber_url includes subscriber id.
+  answer: |-
+    The ONDC network utilises two identifiers for subscribers: a subscriber ID and a subscriber URL. While both serve the purpose of identifying participants within the network, they differ in their nature and function. Subscriber_id: A unique, identifier assigned to each subscriber within the ONDC network Subscriber_url: A publicly accessible URL that points to the subscriber's information and endpoints hosted within the ONDC network. It is an extension to the subscriber id domain. Make sure subscriber_url includes subscriber id.
 
-
-    Example: Suppose a network participant has the domain ondc.seller.example, their
-    subscriber ID becomes "ondc.seller.example" and their subscriber URL can be  or
-    any subroute with the domain ondc.seller.example where they are hosting their
-    API endpoints for ONDC transactions.'
+    Example: Suppose a network participant has the domain ondc.seller.example, their subscriber ID becomes "ondc.seller.example" and their subscriber URL can be  or any subroute with the domain ondc.seller.example where they are hosting their API endpoints for ONDC transactions.
   categories:
-  - Be discoverable on the network
+    - Be discoverable on the network
   tags:
-  - ondc
-  - network
-  - participant
-  - seller
-  - api
+    - api
+    - beckn_api
+    - bpp_entity
+    - network
+    - network_participant_np
+    - ondc
+    - ondc_network
+    - ondc_protocol
+    - open_commerce_network
+    - open_network
+    - participant
+    - seller
+    - seller_np
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Subscriber ID not whitelisted by ONDC
-  answer: '{ "message": { "ack": { "status": "NACK" } }, "error": { "type": "POLICY-ERROR",
-    "code": "144", "path": null, "message": "Subscriber Id is not whitelisted in our
-    database" } } Get your subscriber_id whitelisted/approved by ONDC. To do that:
-    For Staging: Begin by registering on the  and ensuring your profile is fully completed
-    100%. Once this is done, you can proceed to request domain whitelisting on portal
-    : Home > Environment Access Request. For Preprod: Self Declaration is required
-    to be submitted through the portal and then the whitelisting request needs to
-    be raised through the portal itself. For Prod: After your preprod logs are verified
-    and the QA process is completed, you''re ready to go to the production environment.
-    You may then raise a whitelisting request like all the other environments and
-    proceed.'
+  answer: '{ "message": { "ack": { "status": "NACK" } }, "error": { "type": "POLICY-ERROR", "code": "144", "path": null, "message": "Subscriber Id is not whitelisted in our database" } } Get your subscriber_id whitelisted/approved by ONDC. To do that: For Staging: Begin by registering on the  and ensuring your profile is fully completed 100%. Once this is done, you can proceed to request domain whitelisting on portal : Home > Environment Access Request. For Preprod: Self Declaration is required to be submitted through the portal and then the whitelisting request needs to be raised through the portal itself. For Prod: After your preprod logs are verified and the QA process is completed, you''re ready to go to the production environment. You may then raise a whitelisting request like all the other environments and proceed.'
   categories:
-  - Be discoverable on the network
+    - Be discoverable on the network
   tags:
-  - ondc
-  - status
-  - error
-  - production
+    - error
+    - error_handling
+    - error_response
+    - fulfillment_status
+    - live_environment
+    - ondc
+    - ondc_network
+    - open_network
+    - order_status
+    - production
+    - production_environment
+    - status
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is ONDC site verification and what is its purpose?
-  answer: 'ONDC site verification is a mandatory step in the subscriber onboarding
-    process. It is used by the ONDC Registry to perform domain verification for the
-    declared subscriber_id. The process involves the following steps: Generate a Unique
-    Request ID (request_id): This can be any unique identifier such as a UUID, number,
-    or alphanumeric string. Sign the Request ID: Use your signing_private_key to sign
-    the request_id using the Ed25519 algorithm (without hashing). This will generate
-    a SIGNED_UNIQUE_REQ_ID. You can use the on_subscribe utility to assist with this
-    step. Create the ondc-site-verification.html file: Host this file at the root
-    of your subscriber_id domain (e.g., https://<subscriber_id>/ondc-site-verification.html)
-    and include the SIGNED_UNIQUE_REQ_ID inside it. The ONDC Registry will check for
-    this file to validate that the domain is correctly set up before allowing subscription.'
+  answer: 'ONDC site verification is a mandatory step in the subscriber onboarding process. It is used by the ONDC Registry to perform domain verification for the declared subscriber_id. The process involves the following steps: Generate a Unique Request ID (request_id): This can be any unique identifier such as a UUID, number, or alphanumeric string. Sign the Request ID: Use your signing_private_key to sign the request_id using the Ed25519 algorithm (without hashing). This will generate a SIGNED_UNIQUE_REQ_ID. You can use the on_subscribe utility to assist with this step. Create the ondc-site-verification.html file: Host this file at the root of your subscriber_id domain (e.g., https://<subscriber_id>/ondc-site-verification.html) and include the SIGNED_UNIQUE_REQ_ID inside it. The ONDC Registry will check for this file to validate that the domain is correctly set up before allowing subscription.'
   categories:
-  - Be discoverable on the network
+    - Be discoverable on the network
   tags:
-  - ondc
-  - verification
-  - onboarding
-  - registry
-  - subscription
+    - auth_verification
+    - network_registry
+    - np_onboarding
+    - np_subscription
+    - onboarding
+    - ondc
+    - ondc_network
+    - ondc_registry
+    - open_network
+    - participant_onboarding
+    - registry
+    - registry_subscription
+    - signature_verification
+    - subscription
+    - verification
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Domain Verification Failed
-  answer: '{ "message": { "ack": { "status": "NACK" } }, "error": { "type": "POLICY-ERROR",
-    "code": "132", "path": null, "message": "Domain verification is failed" } }  A
-    domain verification error occurs if the request_id in your subscribe payload does
-    not match the request_id signed with your private key. If the request_id matches,
-    the issue may be due to a mismatch in the signing key pair. Please use the same
-    request_id in the subscribe utility code, the one that has been used in the subscribe
-    payload. If you have a custom implementation, kindly use the , ,  or  utility
-    to understand the implementation in your specific language.'
+  answer: '{ "message": { "ack": { "status": "NACK" } }, "error": { "type": "POLICY-ERROR", "code": "132", "path": null, "message": "Domain verification is failed" } }  A domain verification error occurs if the request_id in your subscribe payload does not match the request_id signed with your private key. If the request_id matches, the issue may be due to a mismatch in the signing key pair. Please use the same request_id in the subscribe utility code, the one that has been used in the subscribe payload. If you have a custom implementation, kindly use the , ,  or  utility to understand the implementation in your specific language.'
   categories:
-  - Be discoverable on the network
+    - Be discoverable on the network
   tags:
-  - verification
-  - status
-  - error
-  - implementation
+    - auth_verification
+    - error
+    - error_handling
+    - error_response
+    - fulfillment_status
+    - implementation
+    - np_implementation
+    - order_status
+    - protocol_implementation
+    - signature_verification
+    - status
+    - verification
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Ondc-site-verification file is not found
-  answer: '{ "message": { "ack": { "status": "NACK" } }, "error": { "type": "POLICY-ERROR",
-    "code": "132", "path": null, "message": "ondc-site-verification file is not found"
-    } }  Create ondc-site-verification.html and host at domain root level. Here is
-    an example https://<subscriber_id>/ondc-site-verification.html Use the correct
-    html formatting provided in the documentation. Whitelist all the IPs if you have
-    firewall or IP blocking in your sever: 34.131.40.9  34.131.211.247  34.131.201.63  34.131.180.63  34.131.78.219
-    34.93.10.146 35.200.143.183  34.93.118.120  35.200.183.209  34.93.102.253 35.200.232.136  34.100.170.176
-    107.178.231.181/32'
+  answer: '{ "message": { "ack": { "status": "NACK" } }, "error": { "type": "POLICY-ERROR", "code": "132", "path": null, "message": "ondc-site-verification file is not found" } }  Create ondc-site-verification.html and host at domain root level. Here is an example https://<subscriber_id>/ondc-site-verification.html Use the correct html formatting provided in the documentation. Whitelist all the IPs if you have firewall or IP blocking in your sever: 34.131.40.9  34.131.211.247  34.131.201.63  34.131.180.63  34.131.78.219 34.93.10.146 35.200.143.183  34.93.118.120  35.200.183.209  34.93.102.253 35.200.232.136  34.100.170.176 107.178.231.181/32'
   categories:
-  - Be discoverable on the network
+    - Be discoverable on the network
   tags:
-  - status
-  - error
-  - documentation
+    - api_documentation
+    - documentation
+    - error
+    - error_handling
+    - error_response
+    - fulfillment_status
+    - order_status
+    - status
+    - technical_documentation
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: OCSP Failed
-  answer: '{ "message": { "ack": { "status": "NACK" } }, "error": { "type": "POLICY-ERROR",
-    "code": "132", "path": null, "message": "OCSP failed" } } You need to have a valid
-    SSL certificate for your domain. This will be used while performing Online Certificate
-    Status Protocol (OCSP) validation. Please obtain a valid SSL certificate that
-    supports OCSP validation for the purchased domain.'
+  answer: '{ "message": { "ack": { "status": "NACK" } }, "error": { "type": "POLICY-ERROR", "code": "132", "path": null, "message": "OCSP failed" } } You need to have a valid SSL certificate for your domain. This will be used while performing Online Certificate Status Protocol (OCSP) validation. Please obtain a valid SSL certificate that supports OCSP validation for the purchased domain.'
   categories:
-  - Be discoverable on the network
+    - Be discoverable on the network
   tags:
-  - status
-  - error
-  - protocol
+    - error
+    - error_handling
+    - error_response
+    - fulfillment_status
+    - order_status
+    - protocol
+    - status
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: How does a subscriber get Registry’s public keys to decrypt information
-    on on_subscribe?
-  answer: The Registry’s public keys are used to decrypt the encrypted payload received
-    during the on_subscribe callback. These keys are published and made available
-    by the ONDC Registry. You can retrieve them from this  at point no. 6.
+- question: How does a subscriber get Registry’s public keys to decrypt information on on_subscribe?
+  answer: The Registry’s public keys are used to decrypt the encrypted payload received during the on_subscribe callback. These keys are published and made available by the ONDC Registry. You can retrieve them from this  at point no. 6.
   categories:
-  - Be discoverable on the network
+    - Be discoverable on the network
   tags:
-  - registry
-  - ondc
+    - network_registry
+    - ondc
+    - ondc_network
+    - ondc_registry
+    - open_network
+    - registry
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: How to generate signing and encryption key pairs?
   answer: You can you utilities to generate signing and encryption keys
   categories:
-  - Be discoverable on the network
+    - Be discoverable on the network
   tags:
-  - encryption
+    - data_encryption
+    - encryption
+    - x25519_encryption
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Code example for the export format of the public key?
-  answer: There are fundamentally 2 formats in which Ed25519 & X25519 Keys are exported.
-    Raw  (simply base64 encoded of the raw bytes) Pem (Typically used by JCA/JCE here
-    it is bas64 encoded of a X509encoded public key ) If you do an online key pair
-    generation for Ed25519, you will generally get it in raw format. Both these formats
-    are interconvertible. However, since raw is more prevalent, we could use the same
-    for our communication with the registry.
+  answer: There are fundamentally 2 formats in which Ed25519 & X25519 Keys are exported. Raw  (simply base64 encoded of the raw bytes) Pem (Typically used by JCA/JCE here it is bas64 encoded of a X509encoded public key ) If you do an online key pair generation for Ed25519, you will generally get it in raw format. Both these formats are interconvertible. However, since raw is more prevalent, we could use the same for our communication with the registry.
   categories:
-  - Be discoverable on the network
+    - Be discoverable on the network
   tags:
-  - registry
+    - network_registry
+    - ondc_registry
+    - registry
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Which algorithm will BAP use for decrypting Challenge String?
-  answer: In general, the X25519 Key Agreement algorithm is used to derive a symmetric  AES
-    key for encryption and decryption between any two parties. We will use it between
-    registry and participants to encrypt and decrypt challenges.
+  answer: In general, the X25519 Key Agreement algorithm is used to derive a symmetric  AES key for encryption and decryption between any two parties. We will use it between registry and participants to encrypt and decrypt challenges.
   categories:
-  - Be discoverable on the network
+    - Be discoverable on the network
   tags:
-  - bap
-  - encryption
-  - registry
+    - bap
+    - buyer_app
+    - buyer_np
+    - data_encryption
+    - encryption
+    - network_registry
+    - ondc_registry
+    - registry
+    - x25519_encryption
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Is subscriber_id unique across the network for a BAP or is it the unique_key_id?
-  answer: Both subscriber_id and unique_key_id must be unique for each Network Participant
-    within a given ONDC environment (such as staging or production). However, the
-    same subscriber_id can be reused in different environments (e.g., a BAP can use
-    the same domain name as subscriber_id in both staging and production).
+  answer: Both subscriber_id and unique_key_id must be unique for each Network Participant within a given ONDC environment (such as staging or production). However, the same subscriber_id can be reused in different environments (e.g., a BAP can use the same domain name as subscriber_id in both staging and production).
   categories:
-  - Be discoverable on the network
+    - Be discoverable on the network
   tags:
-  - network
-  - bap
-  - participant
-  - ondc
-  - production
+    - bap
+    - buyer_app
+    - buyer_np
+    - live_environment
+    - network
+    - network_participant_np
+    - ondc
+    - ondc_network
+    - open_commerce_network
+    - open_network
+    - participant
+    - production
+    - production_environment
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: Should we validate the bpp_id or bap_id in the context against the Authorization
-    header?
-  answer: Yes, bap_id and bpp_id need to be validated. When BPP receives a request,
-    If bap_id in context does not match bap_id in signature, the BPP must return a
-    401 unauthorized response.
+- question: Should we validate the bpp_id or bap_id in the context against the Authorization header?
+  answer: Yes, bap_id and bpp_id need to be validated. When BPP receives a request, If bap_id in context does not match bap_id in signature, the BPP must return a 401 unauthorized response.
   categories:
-  - Be discoverable on the network
+    - Be discoverable on the network
   tags:
-  - bpp
-  - bap
-  - signature
-  - return
+    - bap
+    - bpp
+    - buyer_app
+    - buyer_np
+    - ed25519_signing
+    - return
+    - return_to_origin
+    - rto_flow
+    - seller_app
+    - seller_np
+    - signature
+    - signature_verification
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: What cipher is used to encrypt a challenge? We need to know it to be able
-    to decrypt the challenge?
-  answer: The encryption would be AES but it is derived using the key agreement mechanism
-    of x25519. Every participant registers with the registry 2 public keys. An ed25519
-    and x25519 and would keep the private key with them Registry would use its private
-    and public encryption key to derive the aes key for encrypting the challenge.
-    Participants will use their own Private key and registry's public key to derive
-    the AES key that was used for encryption. And decrypt the challenge using this
-    key.
+- question: What cipher is used to encrypt a challenge? We need to know it to be able to decrypt the challenge?
+  answer: The encryption would be AES but it is derived using the key agreement mechanism of x25519. Every participant registers with the registry 2 public keys. An ed25519 and x25519 and would keep the private key with them Registry would use its private and public encryption key to derive the aes key for encrypting the challenge. Participants will use their own Private key and registry's public key to derive the AES key that was used for encryption. And decrypt the challenge using this key.
   categories:
-  - Be discoverable on the network
+    - Be discoverable on the network
   tags:
-  - encryption
-  - participant
-  - registry
+    - data_encryption
+    - encryption
+    - network_participant_np
+    - network_registry
+    - ondc_registry
+    - participant
+    - registry
+    - x25519_encryption
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: If subscriber A needs to get the public key of Subscriber B when doing
-    a transaction, then does it need to call lookup API to check whether Subscriber
-    B exists?
-  answer: 'Yes, Subscriber A needs to call the lookup API to get the public key of
-    Subscriber B and verify if Subscriber B exists in the registry. The lookup API
-    only returns subscriber records that have status = "SUBSCRIBED" or “WHITELISTED”.
-    Here''s a detailed explanation: 1. Why Lookup? ONDC relies on public-key cryptography
-    for secure communication. When Subscriber A wants to interact with Subscriber
-    B, it needs Subscriber B''s public key to verify signatures and ensure the message
-    is from a trusted source. 2. Lookup API: The ONDC registry provides a lookup API
-    that allows subscribers to fetch the public key of other subscribers using their
-    `subscriber_id`. 3. Active Status Check: The lookup API''s response includes a
-    "status" field indicating the subscriber''s status.  Subscriber A should check
-    if Subscriber B''s status is "SUBSCRIBED". This ensures that Subscriber B is active
-    on the network and the communication will be successful. 4. Postman curl Example:
-    curl --location ''https://prod.registry.ondc.org/v2.0/lookup'' \ --header ''Content-Type:
-    application/json'' \ --header ''Authorization: Signature keyId="example-bap.com|bap1234|ed25519",
-    algorithm="ed25519", created="<timestamp>", expires="<timestamp>", headers="(created)(expires)digest",
-    signature="<signature>"'' \ --data ''{ "country": "IND", "domain": "ONDC:RET10"
-    }'''
+- question: If subscriber A needs to get the public key of Subscriber B when doing a transaction, then does it need to call lookup API to check whether Subscriber B exists?
+  answer: 'Yes, Subscriber A needs to call the lookup API to get the public key of Subscriber B and verify if Subscriber B exists in the registry. The lookup API only returns subscriber records that have status = "SUBSCRIBED" or “WHITELISTED”. Here''s a detailed explanation: 1. Why Lookup? ONDC relies on public-key cryptography for secure communication. When Subscriber A wants to interact with Subscriber B, it needs Subscriber B''s public key to verify signatures and ensure the message is from a trusted source. 2. Lookup API: The ONDC registry provides a lookup API that allows subscribers to fetch the public key of other subscribers using their `subscriber_id`. 3. Active Status Check: The lookup API''s response includes a "status" field indicating the subscriber''s status.  Subscriber A should check if Subscriber B''s status is "SUBSCRIBED". This ensures that Subscriber B is active on the network and the communication will be successful. 4. Postman curl Example: curl --location ''https://prod.registry.ondc.org/v2.0/lookup'' \ --header ''Content-Type: application/json'' \ --header ''Authorization: Signature keyId="example-bap.com|bap1234|ed25519", algorithm="ed25519", created="<timestamp>", expires="<timestamp>", headers="(created)(expires)digest", signature="<signature>"'' \ --data ''{ "country": "IND", "domain": "ONDC:RET10" }'''
   categories:
-  - Be discoverable on the network
+    - Be discoverable on the network
   tags:
-  - transaction
-  - api
-  - registry
-  - status
-  - ondc
+    - api
+    - beckn_api
+    - fulfillment_status
+    - network_registry
+    - ondc
+    - ondc_network
+    - ondc_protocol
+    - ondc_registry
+    - open_network
+    - order_status
+    - order_transaction
+    - registry
+    - status
+    - transaction
+    - transaction_flow
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Does the lookup API need to be called before calling any APIs?
-  answer: 'The Lookup API is not mandatory to call before every API request. Instead,
-    it serves as a utility that subscribers can use whenever they need to resolve
-    information about another participant—typically to fetch their public keys, network
-    roles, or endpoint details from the ONDC Registry. This is particularly important
-    for verifying the signatures in data payloads exchanged over the network. For
-    example, you may use the Lookup API to fetch a seller app’s signing public key
-    when validating a signed message. Recommendation for efficiency: To reduce frequent
-    calls to the Lookup API, participants can cache the public registry dump periodically.
-    This dump includes information about all network participants and their public
-    signing keys. You can then rely on your local cache for most lookups, and use
-    the v2.0/lookup API only as a fallback mechanism when the cache is outdated or
-    a new participant needs to be resolved.'
+  answer: 'The Lookup API is not mandatory to call before every API request. Instead, it serves as a utility that subscribers can use whenever they need to resolve information about another participant—typically to fetch their public keys, network roles, or endpoint details from the ONDC Registry. This is particularly important for verifying the signatures in data payloads exchanged over the network. For example, you may use the Lookup API to fetch a seller app’s signing public key when validating a signed message. Recommendation for efficiency: To reduce frequent calls to the Lookup API, participants can cache the public registry dump periodically. This dump includes information about all network participants and their public signing keys. You can then rely on your local cache for most lookups, and use the v2.0/lookup API only as a fallback mechanism when the cache is outdated or a new participant needs to be resolved.'
   categories:
-  - Be discoverable on the network
+    - Be discoverable on the network
   tags:
-  - api
-  - participant
-  - network
-  - ondc
-  - registry
+    - api
+    - beckn_api
+    - network
+    - network_participant_np
+    - network_registry
+    - ondc
+    - ondc_network
+    - ondc_protocol
+    - ondc_registry
+    - open_commerce_network
+    - open_network
+    - participant
+    - registry
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Why is the subscriber_url showing as null in the registry after subscribing?
-  answer: 'The subscriber_url appears as null when the participant is only whitelisted.
-    It gets updated in the registry once you complete the onboarding by calling the
-    subscribe API with your subscriber_url. The value provided in that API call will
-    be saved and reflected in the registry records. Key-wise explanation to subscribe
-    payload ops_no ops_no : 1 - Buyer App Registration ops_no : 2 - Seller App Registration
-    ops_no : 4 - Buyer & Seller App Registration Note: ops_no 3 & 5 is deprecated
-    as the feature of Seller On Record (SOR) in registry is obsolete. request_id and
-    unique_key_id The `request_id` and `unique_key_id` are distinct random alphanumeric
-    strings or UUIDs generated by the network participant. callback_url The callback_url
-    in ONDC is a relative path provided during the subscription process. It tells
-    ONDC where to send verification callbacks like on_subscribe. The final callback
-    endpoint URL is constructed as: https://<subscriber_url>/<callback_url>/on_subscribe
-    If: subscriber_id = callback_url = /api/ondc Then the final on_subscribe callback
-    URL will be: https://www.sellerapp.example.com/api/ondc/on_subscribe key_pairs
-    The network participant must include the `signing_public_key` and `encryption_public_key`
-    in the subscribe payload, which were generated during the key generation process.
-    Additionally, they need to specify the keys'' validity period using the `valid_from`
-    and `valid_until` fields. network_participant The network participant includes
-    a `domains` object specifying the domains they wish to subscribe to. For instance,
-    if the network participant is whitelisted for `ONDC:RET10` and `ONDC:RET11`, they
-    need to include two objects in the `network_participant` array as shown below:
-    ```json "network_participant": [ { "subscriber_url": "/ret10", "domain": "ONDC:RET10",
-    "type": "sellerApp", "msn": false, "city_code": ["*"] }, { "subscriber_url": "/ret11",
-    "domain": "ONDC:RET11", "type": "sellerApp", "msn": false, "city_code": ["*"]
-    } ] `` subscriber_url Essentially, this field represents the relative path to
-    where your transactional API endpoints are hosted. For example, if your endpoint
-    is subscriber_id/api/v1/search, then the subscriber_url in the subscriber payload
-    should be set to /api/v1. In the JSON, the subscriber_url is defined for each
-    domain, allowing different relative paths based on domain-specific requirements.
-    For instance, ONDC:RET10 might have a subscriber_url like /ret10, whereas ONDC:RET11
-    could use /ret11. Alternatively, you can adopt an API versioning approach — such
-    as /api/v1 — as the subscriber_url. If you''re hosting your APIs at the root level,
-    then / would be the value used in the payload.'
+  answer: 'The subscriber_url appears as null when the participant is only whitelisted. It gets updated in the registry once you complete the onboarding by calling the subscribe API with your subscriber_url. The value provided in that API call will be saved and reflected in the registry records. Key-wise explanation to subscribe payload ops_no ops_no : 1 - Buyer App Registration ops_no : 2 - Seller App Registration ops_no : 4 - Buyer & Seller App Registration Note: ops_no 3 & 5 is deprecated as the feature of Seller On Record (SOR) in registry is obsolete. request_id and unique_key_id The `request_id` and `unique_key_id` are distinct random alphanumeric strings or UUIDs generated by the network participant. callback_url The callback_url in ONDC is a relative path provided during the subscription process. It tells ONDC where to send verification callbacks like on_subscribe. The final callback endpoint URL is constructed as: https://<subscriber_url>/<callback_url>/on_subscribe If: subscriber_id = callback_url = /api/ondc Then the final on_subscribe callback URL will be: https://www.sellerapp.example.com/api/ondc/on_subscribe key_pairs The network participant must include the `signing_public_key` and `encryption_public_key` in the subscribe payload, which were generated during the key generation process. Additionally, they need to specify the keys'' validity period using the `valid_from` and `valid_until` fields. network_participant The network participant includes a `domains` object specifying the domains they wish to subscribe to. For instance, if the network participant is whitelisted for `ONDC:RET10` and `ONDC:RET11`, they need to include two objects in the `network_participant` array as shown below: ```json "network_participant": [ { "subscriber_url": "/ret10", "domain": "ONDC:RET10", "type": "sellerApp", "msn": false, "city_code": ["*"] }, { "subscriber_url": "/ret11", "domain": "ONDC:RET11", "type": "sellerApp", "msn": false, "city_code": ["*"] } ] `` subscriber_url Essentially, this field represents the relative path to where your transactional API endpoints are hosted. For example, if your endpoint is subscriber_id/api/v1/search, then the subscriber_url in the subscriber payload should be set to /api/v1. In the JSON, the subscriber_url is defined for each domain, allowing different relative paths based on domain-specific requirements. For instance, ONDC:RET10 might have a subscriber_url like /ret10, whereas ONDC:RET11 could use /ret11. Alternatively, you can adopt an API versioning approach — such as /api/v1 — as the subscriber_url. If you''re hosting your APIs at the root level, then / would be the value used in the payload.'
   categories:
-  - Signature & Verification FAQs
+    - Signature & Verification FAQs
   tags:
-  - registry
-  - participant
-  - onboarding
-  - api
-  - buyer
+    - api
+    - bap_entity
+    - beckn_api
+    - buyer
+    - buyer_np
+    - network_participant_np
+    - network_registry
+    - np_onboarding
+    - onboarding
+    - ondc_protocol
+    - ondc_registry
+    - participant
+    - participant_onboarding
+    - registry
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'What does the Authorization header look like?
-
-    '
-  answer: 'It follows this format: Authorization: Signature keyId="<subscriber_id>|<key_id>",
-    algorithm="rsa-sha256", headers="(created) (expires) digest", signature="<base64-encoded-signature>"'
+- question: |
+    What does the Authorization header look like?
+  answer: 'It follows this format: Authorization: Signature keyId="<subscriber_id>|<key_id>", algorithm="rsa-sha256", headers="(created) (expires) digest", signature="<base64-encoded-signature>"'
   categories:
-  - Signature & Verification FAQs
+    - Signature & Verification FAQs
   tags:
-  - signature
+    - ed25519_signing
+    - signature
+    - signature_verification
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: "What tools are available for signature generation and validation?\n \
-    \ ONDC provides sample scripts and SDKs (in JavaScript, Python, etc.) for generating\
-    \ and verifying signatures, and these can be adapted into your platform’s middleware."
+- question: |-
+    What tools are available for signature generation and validation?
+      ONDC provides sample scripts and SDKs (in JavaScript, Python, etc.) for generating and verifying signatures, and these can be adapted into your platform’s middleware.
   answer: 'There are commonly 6 types of error messages:'
   categories:
-  - Signature & Verification FAQs
+    - Signature & Verification FAQs
   tags:
-  - signature
-  - ondc
-  - platform
-  - error
+    - ed25519_signing
+    - error
+    - error_handling
+    - error_response
+    - ondc
+    - ondc_network
+    - ondc_platform
+    - open_network
+    - platform
+    - signature
+    - signature_verification
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Auth header not found
-  answer: 'Reason: Making API requests without setting up authorization header. Resolution:
-    To resolve this, ensure that you generate the authorization header as per the
-    ONDC protocol. This typically involves signing the request payload using your
-    private key, constructing the header with the appropriate Authorization format,
-    and including any required timestamps or identifiers. You can follow the step-by-step
-    instructions provided in the . Alternatively, you may use the ONDC header generation  to
-    simplify this process.'
+  answer: 'Reason: Making API requests without setting up authorization header. Resolution: To resolve this, ensure that you generate the authorization header as per the ONDC protocol. This typically involves signing the request payload using your private key, constructing the header with the appropriate Authorization format, and including any required timestamps or identifiers. You can follow the step-by-step instructions provided in the . Alternatively, you may use the ONDC header generation  to simplify this process.'
   categories:
-  - Signature & Verification FAQs
+    - Signature & Verification FAQs
   tags:
-  - api
-  - ondc
-  - protocol
+    - api
+    - beckn_api
+    - ondc
+    - ondc_network
+    - ondc_protocol
+    - open_network
+    - protocol
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Authentication failed
-  answer: 'Reason: The unique key ID assigned at the time of subscription does not
-    match the unique key ID used in the header creation Additional Possible Reason:
-    The subscriber_id in the header may not exist in the registry lookup. Resolution:
-    Kindly ensure you are using an existing subscriber_id within the network. Retrieve
-    the correct unique key ID by calling the lookup API with your subscriber ID. Then,
-    use the correct ukId and subscriber_id in the header to generate the authorization
-    header. This will resolve the issue.'
+  answer: 'Reason: The unique key ID assigned at the time of subscription does not match the unique key ID used in the header creation Additional Possible Reason: The subscriber_id in the header may not exist in the registry lookup. Resolution: Kindly ensure you are using an existing subscriber_id within the network. Retrieve the correct unique key ID by calling the lookup API with your subscriber ID. Then, use the correct ukId and subscriber_id in the header to generate the authorization header. This will resolve the issue.'
   categories:
-  - Signature & Verification FAQs
+    - Signature & Verification FAQs
   tags:
-  - authentication
-  - subscription
-  - registry
-  - network
-  - api
+    - api
+    - auth_header
+    - authentication
+    - beckn_api
+    - network
+    - network_registry
+    - np_authentication
+    - np_subscription
+    - ondc_network
+    - ondc_protocol
+    - ondc_registry
+    - open_commerce_network
+    - registry
+    - registry_subscription
+    - subscription
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Invalid Signature
-  answer: 'Reason: There might be problems when signatures are not encrypted using
-    the same private key, especially since its corresponding public key has been shared
-    with the ONDC network during the subscription process. Resolution: Use the private
-    key to create a signature. This private key matches the public key that was previously
-    shared with the ONDC network when you subscribed.'
+  answer: 'Reason: There might be problems when signatures are not encrypted using the same private key, especially since its corresponding public key has been shared with the ONDC network during the subscription process. Resolution: Use the private key to create a signature. This private key matches the public key that was previously shared with the ONDC network when you subscribed.'
   categories:
-  - Signature & Verification FAQs
+    - Signature & Verification FAQs
   tags:
-  - signature
-  - ondc
-  - network
-  - subscription
+    - ed25519_signing
+    - network
+    - np_subscription
+    - ondc
+    - ondc_network
+    - open_commerce_network
+    - open_network
+    - registry_subscription
+    - signature
+    - signature_verification
+    - subscription
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Signature Verification failed
-  answer: 'Reason: When decrypted signature are not matched with request body payload
-    Resolution: During the signature generation process, minify the payload. Similarly,
-    before making your API call, minify the request body. This is crucial because
-    tools like VS Code may automatically format your code, introducing extra spaces
-    and commas, which can result in signature verification errors.'
+  answer: 'Reason: When decrypted signature are not matched with request body payload Resolution: During the signature generation process, minify the payload. Similarly, before making your API call, minify the request body. This is crucial because tools like VS Code may automatically format your code, introducing extra spaces and commas, which can result in signature verification errors.'
   categories:
-  - Signature & Verification FAQs
+    - Signature & Verification FAQs
   tags:
-  - signature
-  - verification
-  - api
+    - api
+    - auth_verification
+    - beckn_api
+    - ed25519_signing
+    - ondc_protocol
+    - signature
+    - signature_verification
+    - verification
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Signature is forged
-  answer: 'Reason: If the signature is not included in the request header adhering
-    to the specified format, it could be due to alterations in the positioning of
-    key-value pairs or the addition of extra spaces. Resolution: Ensure your Authorization
-    header adheres to the specified format mentioned in this .'
+  answer: 'Reason: If the signature is not included in the request header adhering to the specified format, it could be due to alterations in the positioning of key-value pairs or the addition of extra spaces. Resolution: Ensure your Authorization header adheres to the specified format mentioned in this .'
   categories:
-  - Signature & Verification FAQs
+    - Signature & Verification FAQs
   tags:
-  - signature
+    - ed25519_signing
+    - signature
+    - signature_verification
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Algorithm Mismatched
-  answer: 'Reason: This issue may arise during the decryption process, possibly because
-    the encryption was not performed as per the ONDC defined . Resolution: For creating
-    the Authorization header, use the ONDC utility function exactly as it is provided.
-    However, if you prefer not to use the utility directly, you can employ the same
-    functions and libraries utilised within the ONDC utility to generate headers.
-    In this scenario, ensure that the encryption and decryption algorithms remain
-    consistent. You can also refer to this .
+  answer: |-
+    Reason: This issue may arise during the decryption process, possibly because the encryption was not performed as per the ONDC defined . Resolution: For creating the Authorization header, use the ONDC utility function exactly as it is provided. However, if you prefer not to use the utility directly, you can employ the same functions and libraries utilised within the ONDC utility to generate headers. In this scenario, ensure that the encryption and decryption algorithms remain consistent. You can also refer to this .
 
-
-    For computing the digest of the request body, the hashing function will use the
-    BLAKE-512 (2b) hashing algorithm. Then to digitally sign the singing string, the
-    subscribers should use the "ed25519" algorithm for  signature.'
+    For computing the digest of the request body, the hashing function will use the BLAKE-512 (2b) hashing algorithm. Then to digitally sign the singing string, the subscribers should use the "ed25519" algorithm for  signature.
   categories:
-  - Signature & Verification FAQs
+    - Signature & Verification FAQs
   tags:
-  - encryption
-  - ondc
-  - signature
+    - data_encryption
+    - ed25519_signing
+    - encryption
+    - ondc
+    - ondc_network
+    - open_network
+    - signature
+    - signature_verification
+    - x25519_encryption
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: I am facing a Signature verification issue with the Reference apps or
-    Mock servers. How do I resolve this?
-  answer: 'Points to consider while generating signatures: One of the plausible reasons
-    can be that you aren’t sending the same payload as you have used for the generating
-    signature. For example, you have generated the signature with minify json. But
-    when you are making a http request you have or your editor has beautified the
-    payload. Secondly, make sure there are no escape characters added in the signature
-    instead of space. After generating the signature, changing the context_timestamp
-    to current time while making http request will receive NACK for Signature verification.
-    It is not accepted if you make any change after generating the signature. Furthermore,
-    You have added a wrong subscriber_id or unique_key while generating the signature.
-    Make sure you put the signature in the Header as an Authorization key not in Bearer
-    Token. While generating a signature through an endpoint as shown in the image
-    below. It returns as json (stringified version)  which means addition of escape
-    characters. It is crucial to ensure the signature remains intact and free from
-    any alterations. FAQs for ONDC Registry Lookup v2.0 API'
+- question: I am facing a Signature verification issue with the Reference apps or Mock servers. How do I resolve this?
+  answer: 'Points to consider while generating signatures: One of the plausible reasons can be that you aren’t sending the same payload as you have used for the generating signature. For example, you have generated the signature with minify json. But when you are making a http request you have or your editor has beautified the payload. Secondly, make sure there are no escape characters added in the signature instead of space. After generating the signature, changing the context_timestamp to current time while making http request will receive NACK for Signature verification. It is not accepted if you make any change after generating the signature. Furthermore, You have added a wrong subscriber_id or unique_key while generating the signature. Make sure you put the signature in the Header as an Authorization key not in Bearer Token. While generating a signature through an endpoint as shown in the image below. It returns as json (stringified version)  which means addition of escape characters. It is crucial to ensure the signature remains intact and free from any alterations. FAQs for ONDC Registry Lookup v2.0 API'
   categories:
-  - Signature & Verification FAQs
+    - Signature & Verification FAQs
   tags:
-  - signature
-  - verification
-  - ondc
-  - registry
-  - api
+    - api
+    - auth_verification
+    - beckn_api
+    - ed25519_signing
+    - network_registry
+    - ondc
+    - ondc_network
+    - ondc_protocol
+    - ondc_registry
+    - open_network
+    - registry
+    - signature
+    - signature_verification
+    - verification
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is Lookup v2.0 in ONDC?
-  answer: Lookup v2.0 is an ONDC Registry API that allows participants (BAPs, BPPs,
-    etc.) to securely query network details (e.g., seller/buyer endpoints, public
-    keys and unique key ID) using signed requests.
+  answer: Lookup v2.0 is an ONDC Registry API that allows participants (BAPs, BPPs, etc.) to securely query network details (e.g., seller/buyer endpoints, public keys and unique key ID) using signed requests.
   categories:
-  - Signature & Verification FAQs
+    - Signature & Verification FAQs
   tags:
-  - ondc
-  - registry
-  - api
-  - network
-  - seller
+    - api
+    - beckn_api
+    - bpp_entity
+    - network
+    - network_registry
+    - ondc
+    - ondc_network
+    - ondc_protocol
+    - ondc_registry
+    - open_commerce_network
+    - open_network
+    - registry
+    - seller
+    - seller_np
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: How do I access Lookup v2.0?
-  answer: 'Use these endpoints: Staging: https://staging.registry.ondc.org/v2.0/lookup
-    Pre-Prod: https://preprod.registry.ondc.org/v2.0/lookup Production: https://prod.registry.ondc.org/v2.0/lookup'
+  answer: 'Use these endpoints: Staging: https://staging.registry.ondc.org/v2.0/lookup Pre-Prod: https://preprod.registry.ondc.org/v2.0/lookup Production: https://prod.registry.ondc.org/v2.0/lookup'
   categories:
-  - Signature & Verification FAQs
+    - Signature & Verification FAQs
   tags:
-  - registry
-  - ondc
-  - production
+    - live_environment
+    - network_registry
+    - ondc
+    - ondc_network
+    - ondc_registry
+    - open_network
+    - production
+    - production_environment
+    - registry
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What authentication is required?
-  answer: 'Requests must include: Authorization header with a signature (Ed25519 algorithm).
-    created and expires timestamps (ISO8601 UTC format). digest (Blake-2b hash of
-    the request body). Example: curl --location ''https://prod.registry.ondc.org/v2.0/lookup''
-    \ --header ''Authorization: Signature keyId="example-bap.com|bap1234|ed25519",
-    algorithm="ed25519", created="2024-05-04T12:00:00Z", expires="2024-05-04T12:05:00Z",
-    headers="(created)(expires)digest", signature="<base64_signature>"'' \ --data
-    ''{"country": "IND", "domain": "ONDC:RET10"}'''
+  answer: 'Requests must include: Authorization header with a signature (Ed25519 algorithm). created and expires timestamps (ISO8601 UTC format). digest (Blake-2b hash of the request body). Example: curl --location ''https://prod.registry.ondc.org/v2.0/lookup'' \ --header ''Authorization: Signature keyId="example-bap.com|bap1234|ed25519", algorithm="ed25519", created="2024-05-04T12:00:00Z", expires="2024-05-04T12:05:00Z", headers="(created)(expires)digest", signature="<base64_signature>"'' \ --data ''{"country": "IND", "domain": "ONDC:RET10"}'''
   categories:
-  - Signature & Verification FAQs
+    - Signature & Verification FAQs
   tags:
-  - authentication
-  - signature
-  - registry
-  - ondc
+    - auth_header
+    - authentication
+    - ed25519_signing
+    - network_registry
+    - np_authentication
+    - ondc
+    - ondc_network
+    - ondc_registry
+    - open_network
+    - registry
+    - signature
+    - signature_verification
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: How to Generate the Signature
-  answer: 'To generate the signature, follow the standard signing and verification
-    process outlined below: Refer to the detailed . Alternative Option: Use Provided
-    You can skip the manual process and use the ready-to-use utilities provided by
-    us in multiple programming languages.'
+  answer: 'To generate the signature, follow the standard signing and verification process outlined below: Refer to the detailed . Alternative Option: Use Provided You can skip the manual process and use the ready-to-use utilities provided by us in multiple programming languages.'
   categories:
-  - Signature & Verification FAQs
+    - Signature & Verification FAQs
   tags:
-  - signature
-  - verification
+    - auth_verification
+    - ed25519_signing
+    - signature
+    - signature_verification
+    - verification
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What parameters are mandatory in the request body?
-  answer: "This API doesn’t have fixed mandatory or optional parameters.\n Instead,\
-    \ the user must send at least any two keys from the below list: subscriber_id\
-    \ country ukId city domain type (BAP or BPP) If fewer than two keys are provided,\
-    \ the API will throw an error."
+  answer: |-
+    This API doesn’t have fixed mandatory or optional parameters.
+     Instead, the user must send at least any two keys from the below list: subscriber_id country ukId city domain type (BAP or BPP) If fewer than two keys are provided, the API will throw an error.
   categories:
-  - Signature & Verification FAQs
+    - Signature & Verification FAQs
   tags:
-  - api
-  - bap
-  - bpp
-  - error
+    - api
+    - bap
+    - beckn_api
+    - bpp
+    - buyer_app
+    - buyer_np
+    - error
+    - error_handling
+    - error_response
+    - ondc_protocol
+    - seller_app
+    - seller_np
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What’s the difference between v1.0 and v2.0?
-  answer: In v1.0, requests didn’t require an authorization header. In v2.0, all requests
-    must be signed and include an Authorization header. You sign the payload (e.g.,
-    lookup) using the same private key used during onboarding.This enforces stronger
-    security by validating sender authenticity and payload integrity.
+  answer: In v1.0, requests didn’t require an authorization header. In v2.0, all requests must be signed and include an Authorization header. You sign the payload (e.g., lookup) using the same private key used during onboarding.This enforces stronger security by validating sender authenticity and payload integrity.
   categories:
-  - Signature & Verification FAQs
+    - Signature & Verification FAQs
   tags:
-  - onboarding
+    - np_onboarding
+    - onboarding
+    - participant_onboarding
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What if my request fails with 401 Unauthorized?
-  answer: Verify the signature format and timestamps (created/expires). Ensure the
-    digest matches the request body. Check if the Ed25519 public key is registered
-    with ONDC.
+  answer: Verify the signature format and timestamps (created/expires). Ensure the digest matches the request body. Check if the Ed25519 public key is registered with ONDC.
   categories:
-  - Signature & Verification FAQs
+    - Signature & Verification FAQs
   tags:
-  - signature
-  - ondc
+    - ed25519_signing
+    - ondc
+    - ondc_network
+    - open_network
+    - signature
+    - signature_verification
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Where can I find sample code for signing?
   answer: Refer to the Reference Utility () for signing and verification mechanism.
   categories:
-  - Signature & Verification FAQs
+    - Signature & Verification FAQs
   tags:
-  - verification
+    - auth_verification
+    - signature_verification
+    - verification
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: "What data is returned in a lookup response?\n A: The response contains:"
-  answer: subscriber_id domain signing_public_key callback_urls city and country codes
-    status (SUBSCRIBED, UNSUBSCRIBED, etc.)
+- question: |-
+    What data is returned in a lookup response?
+     A: The response contains:
+  answer: subscriber_id domain signing_public_key callback_urls city and country codes status (SUBSCRIBED, UNSUBSCRIBED, etc.)
   categories:
-  - Signature & Verification FAQs
+    - Signature & Verification FAQs
   tags:
-  - status
+    - fulfillment_status
+    - order_status
+    - status
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Who needs to open a NOCA (Non-Operative Current Account)?
-  answer: 'Non-Operative Current Account has to be mandatorily opened by: 1. Network
-    participant who are collector of Money and need to settle to a counter 2. MSN
-    Seller Network Participants who are opting in for direct Settlement to its providers
-    (sellers) while registering with NBBL (Settlement Agency)'
+  answer: 'Non-Operative Current Account has to be mandatorily opened by: 1. Network participant who are collector of Money and need to settle to a counter 2. MSN Seller Network Participants who are opting in for direct Settlement to its providers (sellers) while registering with NBBL (Settlement Agency)'
   categories:
-  - Participant on the Network
+    - Participant on the Network
   tags:
-  - network
-  - participant
-  - seller
-  - settlement
+    - bpp_entity
+    - network
+    - network_participant_np
+    - ondc_network
+    - open_commerce_network
+    - participant
+    - rsf_settlement
+    - seller
+    - seller_np
+    - settlement
+    - settlement_framework
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: Can I (a network participant) access my NOCA account for withdrawal of
-    money?
-  answer: Money withdrawal from NOCA is only allowed by the instructions of the Settlement
-    Agency. It is therefore mandated for every participant opening a NOCA account
-    to also open an OCA account where “Self” money can be parked via instructions
-    from the Settlement Agency. It is also therefore advised for participants to not
-    link their NOCA account to their PA/PG till RSF 2.0 APIs are developed and tested
-    by NBBL.
+- question: Can I (a network participant) access my NOCA account for withdrawal of money?
+  answer: Money withdrawal from NOCA is only allowed by the instructions of the Settlement Agency. It is therefore mandated for every participant opening a NOCA account to also open an OCA account where “Self” money can be parked via instructions from the Settlement Agency. It is also therefore advised for participants to not link their NOCA account to their PA/PG till RSF 2.0 APIs are developed and tested by NBBL.
   categories:
-  - Participant on the Network
+    - Participant on the Network
   tags:
-  - network
-  - participant
-  - settlement
+    - network
+    - network_participant_np
+    - ondc_network
+    - open_commerce_network
+    - participant
+    - rsf_settlement
+    - settlement
+    - settlement_framework
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Which Banks are compliant with opening a NOCA account?
-  answer: 'You can access the list of banks on the ONDC website. The link is here:
-    .'
+  answer: 'You can access the list of banks on the ONDC website. The link is here: .'
   categories:
-  - Participant on the Network
+    - Participant on the Network
   tags:
-  - ondc
+    - ondc
+    - ondc_network
+    - open_network
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Should I have my NOCA and OCA account with the same Bank?
-  answer: Each Network participant opening a NOCA account need to also have an Operative
-    Current Account (OCA). They may or may not choose to have it in the same Bank.
+  answer: Each Network participant opening a NOCA account need to also have an Operative Current Account (OCA). They may or may not choose to have it in the same Bank.
   categories:
-  - Participant on the Network
+    - Participant on the Network
   tags:
-  - network
-  - participant
+    - network
+    - network_participant_np
+    - ondc_network
+    - open_commerce_network
+    - participant
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: I am an MSN Seller NP and have opted in for settling to my sellers via
-    RSF 2.0, how would the money flow happen?
-  answer: 'As an MSN Seller NP you need to mandatorily open a NOCA account with a
-    bank supporting the same. Assuming the Buyer Application is the collector of money
-    from the buyer, the settlement money flows from Buyer Applications NOCA account
-    to your (Seller Application’s NOCA account) and the seller share moves from your
-    NOCA to the sellers account mentioned in the Settle call sent to the Settlement
-    Agency. Your share (Seller Application’s) moves from your NOCA to your Operative
-    Current Account (OCA) as instructed to the SA:'
+- question: I am an MSN Seller NP and have opted in for settling to my sellers via RSF 2.0, how would the money flow happen?
+  answer: 'As an MSN Seller NP you need to mandatorily open a NOCA account with a bank supporting the same. Assuming the Buyer Application is the collector of money from the buyer, the settlement money flows from Buyer Applications NOCA account to your (Seller Application’s NOCA account) and the seller share moves from your NOCA to the sellers account mentioned in the Settle call sent to the Settlement Agency. Your share (Seller Application’s) moves from your NOCA to your Operative Current Account (OCA) as instructed to the SA:'
   categories:
-  - Participant on the Network
+    - Participant on the Network
   tags:
-  - seller
-  - buyer
-  - settlement
+    - bap_entity
+    - bpp_entity
+    - buyer
+    - buyer_np
+    - rsf_settlement
+    - seller
+    - seller_np
+    - settlement
+    - settlement_framework
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is Network Observability (N.O.)?
-  answer: Network Observability is a framework designed to monitor the business and
-    technical health of the ONDC network, providing actionable insights to improve
-    its performance.  Its primary goal is to enhance interoperability, transparency,
-    and trust among network participants by enabling them to self-correct and scale
-    within ONDC's unbundled environment.
+  answer: Network Observability is a framework designed to monitor the business and technical health of the ONDC network, providing actionable insights to improve its performance.  Its primary goal is to enhance interoperability, transparency, and trust among network participants by enabling them to self-correct and scale within ONDC's unbundled environment.
   categories:
-  - Network Observability Queries
+    - Network Observability Queries
   tags:
-  - network
-  - ondc
+    - network
+    - ondc
+    - ondc_network
+    - open_commerce_network
+    - open_network
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: In which environment should NP implement NO?
   answer: NO is implemented in the Preprod and Production environment.
   categories:
-  - Network Observability Queries
+    - Network Observability Queries
   tags:
-  - production
+    - live_environment
+    - production
+    - production_environment
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: From where can I get N.O. token?
-  answer: Please visit the NP portal and login to the portal. There is a button to
-    generate NO token. Please use that to generate new token
+  answer: Please visit the NP portal and login to the portal. There is a button to generate NO token. Please use that to generate new token
   categories:
-  - Network Observability Queries
+    - Network Observability Queries
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Which are the documents related to Network Observability?
   answer: For Prod:- For Preprod:-
   categories:
-  - Network Observability Queries
+    - Network Observability Queries
   tags:
-  - network
+    - network
+    - ondc_network
+    - open_commerce_network
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: If the buyer NP has pushed to N.O. Do I also need to push as seller NP
-  answer: Yes every NP has to push logs using their NO token irrespective of if counterparty
-    has already submitted.
+  answer: Yes every NP has to push logs using their NO token irrespective of if counterparty has already submitted.
   categories:
-  - Network Observability Queries
+    - Network Observability Queries
   tags:
-  - buyer
-  - seller
+    - bap_entity
+    - bpp_entity
+    - buyer
+    - buyer_np
+    - seller
+    - seller_np
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What happens if the signature is invalid?
-  answer: 'The receiving platform should reject the request and return a 401 Unauthorized
-    or 400 Bad Request error, depending on the issue.
-
-    '
+  answer: |
+    The receiving platform should reject the request and return a 401 Unauthorized or 400 Bad Request error, depending on the issue.
   categories:
-  - Signature & Verification FAQs
-  - error
+    - Signature & Verification FAQs
+    - error
   tags:
-  - signature
-  - platform
-  - return
-  - error
+    - ed25519_signing
+    - error
+    - error_handling
+    - error_response
+    - ondc_platform
+    - open_network
+    - platform
+    - return
+    - return_to_origin
+    - rto_flow
+    - signature
+    - signature_verification
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What tools are available for signature generation and validation?
-  answer: 'ONDC provides sample scripts and SDKs (in JavaScript, Python, etc.) for
-    generating and verifying signatures, and these can be adapted into your platform’s
-    middleware.
-
-    '
+  answer: |
+    ONDC provides sample scripts and SDKs (in JavaScript, Python, etc.) for generating and verifying signatures, and these can be adapted into your platform’s middleware.
   categories:
-  - Signature & Verification FAQs
+    - Signature & Verification FAQs
   tags:
-  - signature
-  - ondc
-  - platform
+    - ed25519_signing
+    - ondc
+    - ondc_network
+    - ondc_platform
+    - open_network
+    - platform
+    - signature
+    - signature_verification
   lastUpdated: '2024-07-10T10:00:00Z'

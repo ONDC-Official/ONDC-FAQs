@@ -31,7 +31,6 @@ class FAQManager {
     try {
       console.log('Loading FAQs from multiple domain files...');
       
-      // Load all category files and merge them
       const loadPromises = Object.entries(this.categoryFileMap).map(async ([category, filename]) => {
         try {
           const filePath = `data/domains/${filename}`;
@@ -59,7 +58,6 @@ class FAQManager {
       
       console.log(`Total FAQs loaded from domain files: ${allFAQs.length}`);
       
-      // Mark all categories as loaded
       Object.keys(this.categoryFileMap).forEach(category => {
         this.loadedCategories.add(category);
       });
@@ -73,7 +71,6 @@ class FAQManager {
     } catch (error) {
       console.error('Error loading FAQs from domain files:', error);
       
-      // Fallback to original single file
       try {
         console.log('Falling back to original faqs.yaml file...');
         const response = await fetch('data/faqs.yaml');
@@ -96,7 +93,6 @@ class FAQManager {
 
   processFAQs(rawFAQs) {
     return rawFAQs.map((faq, index) => {
-      // Use categories field for category extraction
       const category = this.extractCategory(faq.categories);
       
       const processedAnswer = this.processAnswer(faq.answer);
@@ -205,11 +201,9 @@ class FAQManager {
   calculateSimilarity(faq1, faq2) {
     let score = 0;
     
-    // Check shared categories
     const sharedCategories = faq1.categories.filter(cat => faq2.categories.includes(cat));
     score += sharedCategories.length * 3;
     
-    // Check shared tags
     const sharedTags = faq1.tags.filter(tag => faq2.tags.includes(tag));
     score += sharedTags.length * 2;
     

@@ -1,541 +1,631 @@
 - question: Can a single participant be both a BAP and a BPP?
-  answer: Yes, an entity can onboard in multiple roles as long as each role complies
-    with ONDC’s protocol and guidelines
+  answer: Yes, an entity can onboard in multiple roles as long as each role complies with ONDC’s protocol and guidelines
   categories:
-  - Technical Architecture
+    - Technical Architecture
   tags:
-  - participant
-  - bap
-  - bpp
-  - ondc
-  - protocol
+    - bap
+    - bpp
+    - buyer_app
+    - buyer_np
+    - network_participant_np
+    - ondc
+    - ondc_network
+    - open_network
+    - participant
+    - protocol
+    - seller_app
+    - seller_np
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is the Gateway in ONDC?
-  answer: The Gateway is a crucial component in the ONDC network that facilitates
-    discovery by routing search requests from Buyer Apps (BAPs) to all registered
-    Seller Apps (BPPs). It does not send responses back to the BAP—its role is limited
-    to multicasting the search request across the network. The BPPs then respond directly
-    to the BAP with on_search. Gateway Endpoints:-
+  answer: The Gateway is a crucial component in the ONDC network that facilitates discovery by routing search requests from Buyer Apps (BAPs) to all registered Seller Apps (BPPs). It does not send responses back to the BAP—its role is limited to multicasting the search request across the network. The BPPs then respond directly to the BAP with on_search. Gateway Endpoints:-
   categories:
-  - Technical Architecture
+    - Technical Architecture
   tags:
-  - gateway
-  - ondc
-  - network
-  - search
-  - buyer
+    - bap_entity
+    - buyer
+    - buyer_np
+    - catalog_search
+    - discovery_search
+    - gateway
+    - network
+    - network_gateway
+    - ondc
+    - ondc_gateway
+    - ondc_network
+    - open_commerce_network
+    - open_network
+    - search
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is the registry in ONDC?
-  answer: 'The ONDC Registry is a central directory of all Network Participants (NPs)
-    in a given environment (Staging, Preprod, or Prod). It stores: NP’s base API URLs
-    Supported domains (e.g., Grocery, Mobility) Each environment has its own registry;
-    participants must subscribe to the appropriate registry before transacting in
-    that environment.'
+  answer: 'The ONDC Registry is a central directory of all Network Participants (NPs) in a given environment (Staging, Preprod, or Prod). It stores: NP’s base API URLs Supported domains (e.g., Grocery, Mobility) Each environment has its own registry; participants must subscribe to the appropriate registry before transacting in that environment.'
   categories:
-  - Technical Architecture
+    - Technical Architecture
   tags:
-  - registry
-  - ondc
-  - network
-  - api
+    - api
+    - beckn_api
+    - network
+    - network_registry
+    - ondc
+    - ondc_network
+    - ondc_protocol
+    - ondc_registry
+    - open_commerce_network
+    - open_network
+    - registry
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Do all messages pass through the Gateway?
-  answer: No. Only discovery-phase messages (like /search) go through the Gateway.
-    After sellers respond to discovery, all other protocol messages—such as /select,
-    /init, /confirm, etc.—are exchanged directly between Buyer App and Seller App
-    over secure channels (peer-to-peer).
+  answer: No. Only discovery-phase messages (like /search) go through the Gateway. After sellers respond to discovery, all other protocol messages—such as /select, /init, /confirm, etc.—are exchanged directly between Buyer App and Seller App over secure channels (peer-to-peer).
   categories:
-  - Technical Architecture
+    - Technical Architecture
   tags:
-  - gateway
-  - search
-  - protocol
+    - catalog_search
+    - discovery_search
+    - gateway
+    - network_gateway
+    - ondc_gateway
+    - protocol
+    - search
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: How does the Gateway decide which Seller Apps receive a search request?
-  answer: 'The Gateway filters Seller Apps based on: Domain (e.g., Fashion, Grocery,
-    F&B) Buyer’s location (city) This ensures only relevant sellers get the request,
-    reducing noise and improving efficiency.'
+  answer: 'The Gateway filters Seller Apps based on: Domain (e.g., Fashion, Grocery, F&B) Buyer’s location (city) This ensures only relevant sellers get the request, reducing noise and improving efficiency.'
   categories:
-  - Technical Architecture
+    - Technical Architecture
   tags:
-  - gateway
-  - registry
-  - search
-  - buyer
+    - bap_entity
+    - buyer
+    - buyer_np
+    - catalog_search
+    - discovery_search
+    - gateway
+    - network_gateway
+    - network_registry
+    - ondc_gateway
+    - ondc_registry
+    - registry
+    - search
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Can a participant in the Staging environment transact with one in Production?
-  answer: No. Each environment is logically and technically isolated. Participants
-    registered in one environment cannot communicate with participants in another.
-    Ensure that all transacting parties are in the same environment.
+  answer: No. Each environment is logically and technically isolated. Participants registered in one environment cannot communicate with participants in another. Ensure that all transacting parties are in the same environment.
   categories:
-  - Technical Architecture
+    - Technical Architecture
   tags:
-  - participant
-  - production
+    - live_environment
+    - network_participant_np
+    - participant
+    - production
+    - production_environment
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: '- Is GSTIN mandatory for sellers?'
-  answer: '- It’s mandatory for SNP and not sellers. We don’t have a requirement for
-    PAN. But it depends on the SNP. While onboarding, if they ask for gstin.'
+  answer: '- It’s mandatory for SNP and not sellers. We don’t have a requirement for PAN. But it depends on the SNP. While onboarding, if they ask for gstin.'
   categories:
-  - Technical Architecture
+    - Technical Architecture
   tags:
-  - onboarding
+    - np_onboarding
+    - onboarding
+    - participant_onboarding
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: "How many domains are currently supported on ONDC?\n "
-  answer: "ONDC currently supports a wide range of domains across commerce and services.\
-    \ The primary domains include: \n \n Retail (RET): General merchandise, fashion,\
-    \ electronics, beauty, and personal \n care. Food & Beverage (F&B): Restaurants,\
-    \ cloud kitchens, and food delivery. Grocery: Daily essentials, fresh produce,\
-    \ and household items. Health & Wellness: Pharmacies, health supplements, and\
-    \ wellness services. Home & Kitchen: Furniture, appliances, and kitchenware. Beauty\
-    \ & Personal Care: Skincare, cosmetics, and hygiene products. Electronics: Gadgets\
-    \ and electronic accessories. Fashion & Footwear: Clothing, shoes, and accessories.\
-    \ Baby Care: Infant and toddler products. Bakery, Cakes & Dairy: Baked goods and\
-    \ dairy products.  \n Agriculture: Agri-tech and farm produce marketplaces. \n\
-    \ \n Mobility, Travel and Tourism (TRV): Ride-hailing, public transport, and intercity\
-    \ travel, hotels, experiences/ activities. \n \n Logistics: Shipping, delivery,\
-    \ and supply chain services. \n \n Financial Services (FIS): Loans, insurance,\
-    \ and investments. \n \n Services (SRV): Home maintenance, repair, and professional\
-    \ services. \n \n Media, Entertainment & Content (MEC): Streaming and digital\
-    \ content. \n \n Gift Cards: Digital gift card sales and redemption. Please refer\
-    \ to this  for the list of all domains and their corresponding domain codes. \n\
-    \ "
+- question: |-
+    How many domains are currently supported on ONDC?
+     
+  answer: |-
+    ONDC currently supports a wide range of domains across commerce and services. The primary domains include: 
+     
+     Retail (RET): General merchandise, fashion, electronics, beauty, and personal 
+     care. Food & Beverage (F&B): Restaurants, cloud kitchens, and food delivery. Grocery: Daily essentials, fresh produce, and household items. Health & Wellness: Pharmacies, health supplements, and wellness services. Home & Kitchen: Furniture, appliances, and kitchenware. Beauty & Personal Care: Skincare, cosmetics, and hygiene products. Electronics: Gadgets and electronic accessories. Fashion & Footwear: Clothing, shoes, and accessories. Baby Care: Infant and toddler products. Bakery, Cakes & Dairy: Baked goods and dairy products.  
+     Agriculture: Agri-tech and farm produce marketplaces. 
+     
+     Mobility, Travel and Tourism (TRV): Ride-hailing, public transport, and intercity travel, hotels, experiences/ activities. 
+     
+     Logistics: Shipping, delivery, and supply chain services. 
+     
+     Financial Services (FIS): Loans, insurance, and investments. 
+     
+     Services (SRV): Home maintenance, repair, and professional services. 
+     
+     Media, Entertainment & Content (MEC): Streaming and digital content. 
+     
+     Gift Cards: Digital gift card sales and redemption. Please refer to this  for the list of all domains and their corresponding domain codes. 
+     
   categories:
-  - Technical Architecture
+    - Technical Architecture
   tags:
-  - ondc
-  - retail
-  - mobility
-  - logistics
-  - digital
+    - digital
+    - digital_commerce
+    - digital_signature
+    - logistics
+    - logistics_domain
+    - mobility
+    - mobility_domain
+    - ondc
+    - ondc_logistics
+    - ondc_network
+    - open_network
+    - retail
+    - retail_b2c
+    - retail_domain
+    - transport_services
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'What does a sample on_status or status response look like?
-
-    A:'
-  answer: 'json { "xinput": { "form_response": { "status": "APPROVED", "submission_id":
-    "<Submission_ID>" } } } /search and on_search'
+- question: |-
+    What does a sample on_status or status response look like?
+    A:
+  answer: 'json { "xinput": { "form_response": { "status": "APPROVED", "submission_id": "<Submission_ID>" } } } /search and on_search'
   categories:
-  - API Flow and Sequence
+    - API Flow and Sequence
   tags:
-  - status
-  - search
+    - catalog_search
+    - discovery_search
+    - fulfillment_status
+    - order_status
+    - search
+    - status
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: "What does message.intent.payment.collected_by mean?\n A: It defines who\
-    \ collects the payment."
-  answer: "If set to bap: the Buyer App collects the payment and settles with the\
-    \ Seller App. If set to bpp: the Seller App collects the payment directly.\n This\
-    \ affects whether a payment link is sent or not during the /on_confirm phase."
+- question: |-
+    What does message.intent.payment.collected_by mean?
+     A: It defines who collects the payment.
+  answer: |-
+    If set to bap: the Buyer App collects the payment and settles with the Seller App. If set to bpp: the Seller App collects the payment directly.
+     This affects whether a payment link is sent or not during the /on_confirm phase.
   categories:
-  - API Flow and Sequence
+    - API Flow and Sequence
   tags:
-  - payment
-  - bap
-  - buyer
-  - app
-  - seller
+    - app
+    - bap
+    - bap_entity
+    - bpp_entity
+    - buyer
+    - buyer_app
+    - buyer_np
+    - network_participant_app
+    - payment
+    - payment_collection
+    - payment_gateway
+    - seller
+    - seller_np
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: "What do message.catalog.providers.categories.descriptor.code and name\
-    \ mean?\n A:"
-  answer: code (e.g., "PERSONAL_LOAN") is a machine-readable identifier for the loan
-    type. name (e.g., "Personal Loan") is a human-readable label shown in UI or response
-    listings.
+- question: |-
+    What do message.catalog.providers.categories.descriptor.code and name mean?
+     A:
+  answer: code (e.g., "PERSONAL_LOAN") is a machine-readable identifier for the loan type. name (e.g., "Personal Loan") is a human-readable label shown in UI or response listings.
   categories:
-  - API Flow and Sequence
+    - API Flow and Sequence
   tags:
-  - catalog
+    - catalog
+    - product_catalog
+    - seller_catalog
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: "What is the use of short_desc and long_desc in items.descriptor?\n A:"
-  answer: short_desc is used in compact UI elements (e.g., "ICICI Bank Ltd"). long_desc
-    provides a more descriptive version, such as "ICICI Bank Ltd, India", for expanded
-    views.
+- question: |-
+    What is the use of short_desc and long_desc in items.descriptor?
+     A:
+  answer: short_desc is used in compact UI elements (e.g., "ICICI Bank Ltd"). long_desc provides a more descriptive version, such as "ICICI Bank Ltd, India", for expanded views.
   categories:
-  - API Flow and Sequence
+    - API Flow and Sequence
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: "What does xinput.head.descriptor.name mean?\n A: It is the title of the\
-    \ data collection section, e.g., \"Customer Information\", which helps group the\
-    \ form inputs meaningfully."
+- question: |-
+    What does xinput.head.descriptor.name mean?
+     A: It is the title of the data collection section, e.g., "Customer Information", which helps group the form inputs meaningfully.
   answer: /select and on_select
   categories:
-  - API Flow and Sequence
+    - API Flow and Sequence
   tags:
-  - select
+    - item_select
+    - quote_select
+    - select
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: "Can the borrower change the loan tenure?\n A:Yes, the borrower can modify\
-    \ the loan tenure using a dedicated form shared by the lender. After submitting\
-    \ the form, a new /select call is made with the form submission ID in the xinput."
+- question: |-
+    Can the borrower change the loan tenure?
+     A:Yes, the borrower can modify the loan tenure using a dedicated form shared by the lender. After submitting the form, a new /select call is made with the form submission ID in the xinput.
   answer: /init and on_init
   categories:
-  - API Flow and Sequence
+    - API Flow and Sequence
   tags:
-  - select
-  - init
+    - checkout_init
+    - init
+    - item_select
+    - order_init
+    - quote_select
+    - select
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: How do multiple /init and /on_init calls work?
-  answer: '/init: The borrower fills out forms for KYC, bank details, and e-mandate
-    to initiate the loan request. /on_init: The lender accepts the submitted details,
-    returns the loan status, and may provide additional terms or request an e-mandate
-    form.'
+  answer: '/init: The borrower fills out forms for KYC, bank details, and e-mandate to initiate the loan request. /on_init: The lender accepts the submitted details, returns the loan status, and may provide additional terms or request an e-mandate form.'
   categories:
-  - API Flow and Sequence
+    - API Flow and Sequence
   tags:
-  - init
-  - kyc
-  - status
+    - checkout_init
+    - customer_verification
+    - fulfillment_status
+    - init
+    - kyc
+    - kyc_verification
+    - order_init
+    - order_status
+    - status
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: "Whose bank account number is shared under message.order.payments.params.bank_account_number?\n\
-    \ A:This field refers to the bank account number of the BAP (Buyer App)."
+- question: |-
+    Whose bank account number is shared under message.order.payments.params.bank_account_number?
+     A:This field refers to the bank account number of the BAP (Buyer App).
   answer: /confirm and on_confirm
   categories:
-  - API Flow and Sequence
+    - API Flow and Sequence
   tags:
-  - order
-  - bap
-  - buyer
-  - app
-  - confirm
+    - app
+    - bap
+    - bap_entity
+    - buyer
+    - buyer_app
+    - buyer_np
+    - confirm
+    - network_participant_app
+    - order
+    - order_confirm
+    - purchase_order
+    - retail_order
+    - transaction_confirm
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Why are there multiple calls for search and on_search?
-  answer: 'Search: Explore available invoice based loan options by conducting search
-    over the network. on_search: The lender platform provides a comprehensive catalog
-    of various loan types including invoice based loans. Form: On the above on_search
-    in xinput lender platform sends the form for Invoice based loan to get all the
-    relevant details like UDYAM, contact, GSTIN profile, GSTR1, GSTRA2, and GSTR3B.
-    Note: JSON format to upload the docs as part of form submission Search: Find suitable
-    invoice based loan services, here you will also provide the submission id for
-    the previous form. on_search: The lender platform provides a comprehensive catalog
-    of various loan types including invoice based loans also the lender platform generates
-    a consent request for capturing the borrower''s consent. search: Find suitable
-    invoice based loan services. on_search: The lender platform provides a comprehensive
-    catalog of various loan types including invoice based loans.'
+  answer: 'Search: Explore available invoice based loan options by conducting search over the network. on_search: The lender platform provides a comprehensive catalog of various loan types including invoice based loans. Form: On the above on_search in xinput lender platform sends the form for Invoice based loan to get all the relevant details like UDYAM, contact, GSTIN profile, GSTR1, GSTRA2, and GSTR3B. Note: JSON format to upload the docs as part of form submission Search: Find suitable invoice based loan services, here you will also provide the submission id for the previous form. on_search: The lender platform provides a comprehensive catalog of various loan types including invoice based loans also the lender platform generates a consent request for capturing the borrower''s consent. search: Find suitable invoice based loan services. on_search: The lender platform provides a comprehensive catalog of various loan types including invoice based loans.'
   categories:
-  - API Flow and Sequence
+    - API Flow and Sequence
   tags:
-  - search
-  - invoice
-  - network
-  - platform
-  - catalog
+    - billing_invoice
+    - catalog
+    - catalog_search
+    - discovery_search
+    - invoice
+    - invoicing
+    - network
+    - ondc_network
+    - ondc_platform
+    - open_commerce_network
+    - open_network
+    - platform
+    - product_catalog
+    - search
+    - seller_catalog
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Is there a specified duration for the offer's validity?
-  answer: Yes, the offer includes a defined expiry time, which is specified in the
-    quote.ttl .
+  answer: Yes, the offer includes a defined expiry time, which is specified in the quote.ttl .
   categories:
-  - API Flow and Sequence
+    - API Flow and Sequence
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is quote.id on on_select?
-  answer: Here quote.id is lead id or loan_id which is created at lenders end whenever
-    they receive user information based on the offer they have generated further lender
-    create lead id at their system that is further mapped to loan id.
+  answer: Here quote.id is lead id or loan_id which is created at lenders end whenever they receive user information based on the offer they have generated further lender create lead id at their system that is further mapped to loan id.
   categories:
-  - API Flow and Sequence
+    - API Flow and Sequence
   tags:
-  - select
+    - item_select
+    - quote_select
+    - select
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: In /on_confirm API, what are different codes for message/order/fulfillments/state/descriptor?
-  answer: 'It refers to portraying the present status of order fulfillments. It encapsulates
-    the real time information on the progress and completion status of the fulfillment
-    process. INITIATED: When loan gets initiated by lender SANCTIONED:  Loan sanction
-    is the approval of the loan by lender DISBURSED: When the lender delivers the
-    amount to the borrower after verification and approval PENDING: When the loan
-    is in pending state REJECTED: When the loan request gets rejected by lender due
-    to some reason COMPLETED: When the overall process for loan gets over'
+  answer: 'It refers to portraying the present status of order fulfillments. It encapsulates the real time information on the progress and completion status of the fulfillment process. INITIATED: When loan gets initiated by lender SANCTIONED:  Loan sanction is the approval of the loan by lender DISBURSED: When the lender delivers the amount to the borrower after verification and approval PENDING: When the loan is in pending state REJECTED: When the loan request gets rejected by lender due to some reason COMPLETED: When the overall process for loan gets over'
   categories:
-  - API Flow and Sequence
+    - API Flow and Sequence
   tags:
-  - confirm
-  - api
-  - order
-  - status
-  - fulfillment
+    - api
+    - beckn_api
+    - confirm
+    - delivery_fulfillment
+    - fulfillment
+    - fulfillment_status
+    - ondc_protocol
+    - order
+    - order_confirm
+    - order_fulfillment
+    - order_status
+    - purchase_order
+    - retail_order
+    - status
+    - transaction_confirm
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Why is signing of ONDC API requests required?
-  answer: 'Signing ensures the authenticity and integrity of the request, proving
-    that it originated from a legitimate participant and was not tampered with in
-    transit.
-
-    '
+  answer: |
+    Signing ensures the authenticity and integrity of the request, proving that it originated from a legitimate participant and was not tampered with in transit.
   categories:
-  - api
-  - API Flow and Sequence
+    - api
+    - API Flow and Sequence
   tags:
-  - ondc
-  - api
-  - participant
+    - api
+    - beckn_api
+    - network_participant_np
+    - ondc
+    - ondc_network
+    - ondc_protocol
+    - open_network
+    - participant
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: How is a request signed in ONDC?
-  answer: 'The sender uses their private key to sign the request body. This signature
-    is included in the Authorization header of the API call, following the HMAC or
-    RSA algorithm as defined in ONDC standards.
-
-    '
+  answer: |
+    The sender uses their private key to sign the request body. This signature is included in the Authorization header of the API call, following the HMAC or RSA algorithm as defined in ONDC standards.
   categories:
-  - api
-  - Signature & Verification FAQs
+    - api
+    - Signature & Verification FAQs
   tags:
-  - ondc
-  - signature
-  - api
+    - api
+    - beckn_api
+    - ed25519_signing
+    - ondc
+    - ondc_network
+    - ondc_protocol
+    - open_network
+    - signature
+    - signature_verification
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: How does the recipient verify the signature?
-  answer: 'The recipient extracts the signature, fetches the sender’s public key from
-    the ONDC Registry using the subscriber_id, and verifies the signed body against
-    it.
-
-    '
+  answer: |
+    The recipient extracts the signature, fetches the sender’s public key from the ONDC Registry using the subscriber_id, and verifies the signed body against it.
   categories:
-  - Technical Architecture
+    - Technical Architecture
   tags:
-  - signature
-  - ondc
-  - registry
+    - ed25519_signing
+    - network_registry
+    - ondc
+    - ondc_network
+    - ondc_registry
+    - open_network
+    - registry
+    - signature
+    - signature_verification
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is the purpose of the ONDC Registry lookup?
-  answer: 'It allows a participant to verify another participant’s metadata—like domain,
-    signing public key, and endpoint—before processing the request.
-
-    '
+  answer: |
+    It allows a participant to verify another participant’s metadata—like domain, signing public key, and endpoint—before processing the request.
   categories:
-  - Technical Architecture
-  - registry
+    - Technical Architecture
+    - registry
   tags:
-  - ondc
-  - registry
-  - participant
+    - network_participant_np
+    - network_registry
+    - ondc
+    - ondc_network
+    - ondc_registry
+    - open_network
+    - participant
+    - registry
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What data is returned in a lookup response?
   answer: 'The response contains:'
   categories:
-  - API Flow and Sequence
+    - API Flow and Sequence
   tags: []
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: When should lookup be performed?
-  answer: 'Before processing any signed request, the receiving participant should
-    perform a lookup to validate:
-
-    '
+  answer: |
+    Before processing any signed request, the receiving participant should perform a lookup to validate:
   categories:
-  - API Flow and Sequence
+    - API Flow and Sequence
   tags:
-  - participant
+    - network_participant_np
+    - participant
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Do I need to specify fulfillment types in the /search call?
-  answer: 'The /search call supports two fulfillment types: Delivery and Self-Pickup
-    — and yes, you can choose both. Quick tip: Specifying fulfillment is optional.
-    If it''s not mentioned in the /search call, the response should include all fulfillment
-    types supported by the provider.
-
-    '
+  answer: |
+    The /search call supports two fulfillment types: Delivery and Self-Pickup — and yes, you can choose both. Quick tip: Specifying fulfillment is optional. If it's not mentioned in the /search call, the response should include all fulfillment types supported by the provider.
   categories:
-  - API Flow and Sequence
+    - API Flow and Sequence
   tags:
-  - fulfillment
-  - search
+    - catalog_search
+    - delivery_fulfillment
+    - discovery_search
+    - fulfillment
+    - order_fulfillment
+    - search
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'How is Retail API contract version 1.1.0 different from Retail API contract
-    version 1.2.0?
-
-    '
-  answer: 'The current API contract is at version 1.2, while the previous version,
-    1.1, has been deprecated. Version 1.1 established the basic framework for essential
-    retail operations, enabling the smooth execution of the happy flow along with
-    other common processes like order cancellations. To improve the overall functionality
-    and coverage of the contract, version 1.2.0 was introduced. This new version not
-    only aims to enhance the robustness of the API but also to better align it with
-    the sophisticated functionalities found in platform ecosystems, thereby providing
-    buyers with a more consistent and seamless user experience. Key improvements in
-    version 1.2.0 include advanced catalog caching mechanisms, as well as support
-    for additional scenarios such as product customizations, handling of variants,
-    streamlined return processes, and order tracking capabilities.
-
-    '
+- question: |
+    How is Retail API contract version 1.1.0 different from Retail API contract version 1.2.0?
+  answer: |
+    The current API contract is at version 1.2, while the previous version, 1.1, has been deprecated. Version 1.1 established the basic framework for essential retail operations, enabling the smooth execution of the happy flow along with other common processes like order cancellations. To improve the overall functionality and coverage of the contract, version 1.2.0 was introduced. This new version not only aims to enhance the robustness of the API but also to better align it with the sophisticated functionalities found in platform ecosystems, thereby providing buyers with a more consistent and seamless user experience. Key improvements in version 1.2.0 include advanced catalog caching mechanisms, as well as support for additional scenarios such as product customizations, handling of variants, streamlined return processes, and order tracking capabilities.
   categories:
-  - api
-  - Signature & Verification FAQs
+    - api
+    - Signature & Verification FAQs
   tags:
-  - retail
-  - api
-  - order
-  - platform
-  - catalog
+    - api
+    - beckn_api
+    - catalog
+    - ondc_platform
+    - ondc_protocol
+    - open_network
+    - order
+    - platform
+    - product_catalog
+    - purchase_order
+    - retail
+    - retail_b2c
+    - retail_domain
+    - retail_order
+    - seller_catalog
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What is message.catalog.providers.items.id?
-  answer: 'It is a unique system-generated ID for each individual financial product
-    or loan offering. This ID is crucial during /select, /init, and /confirm.
-
-    '
+  answer: |
+    It is a unique system-generated ID for each individual financial product or loan offering. This ID is crucial during /select, /init, and /confirm.
   categories:
-  - API Flow and Sequence
+    - API Flow and Sequence
   tags:
-  - catalog
-  - select
-  - init
-  - confirm
+    - catalog
+    - checkout_init
+    - confirm
+    - init
+    - item_select
+    - order_confirm
+    - order_init
+    - product_catalog
+    - quote_select
+    - select
+    - seller_catalog
+    - transaction_confirm
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Can add_ons be modified in future API calls?
-  answer: 'Yes, additional add_ons can be added in subsequent calls. However, previously
-    added add_ons cannot be removed.
-
-    '
+  answer: |
+    Yes, additional add_ons can be added in subsequent calls. However, previously added add_ons cannot be removed.
   categories:
-  - api
-  - API Flow and Sequence
+    - api
+    - API Flow and Sequence
   tags:
-  - api
+    - api
+    - beckn_api
+    - ondc_protocol
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'Could you offer detailed information about the field''s inter_participant
-    amount, provider amount, and self amount in the /settle API?
-
-    '
-  answer: 'Inter participant amount is what is to be settled from the collector to
-    the receiver Collector amount is what collector keeps for themselves Self amount
-    is the amount that is to be moved to the API caller''s operative account Provider
-    amount is the amount that is to be transferred to the provider''s provided account
-
-    '
+- question: |
+    Could you offer detailed information about the field's inter_participant amount, provider amount, and self amount in the /settle API?
+  answer: |
+    Inter participant amount is what is to be settled from the collector to the receiver Collector amount is what collector keeps for themselves Self amount is the amount that is to be moved to the API caller's operative account Provider amount is the amount that is to be transferred to the provider's provided account
   categories:
-  - api
-  - API Flow and Sequence
+    - api
+    - API Flow and Sequence
   tags:
-  - participant
-  - api
+    - api
+    - beckn_api
+    - network_participant_np
+    - ondc_protocol
+    - participant
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'Settlement in settlements array of order in /recon - /on_recon APIs,
-    what does payment_id, amount, commission (is this buyer app finder fee, seller
-    app finder fee, withholding amount) signify?
-
-    '
-  answer: 'Settlements in the long term context, could be split into multiple phases
-    (example 50% at the time of delivery and 50% at the time of return window expiry)
-    hence provided as an array. Therefore the settlement object is an array, which
-    may comprise one or as many settlement objects as required. Order amount signifies
-    the total order value. payment_id the payment transaction id as per the domain
-    transaction, refer params object
-
-    '
+- question: |
+    Settlement in settlements array of order in /recon - /on_recon APIs, what does payment_id, amount, commission (is this buyer app finder fee, seller app finder fee, withholding amount) signify?
+  answer: |
+    Settlements in the long term context, could be split into multiple phases (example 50% at the time of delivery and 50% at the time of return window expiry) hence provided as an array. Therefore the settlement object is an array, which may comprise one or as many settlement objects as required. Order amount signifies the total order value. payment_id the payment transaction id as per the domain transaction, refer params object
   categories:
-  - Technical Architecture
-  - api
+    - Technical Architecture
+    - api
   tags:
-  - settlement
-  - order
-  - payment
-  - commission
-  - buyer
+    - bap_entity
+    - buyer
+    - buyer_np
+    - commission
+    - finder_fee
+    - np_commission
+    - order
+    - payment
+    - payment_collection
+    - payment_gateway
+    - purchase_order
+    - retail_order
+    - rsf_settlement
+    - settlement
+    - settlement_framework
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'Is the settlement_window field mandatory in the "on_confirm" call? If
-    it is not required, what would be the recommended default value to filter orders
-    to be settled in the RSF "/settle" call?
-
-    '
-  answer: 'Please refer to the API contract/ developer guide for the respective domain/
-    use case. The recommended value would vary for respective domains.
-
-    '
+- question: |
+    Is the settlement_window field mandatory in the "on_confirm" call? If it is not required, what would be the recommended default value to filter orders to be settled in the RSF "/settle" call?
+  answer: |
+    Please refer to the API contract/ developer guide for the respective domain/ use case. The recommended value would vary for respective domains.
   categories:
-  - Technical Architecture
-  - api
+    - Technical Architecture
+    - api
   tags:
-  - settlement
-  - confirm
-  - api
+    - api
+    - beckn_api
+    - confirm
+    - ondc_protocol
+    - order_confirm
+    - rsf_settlement
+    - settlement
+    - settlement_framework
+    - transaction_confirm
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'I am a seller and there are unsettled orders with a buyer application.
-    What should be my next steps to initiate reconciliation?
-
-    '
-  answer: 'Steps to be followed are as follows: 1) Seller Application need to initiate
-    recon API call to the respective buyer app(s) highlighting order level details
-    including Order details such as Amount, Commission, With-holding amount, TDS and
-    TCS 2) Buyer application needs to respond back with “on_recon” to either convey
-    their agreement to seller application’s workings or reject the same a) If the
-    “recon_accord” flag is true: Buyer Application agrees to the calculations of Seller
-    application as per Recon API and requests the seller application to send a /settle
-    call basis the same on the “Settlement Date” mentioned in the call. b) If the
-    “recon_accord” flag is false: : Buyer Application disagrees with the calculations
-    of Seller application as per Recon API and would send the order level calculations
-    along with “diff_Value” wherever applicable. 3) Seller application basis the calculations
-    can re-initiate the recon call, with the updated values if applicable and Step
-    2 would restart. The Recon flow ultimately positively closes with Buyer Application
-    (Collector) responding with “Recon_Accord” = True and provide settlement date
-    Both Parties can at any stage raise an IGM complaint for resolution in case the
-    recon, on_recon flow doesn’t provide a satisfactory resolution. Please find the
-    pictorial representation of handling unsettled order here.
-
-    '
+- question: |
+    I am a seller and there are unsettled orders with a buyer application. What should be my next steps to initiate reconciliation?
+  answer: |
+    Steps to be followed are as follows: 1) Seller Application need to initiate recon API call to the respective buyer app(s) highlighting order level details including Order details such as Amount, Commission, With-holding amount, TDS and TCS 2) Buyer application needs to respond back with “on_recon” to either convey their agreement to seller application’s workings or reject the same a) If the “recon_accord” flag is true: Buyer Application agrees to the calculations of Seller application as per Recon API and requests the seller application to send a /settle call basis the same on the “Settlement Date” mentioned in the call. b) If the “recon_accord” flag is false: : Buyer Application disagrees with the calculations of Seller application as per Recon API and would send the order level calculations along with “diff_Value” wherever applicable. 3) Seller application basis the calculations can re-initiate the recon call, with the updated values if applicable and Step 2 would restart. The Recon flow ultimately positively closes with Buyer Application (Collector) responding with “Recon_Accord” = True and provide settlement date Both Parties can at any stage raise an IGM complaint for resolution in case the recon, on_recon flow doesn’t provide a satisfactory resolution. Please find the pictorial representation of handling unsettled order here.
   categories:
-  - api
-  - API Flow and Sequence
+    - api
+    - API Flow and Sequence
   tags:
-  - seller
-  - buyer
-  - reconciliation
-  - api
-  - app
+    - api
+    - app
+    - bap_entity
+    - beckn_api
+    - bpp_entity
+    - buyer
+    - buyer_np
+    - network_participant_app
+    - ondc_protocol
+    - reconciliation
+    - rsf_reconciliation
+    - seller
+    - seller_np
+    - transaction_reconciliation
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'For RSF API implementation, is it necessary to also subscribe to the
-    "ONDC:NTS10" domain?
-
-    '
+- question: |
+    For RSF API implementation, is it necessary to also subscribe to the "ONDC:NTS10" domain?
   answer: No subscription is needed for ONDC:NTS10
   categories:
-  - Technical Architecture
-  - api
+    - Technical Architecture
+    - api
   tags:
-  - api
-  - implementation
-  - ondc
-  - subscription
+    - api
+    - beckn_api
+    - implementation
+    - np_implementation
+    - np_subscription
+    - ondc
+    - ondc_network
+    - ondc_protocol
+    - open_network
+    - protocol_implementation
+    - registry_subscription
+    - subscription
   lastUpdated: '2024-07-10T10:00:00Z'
-- question: 'The documentation indicates that as a seller app, we need to call the
-    /settle endpoint of the Settlement Agency to initiate the RSF settlement flow.
-    Is there a predefined cycle for calling this method (e.g., every 7 days), or is
-    this something we need to configure manually?
-
-    '
-  answer: 'The settlement cycle runs everyday. The /settle instruction needs to be
-    shared with the settlement agency, by both buyer app and seller app, based on
-    the settlement cycle agreed for the transaction (refer settlement_window and settlement_basis
-    attributes). Buyer Applications (Collector) are strongly suggested to send a daily
-    /settle call, even if there are null settlements for the day to ensure deductions
-    don''t happen based on the settlement call of the Seller Application (Receiver).
-
-    '
+- question: |
+    The documentation indicates that as a seller app, we need to call the /settle endpoint of the Settlement Agency to initiate the RSF settlement flow. Is there a predefined cycle for calling this method (e.g., every 7 days), or is this something we need to configure manually?
+  answer: |
+    The settlement cycle runs everyday. The /settle instruction needs to be shared with the settlement agency, by both buyer app and seller app, based on the settlement cycle agreed for the transaction (refer settlement_window and settlement_basis attributes). Buyer Applications (Collector) are strongly suggested to send a daily /settle call, even if there are null settlements for the day to ensure deductions don't happen based on the settlement call of the Seller Application (Receiver).
   categories:
-  - API Flow and Sequence
+    - API Flow and Sequence
   tags:
-  - documentation
-  - seller
-  - app
-  - settlement
-  - buyer
+    - api_documentation
+    - app
+    - bap_entity
+    - bpp_entity
+    - buyer
+    - buyer_np
+    - documentation
+    - network_participant_app
+    - rsf_settlement
+    - seller
+    - seller_np
+    - settlement
+    - settlement_framework
+    - technical_documentation
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: Can a single invoice be used across multiple domain orders?
-  answer: 'Yes, if items are fulfilled through a single logistics operation, the seller
-    app may reuse the same invoice across /on_status callbacks.
-
-    '
+  answer: |
+    Yes, if items are fulfilled through a single logistics operation, the seller app may reuse the same invoice across /on_status callbacks.
   categories:
-  - Technical Architecture
+    - Technical Architecture
   tags:
-  - invoice
-  - logistics
-  - seller
-  - app
-  - status
+    - app
+    - billing_invoice
+    - bpp_entity
+    - fulfillment_status
+    - invoice
+    - invoicing
+    - logistics
+    - logistics_domain
+    - network_participant_app
+    - ondc_logistics
+    - order_status
+    - seller
+    - seller_np
+    - status
   lastUpdated: '2024-07-10T10:00:00Z'
 - question: What if one of the seller apps doesn’t respond to /select or /confirm?
-  answer: 'The buyer app must implement a timeout and retry logic as per ONDC guidelines.
-    If confirmation ultimately fails, initiate cancellation for all related orders.
-
-    '
+  answer: |
+    The buyer app must implement a timeout and retry logic as per ONDC guidelines. If confirmation ultimately fails, initiate cancellation for all related orders.
   categories:
-  - API Flow and Sequence
+    - API Flow and Sequence
   tags:
-  - seller
-  - select
-  - confirm
-  - buyer
-  - app
+    - app
+    - bap_entity
+    - bpp_entity
+    - buyer
+    - buyer_np
+    - confirm
+    - item_select
+    - network_participant_app
+    - order_confirm
+    - quote_select
+    - select
+    - seller
+    - seller_np
+    - transaction_confirm
   lastUpdated: '2024-07-10T10:00:00Z'

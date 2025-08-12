@@ -1,4 +1,3 @@
-// Enhanced Search Engine with multiple search strategies
 class SearchEngine {
   constructor(faqManager) {
     this.faqManager = faqManager;
@@ -10,7 +9,6 @@ class SearchEngine {
   }
 
   initialize(faqs) {
-    // Initialize MiniSearch for fast full-text search
     this.miniSearch = new MiniSearch({
       fields: ['question', 'answer', 'categories', 'tags', 'category'],
       storeFields: ['id', 'question', 'answerPreview', 'categories', 'tags', 'category'],
@@ -22,10 +20,8 @@ class SearchEngine {
       }
     });
 
-    // Add documents to MiniSearch
     this.miniSearch.addAll(faqs);
 
-    // Initialize Fuse.js for fuzzy search
     this.fuseSearch = new Fuse(faqs, {
       keys: [
         { name: 'question', weight: 0.4 },
@@ -41,52 +37,41 @@ class SearchEngine {
     });
   }
 
-  // Main search method combining multiple strategies
   search(query, options = {}) {
     const {
       limit = 20,
       category = null,
       tags = [],
       sortBy = 'relevance',
-      faqs = null  // Accept specific FAQ subset
+      faqs = null
     } = options;
 
-    // Use provided FAQs or default to all
     const searchableFAQs = faqs || this.faqManager.faqs;
 
-    // Check cache first
     const cacheKey = JSON.stringify({ query, options });
     if (this.searchCache.has(cacheKey)) {
       return this.searchCache.get(cacheKey);
     }
 
-    // Clean and prepare query
     const cleanQuery = this.cleanQuery(query);
     if (!cleanQuery) {
       return this.getFilteredResults(category, tags, sortBy, limit, searchableFAQs);
     }
 
-    // Track search
     this.trackSearch(cleanQuery);
 
-    // Perform multi-strategy search
     let results = this.performMultiStrategySearch(cleanQuery, searchableFAQs);
 
-    // Apply filters
     if (category || tags.length > 0) {
       results = this.applyFilters(results, category, tags);
     }
 
-    // Sort results
     results = this.sortResults(results, sortBy);
 
-    // Limit results
     results = results.slice(0, limit);
 
-    // Cache results
     this.searchCache.set(cacheKey, results);
 
-    // Track analytics
     this.faqManager.trackSearch(cleanQuery, results.length);
 
     return results;
@@ -95,11 +80,9 @@ class SearchEngine {
   performMultiStrategySearch(query, searchableFAQs) {
     const results = new Map();
     
-    // Strategy 1: Exact match in questions
     const exactMatches = this.findExactMatches(query, searchableFAQs);
     exactMatches.forEach(faq => results.set(faq.id, { faq, score: 10 }));
 
-    // Strategy 2: MiniSearch full-text search
     const miniSearchResults = this.miniSearch.search(query);
     miniSearchResults.forEach(result => {
       const faq = searchableFAQs.find(f => f.id === result.id);
@@ -112,7 +95,6 @@ class SearchEngine {
       }
     });
 
-    // Strategy 3: Fuzzy search with Fuse.js - create new instance for subset
     const fuseTempSearch = new Fuse(searchableFAQs, {
       keys: [
         { name: 'question', weight: 0.4 },
@@ -136,7 +118,6 @@ class SearchEngine {
       }
     });
 
-    // Strategy 4: Keyword matching
     const keywords = this.extractKeywords(query);
     if (keywords.length > 0) {
       const keywordMatches = this.findKeywordMatches(keywords, searchableFAQs);
@@ -151,7 +132,6 @@ class SearchEngine {
       });
     }
 
-    // Convert to array and sort by score
     return Array.from(results.values())
       .sort((a, b) => b.score - a.score)
       .map(item => item.faq);
@@ -184,7 +164,6 @@ class SearchEngine {
   }
 
   extractKeywords(query) {
-    // Remove common words and extract meaningful keywords
     const stopWords = new Set([
       'what', 'how', 'when', 'where', 'why', 'who', 'which',
       'is', 'are', 'was', 'were', 'been', 'being', 'be',
@@ -198,25 +177,21 @@ class SearchEngine {
       .filter(word => word.length > 2 && !stopWords.has(word));
   }
 
-  // Get search suggestions
   getSuggestions(partial, limit = 5) {
     if (partial.length < 2) return [];
 
-    // Check cache
     if (this.suggestionCache.has(partial)) {
       return this.suggestionCache.get(partial);
     }
 
     const suggestions = [];
     
-    // Get MiniSearch suggestions
     const searchResults = this.miniSearch.search(partial, {
       prefix: true,
       fuzzy: 0.2,
       combineWith: 'OR'
     });
 
-    // Convert to suggestions
     searchResults.slice(0, limit).forEach(result => {
       const faq = this.faqManager.faqs.find(f => f.id === result.id);
       if (faq) {
@@ -230,11 +205,9 @@ class SearchEngine {
       }
     });
 
-    // Add popular search suggestions from history
     const historySuggestions = this.getHistorySuggestions(partial, limit - suggestions.length);
     suggestions.push(...historySuggestions);
 
-    // Cache suggestions
     this.suggestionCache.set(partial, suggestions);
 
     return suggestions;
@@ -269,7 +242,6 @@ class SearchEngine {
 
   trackSearch(query) {
     this.searchHistory.push(query);
-    // Keep only last 100 searches
     if (this.searchHistory.length > 100) {
       this.searchHistory.shift();
     }
@@ -319,18 +291,15 @@ class SearchEngine {
       
       case 'relevance':
       default:
-        // Already sorted by relevance from search
         return results;
     }
   }
 
-  // Clear caches
   clearCache() {
     this.searchCache.clear();
     this.suggestionCache.clear();
   }
 
-  // Get search analytics
   getSearchAnalytics() {
     const queries = {};
     this.searchHistory.forEach(query => {
@@ -348,5 +317,4 @@ class SearchEngine {
   }
 }
 
-// Export for use in other modules
 window.SearchEngine = SearchEngine;
